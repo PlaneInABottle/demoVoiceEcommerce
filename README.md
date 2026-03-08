@@ -83,4 +83,78 @@ pm2 delete demo-voice-agent
   - `participant_attributes`
   - unsupported `room_config` keys
 
-More detailed startup and verification steps will continue to expand as the implementation phases land.
+## Startup
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   npm --prefix agent install
+   ```
+
+2. Build the worker and download model files:
+
+   ```bash
+   npm --prefix agent run build
+   npm --prefix agent run download-files
+   ```
+
+3. Start both processes with direct CLI commands:
+
+   ```bash
+   npm run start
+   npm --prefix agent run dev
+   ```
+
+## Verification
+
+- App build:
+
+  ```bash
+  npm run build
+  ```
+
+- Catalog unit test:
+
+  ```bash
+  npm test
+  ```
+
+- Token endpoint:
+
+  ```bash
+  hurl --test verify/token-endpoint.hurl
+  curl -sSf -H 'Content-Type: application/json' -d '{}' http://localhost:3000/api/token
+  ```
+
+- Worker smoke:
+
+  ```bash
+  npm --prefix agent run build
+  npm --prefix agent run dev
+  ```
+
+  Confirm the logs include:
+  - `[worker] readiness:bootstrap-complete`
+  - `[worker] catalog:loaded count=...`
+  - `[worker] session:started`
+  - `[worker] greeting:start ...`
+
+- Browser smoke:
+
+  See `verify/browser-smoke.md`. The typed fallback must use LiveKit text streams on topic `lk.chat`.
+
+## Teardown
+
+Direct CLI:
+
+```bash
+# Stop the running terminal processes with Ctrl+C
+```
+
+Optional PM2:
+
+```bash
+pm2 delete demo-voice-web
+pm2 delete demo-voice-agent
+```
