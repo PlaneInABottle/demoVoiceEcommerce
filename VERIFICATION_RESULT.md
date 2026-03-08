@@ -45,14 +45,20 @@ Additional runtime proof:
 
 ```bash
 pm2 start npm --name demoVoice-web --cwd /Users/Y_ALTAY1/Documents/demoVoice -- run start
+pm2 start npm --name demoVoice-agent --cwd /Users/Y_ALTAY1/Documents/demoVoice/agent -- run start
 curl http://localhost:3000            # repeated to prove fresh room names
 agent-browser ...                     # production typed-only proof flow
 ```
+
+For any browser rerun that claims connect, greeting, or typed-response proof, the worker startup is
+mandatory and should be treated as the canonical gate in
+`verify/agent-worker-smoke.md` (direct CLI first, PM2 optional).
 
 ## Current evidence
 
 - `verify/RUNTIME_VERIFICATION_SUMMARY.txt`
 - `verify/BROWSER_VERIFICATION_REPORT.md`
+- `verify/agent-worker-smoke.md`
 - `verify/artifacts/production-room-names.txt`
 - `verify/artifacts/agent-worker-cycle.log`
 - `verify/artifacts/browser-smoke-home.png`

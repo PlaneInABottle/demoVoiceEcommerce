@@ -5,6 +5,7 @@
 1. [VERIFICATION_RESULT.md](./VERIFICATION_RESULT.md) — concise approval summary
 2. [verify/RUNTIME_VERIFICATION_SUMMARY.txt](./verify/RUNTIME_VERIFICATION_SUMMARY.txt) — detailed runtime proof
 3. [verify/BROWSER_VERIFICATION_REPORT.md](./verify/BROWSER_VERIFICATION_REPORT.md) — browser-focused walkthrough
+4. [verify/agent-worker-smoke.md](./verify/agent-worker-smoke.md) — canonical worker gate for any browser connect/greeting rerun
 
 ## Primary artifacts
 
@@ -42,9 +43,15 @@ npm run build
 npm --prefix agent run build
 
 pm2 start npm --name demoVoice-web --cwd /Users/Y_ALTAY1/Documents/demoVoice -- run start
+pm2 start npm --name demoVoice-agent --cwd /Users/Y_ALTAY1/Documents/demoVoice/agent -- run start
 curl http://localhost:3000
 curl http://localhost:3000
 
 agent-browser --session-name demoVoiceProofProd open http://localhost:3000
 agent-browser --session-name demoVoiceProofProd snapshot -i
 ```
+
+Any browser proof that claims connect, greeting, or typed-response behavior requires the separate
+worker process in addition to the web app. For the canonical worker gate, including the direct-CLI
+first path (`npm --prefix agent run dev`) and PM2 equivalents, use
+[`verify/agent-worker-smoke.md`](./verify/agent-worker-smoke.md).

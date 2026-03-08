@@ -1,30 +1,42 @@
 # Agent worker smoke verification
 
-This document mirrors the approved standalone worker gate step-for-step.
+This is the canonical worker gate for this verification packet.
 
-1. Start the web app with the minimal session/connect shell already added in earlier phases.
+If a reproduction path claims browser connect, greeting, or typed-response proof, it must start the
+worker explicitly before opening the browser. Direct CLI is first-class. PM2 is optional.
 
-   ```bash
-   npm run dev
-   ```
+1. Start the web app.
+
+    ```bash
+    npm run dev
+    ```
 
    PM2 equivalent:
 
-   ```bash
-   pm2 start npm --name demoVoice-web -- run dev
-   ```
+    ```bash
+    pm2 start npm --name demoVoice-web --cwd /Users/Y_ALTAY1/Documents/demoVoice -- run dev
+    ```
 
 2. Start the worker independently.
 
-   ```bash
-   npm --prefix agent run dev
-   ```
+    ```bash
+    npm --prefix agent run dev
+    ```
 
    PM2 equivalent:
 
-   ```bash
-   pm2 start npm --name demoVoice-agent --cwd ./agent -- run dev
-   ```
+    ```bash
+    pm2 start npm --name demoVoice-agent --cwd /Users/Y_ALTAY1/Documents/demoVoice/agent -- run dev
+    ```
+
+   Production-style artifact reruns can swap both `run dev` commands for `run start` after:
+
+    ```bash
+    npm run build
+    npm --prefix agent run build
+    ```
+
+   The browser artifacts committed in this packet were captured from that production-style pair.
 
 3. Confirm worker readiness from the explicit planned logs emitted by this repo:
    - `[worker] bootstrap:env ...`
@@ -62,9 +74,11 @@ This document mirrors the approved standalone worker gate step-for-step.
 
 8. Clean up the runtime after verification:
 
-   ```bash
-   pm2 delete demoVoice-web
-   pm2 delete demoVoice-agent
-   ```
+    ```bash
+    pm2 delete demoVoice-web
+    pm2 delete demoVoice-agent
+    ```
+
+   If you used direct CLI instead of PM2, stop both foreground processes with `Ctrl+C`.
 
 Direct CLI remains first-class. PM2 is optional, but operator-facing runtime names must stay on the approved `demoVoice-*` convention.
