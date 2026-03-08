@@ -10,7 +10,7 @@ import * as silero from '@livekit/agents-plugin-silero';
 import { BackgroundVoiceCancellation } from '@livekit/noise-cancellation-node';
 
 import { loadProductCatalog } from './catalog.js';
-import { ECOMMERCE_AGENT_INSTRUCTIONS } from './prompt.js';
+import { ECOMMERCE_AGENT_INSTRUCTIONS, INITIAL_GREETING_PROMPT } from './prompt.js';
 import { getRealtimeModelConfig, getVoicePipelineMode } from './realtime-config.js';
 import { createGetProductDetailsTool } from './tools/get-product-details.js';
 import { createSearchProductsTool } from './tools/search-products.js';
@@ -38,8 +38,7 @@ class EcommerceAgent extends voice.Agent<SessionUserData> {
       `[worker] greeting:start catalog_size=${this.session.userData?.catalogSize ?? 'unknown'}`,
     );
     await this.session.generateReply({
-      userInput:
-        'Greet the shopper, explain that you can help with product discovery, comparisons, and grounded shipping, return, and warranty questions, then ask what they need.',
+      userInput: INITIAL_GREETING_PROMPT,
       toolChoice: 'none',
     });
   }

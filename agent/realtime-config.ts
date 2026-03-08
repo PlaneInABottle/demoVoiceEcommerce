@@ -21,7 +21,7 @@ export type RealtimeTurnDetectionConfig = {
 };
 
 export type RealtimeModelConfig = {
-  voice: 'marin';
+  voice: 'cedar';
   turnDetection: RealtimeTurnDetectionConfig;
 };
 
@@ -35,7 +35,7 @@ export type SessionSelectionSummary = {
 };
 
 const DEFAULT_REALTIME_MODEL_CONFIG: RealtimeModelConfig = {
-  voice: 'marin',
+  voice: 'cedar',
   turnDetection: {
     type: 'server_vad',
     threshold: 0.5,

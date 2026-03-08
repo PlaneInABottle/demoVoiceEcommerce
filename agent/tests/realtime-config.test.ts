@@ -46,7 +46,7 @@ test('preserves chained mode without requiring OPENAI_API_KEY', () => {
 
 test('returns the documented realtime model rollout config', () => {
   assert.deepEqual(getRealtimeModelConfig(), {
-    voice: 'marin',
+    voice: 'cedar',
     turnDetection: {
       type: 'server_vad',
       threshold: 0.5,

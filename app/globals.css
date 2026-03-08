@@ -159,6 +159,12 @@ code {
   font-size: 1.25rem;
 }
 
+.agent-stage__room-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .agent-stage__presence {
   grid-template-columns: minmax(0, 1fr);
   padding: 24px;
@@ -257,6 +263,7 @@ code {
 .agent-stage__fact {
   display: grid;
   gap: 6px;
+  min-width: 0;
   padding: 14px 16px;
   border-radius: 18px;
   border: 1px solid rgba(148, 163, 184, 0.14);

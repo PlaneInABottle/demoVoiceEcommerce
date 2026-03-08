@@ -105,7 +105,7 @@ export function AgentPane({ agentName, session }: AgentPaneProps) {
           </div>
           <div className="agent-stage__fact">
             <span className="agent-card__label">Session lane</span>
-            <strong>{session.room.name || 'Awaiting room join'}</strong>
+            <strong className="agent-stage__room-name">{session.room.name || 'Awaiting room join'}</strong>
           </div>
         </footer>
       </article>
