@@ -23,8 +23,9 @@ The refreshed packet now matches the current implementation and current browser/
   approval.
 - **Refresh:** `verify/BROWSER_VERIFICATION_REPORT.md`, `verify/browser-smoke.md`, and
   `VERIFICATION_INDEX.md` now point to a successful rerun that captures each state transition.
-- **Proof:** the `verify/artifacts/phase4-retry-*` packet includes screenshots, snapshots, worker
-  logs, and the exact command transcript for the successful browser flow.
+- **Proof:** the `verify/artifacts/phase4-retry-*` packet includes screenshots, supporting
+  DOM-ref/state snapshots, worker logs, and the exact command transcript for the successful browser
+  flow.
 
 ### 2) Stale pre-refresh browser evidence was replaced
 - **Previous gap:** the older `browser-smoke-*` packet could still be read as pre-refresh evidence
@@ -63,6 +64,9 @@ agent-browser --session-name phase4-retry-fake-media \
 The full command transcript captured during the verification rerun is stored in:
 
 - `verify/artifacts/phase4-retry-commands.txt`
+
+That transcript is the direct textual evidence for the successful flow. The phase4 retry snapshot
+`.txt` files are supporting DOM-ref/state artifacts only.
 
 For any browser rerun that claims connect, greeting, mute/unmute, typed-response, or disconnect
 behavior, the separate worker startup remains mandatory and should be treated as the canonical gate

@@ -46,12 +46,12 @@ PM2 operator equivalents, see `verify/agent-worker-smoke.md`.
 - `verify/artifacts/phase4-retry-after-prompt.png`
 - `verify/artifacts/phase4-retry-after-response.png`
 - `verify/artifacts/phase4-retry-disconnected.png`
-- `verify/artifacts/phase4-retry-connected-snapshot.txt`
-- `verify/artifacts/phase4-retry-muted-snapshot.txt`
-- `verify/artifacts/phase4-retry-unmuted-snapshot.txt`
-- `verify/artifacts/phase4-retry-after-prompt-snapshot.txt`
-- `verify/artifacts/phase4-retry-after-response-snapshot.txt`
-- `verify/artifacts/phase4-retry-disconnected-snapshot.txt`
+- `verify/artifacts/phase4-retry-connected-snapshot.txt` — supporting DOM-ref/state snapshot
+- `verify/artifacts/phase4-retry-muted-snapshot.txt` — supporting DOM-ref/state snapshot
+- `verify/artifacts/phase4-retry-unmuted-snapshot.txt` — supporting DOM-ref/state snapshot
+- `verify/artifacts/phase4-retry-after-prompt-snapshot.txt` — supporting DOM-ref/state snapshot
+- `verify/artifacts/phase4-retry-after-response-snapshot.txt` — supporting DOM-ref/state snapshot
+- `verify/artifacts/phase4-retry-disconnected-snapshot.txt` — supporting DOM-ref/state snapshot
 - `verify/artifacts/phase4-retry-agent-log-after-connect.txt`
 - `verify/artifacts/phase4-retry-agent-log-after-prompt.txt`
 
@@ -82,12 +82,23 @@ no longer point at the pre-refresh layout.
 
 ## State-transition evidence
 
-- **Connect / live mic on:** `phase4-retry-connected.png` + `phase4-retry-connected-snapshot.txt`
-- **Mute:** `phase4-retry-muted.png` + `phase4-retry-muted-snapshot.txt`
-- **Unmute:** `phase4-retry-unmuted.png` + `phase4-retry-unmuted-snapshot.txt`
-- **Thinking reaction:** `phase4-retry-after-prompt.png` + `phase4-retry-after-prompt-snapshot.txt`
-- **Speaking reaction:** `phase4-retry-after-response.png` + `phase4-retry-after-response-snapshot.txt`
-- **Disconnect:** `phase4-retry-disconnected.png` + `phase4-retry-disconnected-snapshot.txt`
+Direct textual proof for the successful agent/microphone/state flow lives in
+`verify/artifacts/phase4-retry-commands.txt`. The snapshot `.txt` files below are supporting
+DOM-ref/state artifacts paired with the visible browser captures; they are not the primary textual
+proof.
+
+- **Connect / live mic on:** `phase4-retry-connected.png` (browser-visible proof) +
+  `phase4-retry-connected-snapshot.txt` (supporting DOM-ref/state snapshot)
+- **Mute:** `phase4-retry-muted.png` (browser-visible proof) +
+  `phase4-retry-muted-snapshot.txt` (supporting DOM-ref/state snapshot)
+- **Unmute:** `phase4-retry-unmuted.png` (browser-visible proof) +
+  `phase4-retry-unmuted-snapshot.txt` (supporting DOM-ref/state snapshot)
+- **Thinking reaction:** `phase4-retry-after-prompt.png` (browser-visible proof) +
+  `phase4-retry-after-prompt-snapshot.txt` (supporting DOM-ref/state snapshot)
+- **Speaking reaction:** `phase4-retry-after-response.png` (browser-visible proof) +
+  `phase4-retry-after-response-snapshot.txt` (supporting DOM-ref/state snapshot)
+- **Disconnect:** `phase4-retry-disconnected.png` (browser-visible proof) +
+  `phase4-retry-disconnected-snapshot.txt` (supporting DOM-ref/state snapshot)
 
 ## Worker grounding checks
 

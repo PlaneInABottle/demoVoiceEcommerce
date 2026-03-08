@@ -22,12 +22,12 @@
 - `verify/artifacts/phase4-retry-after-prompt.png` — right pane showing `Agent state Thinking`
 - `verify/artifacts/phase4-retry-after-response.png` — response-in-flight proof with `Agent state Speaking`
 - `verify/artifacts/phase4-retry-disconnected.png` — disconnected terminal state
-- `verify/artifacts/phase4-retry-connected-snapshot.txt` — connect refs/state text
-- `verify/artifacts/phase4-retry-muted-snapshot.txt` — mute refs/state text
-- `verify/artifacts/phase4-retry-unmuted-snapshot.txt` — unmute refs/state text
-- `verify/artifacts/phase4-retry-after-prompt-snapshot.txt` — thinking-state refs/state text
-- `verify/artifacts/phase4-retry-after-response-snapshot.txt` — speaking-state refs/state text
-- `verify/artifacts/phase4-retry-disconnected-snapshot.txt` — disconnect refs/state text
+- `verify/artifacts/phase4-retry-connected-snapshot.txt` — supporting DOM-ref/state snapshot for connect
+- `verify/artifacts/phase4-retry-muted-snapshot.txt` — supporting DOM-ref/state snapshot for mute
+- `verify/artifacts/phase4-retry-unmuted-snapshot.txt` — supporting DOM-ref/state snapshot for unmute
+- `verify/artifacts/phase4-retry-after-prompt-snapshot.txt` — supporting DOM-ref/state snapshot for the thinking state
+- `verify/artifacts/phase4-retry-after-response-snapshot.txt` — supporting DOM-ref/state snapshot for the speaking state
+- `verify/artifacts/phase4-retry-disconnected-snapshot.txt` — supporting DOM-ref/state snapshot for disconnect
 - `verify/artifacts/phase4-retry-agent-log-after-connect.txt` — worker-side connect/greeting proof
 - `verify/artifacts/phase4-retry-agent-log-after-prompt.txt` — worker-side typed prompt + grounding proof
 
