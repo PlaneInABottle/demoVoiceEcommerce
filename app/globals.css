@@ -38,10 +38,24 @@ code {
   padding: 48px 0 64px;
 }
 
+.split-shell,
+.conversation-pane,
+.agent-pane,
 .hero-panel,
 .content-grid {
   display: grid;
   gap: 20px;
+}
+
+.split-shell {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr);
+  align-items: start;
+}
+
+.conversation-pane,
+.agent-pane {
+  min-width: 0;
+  align-content: start;
 }
 
 .hero-panel {
@@ -93,9 +107,32 @@ code {
   min-height: 420px;
 }
 
+.conversation-pane__intro {
+  display: grid;
+  gap: 12px;
+}
+
+.conversation-pane__intro .eyebrow {
+  margin: 0;
+}
+
+.conversation-pane__intro .hero-copy {
+  margin: 0;
+}
+
 .controls-panel,
 .sidebar-panel {
   min-height: 200px;
+}
+
+.agent-pane__identity,
+.agent-pane__state,
+.agent-pane__controls {
+  height: 100%;
+}
+
+.agent-pane__identity strong {
+  font-size: 1.25rem;
 }
 
 .panel {
@@ -295,9 +332,17 @@ code {
 }
 
 @media (max-width: 900px) {
+  .split-shell,
+  .conversation-pane,
+  .agent-pane,
   .hero-panel,
   .content-grid {
     grid-template-columns: 1fr;
+  }
+
+  .page-shell {
+    width: min(100%, calc(100% - 24px));
+    padding: 24px 0 40px;
   }
 
   .typed-chat-form__row,

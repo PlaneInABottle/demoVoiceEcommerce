@@ -4,9 +4,8 @@ import { useSession } from '@livekit/components-react';
 import { TokenSource } from 'livekit-client';
 import { useMemo } from 'react';
 
+import { AgentPane } from '@/components/agent-pane';
 import { AgentSessionProvider } from '@/components/agents-ui/agent-session-provider';
-import { ProductSidebar } from '@/components/product-sidebar';
-import { SessionPanel } from '@/components/session-panel';
 import { TranscriptPanel } from '@/components/transcript-panel';
 
 type DemoShellProps = {
@@ -25,33 +24,22 @@ export function DemoShell({ appName, agentName, roomName }: DemoShellProps) {
 
   return (
     <main className="page-shell">
-      <section className="hero-panel">
-        <div>
-          <p className="eyebrow">MVP demo</p>
-          <h1>{appName}</h1>
-          <p className="hero-copy">
-            Ask the agent for product recommendations, comparisons, and grounded shipping, return,
-            and warranty guidance using voice or typed input.
-          </p>
-        </div>
-        <div className="agent-card">
-          <span className="agent-card__label">Canonical agent</span>
-          <strong>{agentName}</strong>
-        </div>
-      </section>
-
       <AgentSessionProvider session={session}>
-        <section className="content-grid">
-          <TranscriptPanel />
+        <section className="split-shell">
+          <section className="conversation-pane">
+            <article className="panel conversation-pane__intro">
+              <p className="eyebrow">MVP demo</p>
+              <h1>{appName}</h1>
+              <p className="hero-copy">
+                Ask the agent for product recommendations, comparisons, and grounded shipping,
+                return, and warranty guidance using voice or typed input.
+              </p>
+            </article>
 
-          <article className="panel controls-panel">
-            <header className="panel__header">
-              <h2>Session controls</h2>
-            </header>
-            <SessionPanel agentName={agentName} session={session} />
-          </article>
+            <TranscriptPanel />
+          </section>
 
-          <ProductSidebar />
+          <AgentPane agentName={agentName} session={session} />
         </section>
       </AgentSessionProvider>
     </main>

@@ -4,8 +4,6 @@ import { useLocalParticipant, type UseSessionReturn } from '@livekit/components-
 import { ConnectionState } from 'livekit-client';
 import { useState } from 'react';
 
-import { AgentStateBadge } from '@/components/agent-state-badge';
-
 type SessionPanelProps = {
   agentName: string;
   session: UseSessionReturn;
@@ -92,9 +90,6 @@ export function SessionPanel({ agentName, session }: SessionPanelProps) {
         <div>
           <span className="agent-card__label">Microphone</span>
           <strong>{microphoneStatusLabel}</strong>
-        </div>
-        <div className="badge-row">
-          <AgentStateBadge session={session} />
         </div>
         <p className="helper-copy">
           Connects through <code>/api/token</code> using the canonical agent dispatch name:
