@@ -1,0 +1,27 @@
+{
+  "name": "livekit-ecommerce-voice-demo-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx main.ts dev",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js start",
+    "download-files": "node dist/main.js download-files"
+  },
+  "dependencies": {
+    "@livekit/agents": "1.0.48",
+    "@livekit/agents-plugin-livekit": "1.0.48",
+    "@livekit/agents-plugin-silero": "1.0.48",
+    "@livekit/noise-cancellation-node": "^0.1.9",
+    "@livekit/rtc-node": "^0.13.24",
+    "dotenv": "^17.2.3",
+    "livekit-server-sdk": "^2.15.0",
+    "zod": "^4.1.8"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
