@@ -6,74 +6,103 @@
 
 ## Scope
 
-This refreshed report replaces the earlier stale partial-pass story. The current browser proof was
-re-run against a production-style web server (`next build && next start`) on `http://localhost:3000`
-with the approved typed-only fallback flow. That proof requires the separate agent worker; browser
-connect/greeting claims are not reproducible from the web process alone.
+This refresh closes the remaining Phase 3 approval gap for the current split-shell UI. The browser
+proof now explicitly covers:
+
+- connect
+- mute
+- unmute
+- disconnect
+- visible agent-state reactions in the right-side agent pane
+
+The browser proof uses the current local UI on `http://localhost:3000` plus the separate LiveKit
+agent worker. The microphone-specific checks were re-run with Chrome fake-media launch flags so the
+live microphone path is testable under automation.
 
 ## Commands used
 
 ```bash
-pm2 start npm --name demoVoice-web --cwd /Users/Y_ALTAY1/Documents/demoVoice -- run start
-pm2 start npm --name demoVoice-agent --cwd /Users/Y_ALTAY1/Documents/demoVoice/agent -- run start
+pm2 start npm --name demoVoice-web --cwd /Users/Y_ALTAY1/Documents/demoVoice -- run dev
+pm2 start npm --name demoVoice-agent --cwd /Users/Y_ALTAY1/Documents/demoVoice/agent -- run dev
 
-agent-browser --session-name demoVoiceProofProd open http://localhost:3000
-agent-browser --session-name demoVoiceProofProd snapshot -i
-agent-browser --session-name demoVoiceProofProd uncheck @e5
-agent-browser --session-name demoVoiceProofProd click @e6
-agent-browser --session-name demoVoiceProofProd click @e1
-agent-browser --session-name demoVoiceProofProd click @e8
+agent-browser --session-name phase4-retry-fake-media \
+  --executable-path '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' \
+  --args '--use-fake-ui-for-media-stream,--use-fake-device-for-media-stream,--autoplay-policy=no-user-gesture-required' \
+  open http://localhost:3000
 ```
 
-For the canonical worker gate, including the direct CLI reproduction path
-(`npm --prefix agent run dev`) and PM2-optional operator commands, see
-`verify/agent-worker-smoke.md`.
+The full console transcript, including the exact browser and PM2 commands captured during the
+verification rerun, is stored in `verify/artifacts/phase4-retry-commands.txt`.
+
+For the canonical worker gate, including the direct-CLI path (`npm --prefix agent run dev`) and the
+PM2 operator equivalents, see `verify/agent-worker-smoke.md`.
 
 ## Browser artifacts
 
-- `verify/artifacts/browser-smoke-home.png`
-- `verify/artifacts/browser-smoke-connected.png`
-- `verify/artifacts/browser-smoke-transcript.png`
-- `verify/artifacts/browser-smoke-transcript.txt`
-- `verify/artifacts/production-room-names.txt`
+- `verify/artifacts/phase4-retry-home.png`
+- `verify/artifacts/phase4-retry-connected.png`
+- `verify/artifacts/phase4-retry-muted.png`
+- `verify/artifacts/phase4-retry-unmuted.png`
+- `verify/artifacts/phase4-retry-after-prompt.png`
+- `verify/artifacts/phase4-retry-after-response.png`
+- `verify/artifacts/phase4-retry-disconnected.png`
+- `verify/artifacts/phase4-retry-connected-snapshot.txt`
+- `verify/artifacts/phase4-retry-muted-snapshot.txt`
+- `verify/artifacts/phase4-retry-unmuted-snapshot.txt`
+- `verify/artifacts/phase4-retry-after-prompt-snapshot.txt`
+- `verify/artifacts/phase4-retry-after-response-snapshot.txt`
+- `verify/artifacts/phase4-retry-disconnected-snapshot.txt`
+- `verify/artifacts/phase4-retry-agent-log-after-connect.txt`
+- `verify/artifacts/phase4-retry-agent-log-after-prompt.txt`
+
+The legacy `browser-smoke-*` assets were also refreshed so the repository’s older proof references
+no longer point at the pre-refresh layout.
 
 ## Observed behavior
 
-1. The homepage rendered with the canonical agent card and the expected session controls.
-2. A production `next start` run produced a fresh room name on each page request:
+1. The homepage rendered the current split shell:
+   - left conversation pane with intro copy, shared transcript, prompt chips, and typed fallback
+   - right agent pane with canonical agent presence, visible state text, microphone control, and
+     disconnect control
+   - no featured-products sidebar occupying the primary interaction area
+2. After connect, the agent pane showed a live session with:
+   - `Session Connected`
+   - `Microphone track: published to the LiveKit session`
+   - a microphone button that exposed `Mute microphone`
+3. After muting, the agent pane changed to `Microphone Live microphone off` and the button label
+   changed to `Turn microphone on`.
+4. After unmuting, the agent pane changed back to `Microphone Live microphone on` and the button
+   label returned to `Mute microphone`.
+5. Sending the first prompt chip caused a visible right-pane state transition to `Agent state
+   Thinking`, followed by `Agent state Speaking` once the grounded response started streaming.
+6. Disconnecting produced the expected terminal UI state:
+   - `Agent state Disconnected`
+   - `Session outcome Ended`
+   - disabled prompt/microphone controls until reconnect
 
-   ```text
-   demoVoice-room-b1c3c54f-dda3-4c8e-9b51-13c486bf06d2
-   demoVoice-room-ad1e5cf0-2ea5-4a31-8b49-8d80efc86e55
-   ```
+## State-transition evidence
 
-3. After connecting typed-only, the greeting appeared in the transcript and the typed controls became enabled.
-4. Clicking the first prompt chip sent the approved `lk.chat` fallback message and produced a grounded reply.
+- **Connect / live mic on:** `phase4-retry-connected.png` + `phase4-retry-connected-snapshot.txt`
+- **Mute:** `phase4-retry-muted.png` + `phase4-retry-muted-snapshot.txt`
+- **Unmute:** `phase4-retry-unmuted.png` + `phase4-retry-unmuted-snapshot.txt`
+- **Thinking reaction:** `phase4-retry-after-prompt.png` + `phase4-retry-after-prompt-snapshot.txt`
+- **Speaking reaction:** `phase4-retry-after-response.png` + `phase4-retry-after-response-snapshot.txt`
+- **Disconnect:** `phase4-retry-disconnected.png` + `phase4-retry-disconnected-snapshot.txt`
 
-## Transcript excerpt
+## Worker grounding checks
 
-From `verify/artifacts/browser-smoke-transcript.txt`:
+`verify/artifacts/phase4-retry-agent-log-after-connect.txt` and
+`verify/artifacts/phase4-retry-agent-log-after-prompt.txt` capture the matching worker side:
 
-```text
-Agent
-4:49:15 PM
-Hello! I'm your local shopping assistant. I can help you discover products, compare features, and answer specific questions about shipping, returns, or warranties based on our catalog. How can I help you find what you're looking for today?
-
-Demo shopper
-4:49:28 PM
-I need noise-cancelling headphones under $200.
-
-Agent
-4:49:32 PM
-I couldn't find any noise-cancelling headphones under $200 in our current catalog.
-```
+- `job:accepted`
+- `greeting:start`
+- `session:started`
+- `conversation:user I need noise-cancelling headphones under $200.`
+- `tool:search_products query="headphones" maxPrice=200 matches=1`
+- `QuietCore 200 Headphones` returned as the grounded catalog match
 
 ## Conclusion
 
-The production browser path is currently working for the approvable MVP flow:
-
-- homepage room generation is request-time dynamic under `next start`
-- the session connects successfully from the production web app
-- the greeting transcript appears
-- the typed `lk.chat` fallback remains functional
-- the refreshed proof artifacts match the current implementation
+The repository now contains explicit browser-visible proof for the refreshed UI’s connect, mute,
+unmute, disconnect, and agent-state reactions. The previous approval gap was documentation/evidence
+only; this refresh closes it without changing the product implementation.

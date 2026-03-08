@@ -1,123 +1,17 @@
-MVP DEMO
-
-LiveKit Ecommerce Voice Demo
-
-Ask the agent for product recommendations, comparisons, and grounded shipping, return, and warranty guidance using voice or typed input.
-
-CANONICAL AGENT
-ecommerce-agent
-Transcript
-
-Voice and typed messages share the same LiveKit transcript.
-
 Agent
-4:49:15 PM
+8:54 PM
+Hello! I'm your ecommerce voice assistant. I can help you find products from our catalog, compare their features, and answer questions about shipping, returns, or warranties.
 
-Hello! I'm your local shopping assistant. I can help you discover products, compare features, and answer specific questions about shipping, returns, or warranties based on our catalog. How can I help you find what you're looking for today?
+What are you looking for today?
 
-Demo shopper
-4:49:28 PM
-
+You
+8:56 PM
 I need noise-cancelling headphones under $200.
 
 Agent
-4:49:32 PM
+8:56 PM
+I found the **QuietCore ...
+(visible in verify/artifacts/phase4-retry-after-response.png while the agent pane shows Speaking)
 
-I couldn't find any noise-cancelling headphones under $200 in our current catalog. Would you like to see our available
-
-I need noise-cancelling headphones under $200.
-Compare the QuietCore 200 and the Commute Mini.
-How fast is shipping and what is the return window for the QuietCore 200?
-Typed fallback (`lk.chat`)
-Send
-Session controls
-SESSION STATUSConnected
-MICROPHONELive microphone off
-Speaking
-
-Connects through /api/token using the canonical agent dispatch name: ecommerce-agent
-
-Enable microphone when connecting for live voice turns
-Connect typed-only
-Turn microphone on
-Disconnect
-
-The typed lk.chat path remains available for deterministic verification. Uncheck the toggle above if you want a typed-only session, or connect with the microphone enabled for live voice capture.
-
-Microphone track: not published yet
-
-Featured products
-
-Static catalog data shared by the web app and agent worker.
-
-QuietCore 200 Headphones
-$179
-
-Wireless over-ear headphones with adaptive noise cancellation for travel and office use.
-
-30-hour battery
-USB-C fast charging
-
-Shipping: Free standard shipping in 3-5 business days, with 2-day expedited shipping available at checkout.
-
-Returns & warranty: 30-day returns and a 2-year limited warranty.
-
-Commute Mini Earbuds
-$129
-
-Compact earbuds tuned for commuters who need clear calls and light noise isolation.
-
-Qi charging case
-IPX4 splash resistance
-
-Shipping: Free standard shipping in 3-5 business days, with next-day shipping available in the contiguous US.
-
-Returns & warranty: 30-day returns and a 1-year limited warranty.
-
-RoomFill Portable Speaker
-$149
-
-Portable speaker with room-filling sound, stereo pairing, and all-day battery life.
-
-18-hour battery
-stereo pairing
-
-Shipping: Free ground shipping in 4-6 business days, or 2-day delivery for an added fee.
-
-Returns & warranty: 30-day returns and a 2-year limited warranty.
-
-Tactile Pro Keyboard
-$159
-
-Mechanical keyboard with hot-swappable switches and low-latency wireless connectivity.
-
-75% layout
-hot-swappable switches
-
-Shipping: Free standard shipping in 3-5 business days, with express delivery available in major metro areas.
-
-Returns & warranty: 30-day returns and a 2-year limited warranty.
-
-Travel GaN 100 Charger
-$89
-
-Compact GaN charger for phones, tablets, and laptops with international plug adapters.
-
-100W max output
-two USB-C ports
-
-Shipping: Free standard shipping in 2-4 business days, with overnight shipping available for US orders placed before noon.
-
-Returns & warranty: 30-day returns and a 1-year limited warranty.
-
-StreamLight HD Webcam
-$119
-
-4K webcam with auto-framing and low-light correction for meetings and streaming.
-
-4K sensor
-auto-framing
-
-Shipping: Free standard shipping in 3-5 business days, with 2-day delivery available for eligible regions.
-
-Returns & warranty: 30-day returns and a 2-year limited warranty.
+Grounding check
+Tool result: QuietCore 200 Headphones ($179) from verify/artifacts/phase4-retry-agent-log-after-prompt.txt.

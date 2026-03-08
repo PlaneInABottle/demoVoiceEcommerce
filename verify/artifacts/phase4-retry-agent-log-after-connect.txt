@@ -1,0 +1,155 @@
+[1m[90m[TAILING] Tailing last 120 lines for [demoVoice-agent] process (change the value with --lines option)[39m[22m
+[90m/Users/Y_ALTAY1/.pm2/logs/demoVoice-agent-error.log last 120 lines:[39m
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mnode:events:485
+[31m1|demoVoic | [39m      throw er; // Unhandled 'error' event
+[31m1|demoVoic | [39m      ^
+[31m1|demoVoic | [39m
+[31m1|demoVoic | [39mError: write EPIPE
+[31m1|demoVoic | [39m    at target._send (node:internal/child_process:877:20)
+[31m1|demoVoic | [39m    at target.send (node:internal/child_process:751:19)
+[31m1|demoVoic | [39m    at <anonymous> (/Users/Y_ALTAY1/Documents/demoVoice/agent/node_modules/@livekit/agents/dist/ipc/inference_proc_lazy_main.js:81:21)
+[31m1|demoVoic | [39m    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[31m1|demoVoic | [39mEmitted 'error' event on process instance at:
+[31m1|demoVoic | [39m    at process.emit (/Users/Y_ALTAY1/Documents/demoVoice/agent/node_modules/tsx/dist/suppress-warnings.cjs:1:472)
+[31m1|demoVoic | [39m    at node:internal/child_process:881:39
+[31m1|demoVoic | [39m    at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+[31m1|demoVoic | [39m  errno: -32,
+[31m1|demoVoic | [39m  code: 'EPIPE',
+[31m1|demoVoic | [39m  syscall: 'write'
+[31m1|demoVoic | [39m}
+[31m1|demoVoic | [39m
+[31m1|demoVoic | [39mNode.js v23.11.0
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+
+[90m/Users/Y_ALTAY1/.pm2/logs/demoVoice-agent-out.log last 120 lines:[39m
+[32m1|demoVoic | [39m    repoId: "livekit/turn-detector"
+[32m1|demoVoic | [39m    path: "onnx/model_q8.onnx"
+[32m1|demoVoic | [39m    revision: "v0.4.1-intl"
+[32m1|demoVoic | [39m[20:54:13.199] [34mDEBUG[39m (30874): [36mFile found in cache (via refs)[39m
+[32m1|demoVoic | [39m    resolvedPath: "/Users/Y_ALTAY1/.cache/huggingface/hub/models--livekit--turn-detector/snapshots/ebcab0c09c2b62d926e92180d364df3aaae68a09/onnx/model_q8.onnx"
+[32m1|demoVoic | [39m    resolvedHash: "ebcab0c09c2b62d926e92180d364df3aaae68a09"
+[32m1|demoVoic | [39m[20:54:13.335] [34mDEBUG[39m (30874): [36mFile found in cache (via refs)[39m
+[32m1|demoVoic | [39m    resolvedPath: "/Users/Y_ALTAY1/.cache/huggingface/hub/models--livekit--turn-detector/snapshots/87e35fcb1e60a569bea70346191c4886ea92e281/onnx/model_q8.onnx"
+[32m1|demoVoic | [39m    resolvedHash: "87e35fcb1e60a569bea70346191c4886ea92e281"
+[32m1|demoVoic | [39m[20:54:14.282] [34mDEBUG[39m (30874): [36mall inference runners initialized[39m
+[32m1|demoVoic | [39m[20:54:14.283] [32mINFO[39m (30871): [36mstarting worker[39m
+[32m1|demoVoic | [39m    version: "1.0.48"
+[32m1|demoVoic | [39m[20:54:14.301] [32mINFO[39m (30871): [36mServer is listening on port 50269[39m
+[32m1|demoVoic | [39m[20:54:14.678] [34mDEBUG[39m (30871): [36mconnected to LiveKit server[39m
+[32m1|demoVoic | [39m    version: "1.0.48"
+[32m1|demoVoic | [39m[20:54:14.783] [32mINFO[39m (30871): [36mregistered worker[39m
+[32m1|demoVoic | [39m    version: "1.0.48"
+[32m1|demoVoic | [39m    id: "AW_NssUCvcGCwef"
+[32m1|demoVoic | [39m    server_info: {
+[32m1|demoVoic | [39m      "edition": "Cloud",
+[32m1|demoVoic | [39m      "version": "1.9.11",
+[32m1|demoVoic | [39m      "protocol": 16,
+[32m1|demoVoic | [39m      "region": "Israel",
+[32m1|demoVoic | [39m      "nodeId": "NC_OJERUSALEM1A_ot5mD8GV23iA",
+[32m1|demoVoic | [39m      "debugInfo": "",
+[32m1|demoVoic | [39m      "agentProtocol": 0
+[32m1|demoVoic | [39m    }
+[32m1|demoVoic | [39m[20:54:55.039] [32mINFO[39m (30871): [36mreceived job request[39m
+[32m1|demoVoic | [39m    version: "1.0.48"
+[32m1|demoVoic | [39m    jobId: "AJ_sPHSvnAUrNuW"
+[32m1|demoVoic | [39m    resuming: false
+[32m1|demoVoic | [39m    agentName: "ecommerce-agent"
+[32m1|demoVoic | [39m[20:54:56.087] [34mDEBUG[39m (31217): [36minitializing job runner[39m
+[32m1|demoVoic | [39m[worker] prewarm:start
+[32m1|demoVoic | [39m[worker] prewarm:ready
+[32m1|demoVoic | [39m[20:54:56.125] [34mDEBUG[39m (31217): [36mjob runner initialized[39m
+[32m1|demoVoic | [39m[20:54:56.126] [34mDEBUG[39m (31217): [36mjob started[39m
+[32m1|demoVoic | [39m    jobID: "AJ_sPHSvnAUrNuW"
+[32m1|demoVoic | [39m[worker] job:accepted room=connected-room
+[32m1|demoVoic | [39m[worker] catalog:loaded count=6
+[32m1|demoVoic | [39m[20:54:56.128] [34mDEBUG[39m (31217): [36mLocal file only mode - checking cache[39m
+[32m1|demoVoic | [39m    repoId: "livekit/turn-detector"
+[32m1|demoVoic | [39m    path: "languages.json"
+[32m1|demoVoic | [39m    revision: "v0.4.1-intl"
+[32m1|demoVoic | [39m[worker] greeting:start catalog_size=6
+[32m1|demoVoic | [39m[worker] speech:created source=generate_reply
+[32m1|demoVoic | [39m[worker] conversation:user Greet the shopper, explain that you can help with product discovery, comparisons, and grounded shipping, return, and warranty questions, then ask what they need.
+[32m1|demoVoic | [39m[worker] agent:state initializing -> thinking
+[32m1|demoVoic | [39m[20:54:56.133] [34mDEBUG[39m (31217): [36mAuto-connecting to room via job context[39m
+[32m1|demoVoic | [39m[20:54:56.134] [34mDEBUG[39m (31217): [36mAgent handoff inserted into chat context[39m
+[32m1|demoVoic | [39m    newAgentId: "ecommerce_agent"
+[32m1|demoVoic | [39m[20:54:56.136] [34mDEBUG[39m (31217): [36mcreateSttTask: create stt stream from stt node[39m
+[32m1|demoVoic | [39m[20:54:56.136] [34mDEBUG[39m (31217): [36mTask.runTask: task AgentActivity_onEnter started[39m
+[32m1|demoVoic | [39m[20:54:56.137] [32mINFO[39m (31217): [36mCreating speech handle[39m
+[32m1|demoVoic | [39m    speech_id: "speech_faf5ee65-6ad"
+[32m1|demoVoic | [39m[20:54:56.137] [34mDEBUG[39m (31217): [36mTask.runTask: task AgentActivity.pipelineReply started[39m
+[32m1|demoVoic | [39m[20:54:56.138] [34mDEBUG[39m (31217): [36mTask.runTask: task performLLMInference started[39m
+[32m1|demoVoic | [39m[20:54:56.138] [34mDEBUG[39m (31217): [36mTask.runTask: task performTTSInference started[39m
+[32m1|demoVoic | [39m[20:54:56.142] [34mDEBUG[39m (31217): [36mTask.runTask: task AgentActivity_onEnter done[39m
+[32m1|demoVoic | [39m[20:54:56.142] [34mDEBUG[39m (31217): [36mTask.runTask: task performTextForwarding started[39m
+[32m1|demoVoic | [39m[20:54:56.142] [34mDEBUG[39m (31217): [36mTask.runTask: task performAudioForwarding started[39m
+[32m1|demoVoic | [39m[20:54:56.142] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecutions started[39m
+[32m1|demoVoic | [39m[20:54:56.163] [34mDEBUG[39m (31217): [36minference.TTS creating new websocket connection (pool miss)[39m
+[32m1|demoVoic | [39m    url: "wss://agent-gateway.livekit.cloud/v1/tts"
+[32m1|demoVoic | [39m[20:54:56.165] [34mDEBUG[39m (31217): [36mFile found in cache (via refs)[39m
+[32m1|demoVoic | [39m    resolvedPath: "/Users/Y_ALTAY1/.cache/huggingface/hub/models--livekit--turn-detector/snapshots/87e35fcb1e60a569bea70346191c4886ea92e281/languages.json"
+[32m1|demoVoic | [39m    resolvedHash: "87e35fcb1e60a569bea70346191c4886ea92e281"
+[32m1|demoVoic | [39m[20:54:56.529] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-input started[39m
+[32m1|demoVoic | [39m[20:54:56.530] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-sentence started[39m
+[32m1|demoVoic | [39m[20:54:56.530] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-ws-listener started[39m
+[32m1|demoVoic | [39m[20:54:56.530] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-recv started[39m
+[32m1|demoVoic | [39m{"level":20,"time":1772992497611,"pid":31217,"hostname":"192.168.1.4","name":"lk-rtc","msg":"Connect callback received"}
+[32m1|demoVoic | [39m[20:54:57.612] [34mDEBUG[39m (31217): [36musing audio io: `ParticipantAudioInputStream` -> `AgentSession` -> `SyncedAudioOutput`[39m
+[32m1|demoVoic | [39m[worker] agent:state thinking -> listening
+[32m1|demoVoic | [39m[worker] session:started
+[32m1|demoVoic | [39m[20:54:57.612] [34mDEBUG[39m (31217): [36musing transcript io: `AgentSession` -> `SyncedTextOutput`[39m
+[32m1|demoVoic | [39m[20:54:57.620] [34mDEBUG[39m (31217): [36mconnection state changed[39m
+[32m1|demoVoic | [39m    state: 1
+[32m1|demoVoic | [39m[20:54:57.620] [34mDEBUG[39m (31217): [36msetting participant[39m
+[32m1|demoVoic | [39m    participantIdentity: "demo-114fca85-d2b3-403a-a434-595fd2324aab"
+[32m1|demoVoic | [39m[20:54:57.621] [34mDEBUG[39m (31217): [36msetting participant audio input[39m
+[32m1|demoVoic | [39m    participant: "demo-114fca85-d2b3-403a-a434-595fd2324aab"
+[32m1|demoVoic | [39m[20:54:57.621] [32mINFO[39m (31217): [36mparticipantValue.trackPublications[39m
+[32m1|demoVoic | [39m    participantValue: "demo-114fca85-d2b3-403a-a434-595fd2324aab"
+[32m1|demoVoic | [39m    trackPublications: [
+[32m1|demoVoic | [39m      {
+[32m1|demoVoic | [39m        "info": {
+[32m1|demoVoic | [39m          "sid": "TR_AM9miWyCTF2Rfz",
+[32m1|demoVoic | [39m          "name": "",
+[32m1|demoVoic | [39m          "kind": "KIND_AUDIO",
+[32m1|demoVoic | [39m          "source": "SOURCE_MICROPHONE",
+[32m1|demoVoic | [39m          "simulcasted": false,
+[32m1|demoVoic | [39m          "width": 0,
+[32m1|demoVoic | [39m          "height": 0,
+[32m1|demoVoic | [39m          "mimeType": "audio/red",
+[32m1|demoVoic | [39m          "muted": false,
+[32m1|demoVoic | [39m          "remote": true,
+[32m1|demoVoic | [39m          "encryptionType": "NONE",
+[32m1|demoVoic | [39m          "audioFeatures": [
+[32m1|demoVoic | [39m            "TF_AUTO_GAIN_CONTROL",
+[32m1|demoVoic | [39m            "TF_ECHO_CANCELLATION",
+[32m1|demoVoic | [39m            "TF_NOISE_SUPPRESSION"
+[32m1|demoVoic | [39m          ]
+[32m1|demoVoic | [39m        },
+[32m1|demoVoic | [39m        "ffiHandle": {},
+[32m1|demoVoic | [39m        "subscribed": false
+[32m1|demoVoic | [39m      }
+[32m1|demoVoic | [39m    ]
+[32m1|demoVoic | [39m    lengthOfTrackPublications: 1
+[32m1|demoVoic | [39m[20:54:57.811] [34mDEBUG[39m (31217): [36monTrackSubscribed in _input[39m
+[32m1|demoVoic | [39m    participant: "demo-114fca85-d2b3-403a-a434-595fd2324aab"
+[32m1|demoVoic | [39m[20:54:58.378] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecutions done[39m
+[32m1|demoVoic | [39m[20:54:58.378] [34mDEBUG[39m (31217): [36mTask.runTask: task performLLMInference done[39m
+[32m1|demoVoic | [39m[20:54:58.379] [34mDEBUG[39m (31217): [36mTask.runTask: task performTextForwarding done[39m
+[32m1|demoVoic | [39m[20:54:58.380] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-input done[39m
+[32m1|demoVoic | [39m[20:54:58.380] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-sentence done[39m
+[32m1|demoVoic | [39m[worker] agent:state listening -> speaking
+[32m1|demoVoic | [39m[20:55:01.444] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-ws-listener done[39m
+[32m1|demoVoic | [39m[20:55:01.445] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-recv done[39m
+[32m1|demoVoic | [39m[20:55:01.446] [34mDEBUG[39m (31217): [36mTask.runTask: task performTTSInference done[39m
+

@@ -1,0 +1,8 @@
+- button "I need noise-cancelling headphones under $200." [ref=e1]
+- button "Compare the QuietCore 200 and the Commute Mini." [ref=e2]
+- button "How fast is shipping and what is the return window for the QuietCore 200?" [ref=e3]
+- button "Send" [ref=e4]
+- button "Connected" [ref=e5] [disabled]
+- button "Mute microphone" [ref=e6] [pressed]
+- button "Disconnect" [ref=e7]
+- checkbox "Enable microphone when connecting for live voice turns" [ref=e8] [checked] [disabled]

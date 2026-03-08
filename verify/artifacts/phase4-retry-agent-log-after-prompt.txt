@@ -1,0 +1,195 @@
+[1m[90m[TAILING] Tailing last 160 lines for [demoVoice-agent] process (change the value with --lines option)[39m[22m
+[90m/Users/Y_ALTAY1/.pm2/logs/demoVoice-agent-error.log last 160 lines:[39m
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mnode:events:485
+[31m1|demoVoic | [39m      throw er; // Unhandled 'error' event
+[31m1|demoVoic | [39m      ^
+[31m1|demoVoic | [39m
+[31m1|demoVoic | [39mError: write EPIPE
+[31m1|demoVoic | [39m    at target._send (node:internal/child_process:877:20)
+[31m1|demoVoic | [39m    at target.send (node:internal/child_process:751:19)
+[31m1|demoVoic | [39m    at <anonymous> (/Users/Y_ALTAY1/Documents/demoVoice/agent/node_modules/@livekit/agents/dist/ipc/inference_proc_lazy_main.js:81:21)
+[31m1|demoVoic | [39m    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[31m1|demoVoic | [39mEmitted 'error' event on process instance at:
+[31m1|demoVoic | [39m    at process.emit (/Users/Y_ALTAY1/Documents/demoVoice/agent/node_modules/tsx/dist/suppress-warnings.cjs:1:472)
+[31m1|demoVoic | [39m    at node:internal/child_process:881:39
+[31m1|demoVoic | [39m    at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+[31m1|demoVoic | [39m  errno: -32,
+[31m1|demoVoic | [39m  code: 'EPIPE',
+[31m1|demoVoic | [39m  syscall: 'write'
+[31m1|demoVoic | [39m}
+[31m1|demoVoic | [39m
+[31m1|demoVoic | [39mNode.js v23.11.0
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+[31m1|demoVoic | [39mlibc++abi: terminating due to uncaught exception of type std::__1::system_error: mutex lock failed: Invalid argument
+
+[90m/Users/Y_ALTAY1/.pm2/logs/demoVoice-agent-out.log last 160 lines:[39m
+[32m1|demoVoic | [39m{"level":20,"time":1772992497611,"pid":31217,"hostname":"192.168.1.4","name":"lk-rtc","msg":"Connect callback received"}
+[32m1|demoVoic | [39m[20:54:57.612] [34mDEBUG[39m (31217): [36musing audio io: `ParticipantAudioInputStream` -> `AgentSession` -> `SyncedAudioOutput`[39m
+[32m1|demoVoic | [39m[worker] agent:state thinking -> listening
+[32m1|demoVoic | [39m[worker] session:started
+[32m1|demoVoic | [39m[20:54:57.612] [34mDEBUG[39m (31217): [36musing transcript io: `AgentSession` -> `SyncedTextOutput`[39m
+[32m1|demoVoic | [39m[20:54:57.620] [34mDEBUG[39m (31217): [36mconnection state changed[39m
+[32m1|demoVoic | [39m    state: 1
+[32m1|demoVoic | [39m[20:54:57.620] [34mDEBUG[39m (31217): [36msetting participant[39m
+[32m1|demoVoic | [39m    participantIdentity: "demo-114fca85-d2b3-403a-a434-595fd2324aab"
+[32m1|demoVoic | [39m[20:54:57.621] [34mDEBUG[39m (31217): [36msetting participant audio input[39m
+[32m1|demoVoic | [39m    participant: "demo-114fca85-d2b3-403a-a434-595fd2324aab"
+[32m1|demoVoic | [39m[20:54:57.621] [32mINFO[39m (31217): [36mparticipantValue.trackPublications[39m
+[32m1|demoVoic | [39m    participantValue: "demo-114fca85-d2b3-403a-a434-595fd2324aab"
+[32m1|demoVoic | [39m    trackPublications: [
+[32m1|demoVoic | [39m      {
+[32m1|demoVoic | [39m        "info": {
+[32m1|demoVoic | [39m          "sid": "TR_AM9miWyCTF2Rfz",
+[32m1|demoVoic | [39m          "name": "",
+[32m1|demoVoic | [39m          "kind": "KIND_AUDIO",
+[32m1|demoVoic | [39m          "source": "SOURCE_MICROPHONE",
+[32m1|demoVoic | [39m          "simulcasted": false,
+[32m1|demoVoic | [39m          "width": 0,
+[32m1|demoVoic | [39m          "height": 0,
+[32m1|demoVoic | [39m          "mimeType": "audio/red",
+[32m1|demoVoic | [39m          "muted": false,
+[32m1|demoVoic | [39m          "remote": true,
+[32m1|demoVoic | [39m          "encryptionType": "NONE",
+[32m1|demoVoic | [39m          "audioFeatures": [
+[32m1|demoVoic | [39m            "TF_AUTO_GAIN_CONTROL",
+[32m1|demoVoic | [39m            "TF_ECHO_CANCELLATION",
+[32m1|demoVoic | [39m            "TF_NOISE_SUPPRESSION"
+[32m1|demoVoic | [39m          ]
+[32m1|demoVoic | [39m        },
+[32m1|demoVoic | [39m        "ffiHandle": {},
+[32m1|demoVoic | [39m        "subscribed": false
+[32m1|demoVoic | [39m      }
+[32m1|demoVoic | [39m    ]
+[32m1|demoVoic | [39m    lengthOfTrackPublications: 1
+[32m1|demoVoic | [39m[20:54:57.811] [34mDEBUG[39m (31217): [36monTrackSubscribed in _input[39m
+[32m1|demoVoic | [39m    participant: "demo-114fca85-d2b3-403a-a434-595fd2324aab"
+[32m1|demoVoic | [39m[20:54:58.378] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecutions done[39m
+[32m1|demoVoic | [39m[20:54:58.378] [34mDEBUG[39m (31217): [36mTask.runTask: task performLLMInference done[39m
+[32m1|demoVoic | [39m[20:54:58.379] [34mDEBUG[39m (31217): [36mTask.runTask: task performTextForwarding done[39m
+[32m1|demoVoic | [39m[20:54:58.380] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-input done[39m
+[32m1|demoVoic | [39m[20:54:58.380] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-sentence done[39m
+[32m1|demoVoic | [39m[worker] agent:state listening -> speaking
+[32m1|demoVoic | [39m[20:55:01.444] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-ws-listener done[39m
+[32m1|demoVoic | [39m[20:55:01.445] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-recv done[39m
+[32m1|demoVoic | [39m[20:55:01.446] [34mDEBUG[39m (31217): [36mTask.runTask: task performTTSInference done[39m
+[32m1|demoVoic | [39m[20:55:09.134] [34mDEBUG[39m (31217): [36mTask.runTask: task performAudioForwarding done[39m
+[32m1|demoVoic | [39m[worker] conversation:assistant Hello! I'm your ecommerce voice assistant. I can help you find products from our catalog, compare their features, and answer questions about shipping, returns, or warranties. What are you looking for today?
+[32m1|demoVoic | [39m[20:55:10.129] [32mINFO[39m (31217): [36mplayout completed without interruption[39m
+[32m1|demoVoic | [39m    speech_id: "speech_faf5ee65-6ad"
+[32m1|demoVoic | [39m    message: "Hello! I'm your ecommerce voice assistant. I can help you find products from our catalog, compare their features, and answer questions about shipping, returns, or warranties.\n\nWhat are you looking for today?"
+[32m1|demoVoic | [39m[worker] agent:state speaking -> listening
+[32m1|demoVoic | [39m[20:55:10.130] [34mDEBUG[39m (31217): [36mTask.runTask: task AgentActivity.pipelineReply done[39m
+[32m1|demoVoic | [39m[20:55:25.130] [34mDEBUG[39m (31217): [36mUser away timeout triggered[39m
+[32m1|demoVoic | [39m[worker] speech:created source=generate_reply
+[32m1|demoVoic | [39m[20:56:12.731] [32mINFO[39m (31217): [36mCreating speech handle[39m
+[32m1|demoVoic | [39m    speech_id: "speech_b6edec62-5a5"
+[32m1|demoVoic | [39m[worker] conversation:user I need noise-cancelling headphones under $200.
+[32m1|demoVoic | [39m[worker] agent:state listening -> thinking
+[32m1|demoVoic | [39m[20:56:12.731] [34mDEBUG[39m (31217): [36mTask.runTask: task AgentActivity.pipelineReply started[39m
+[32m1|demoVoic | [39m[20:56:12.732] [34mDEBUG[39m (31217): [36mTask.runTask: task performLLMInference started[39m
+[32m1|demoVoic | [39m[20:56:12.732] [34mDEBUG[39m (31217): [36mTask.runTask: task performTTSInference started[39m
+[32m1|demoVoic | [39m[20:56:12.734] [34mDEBUG[39m (31217): [36mTask.runTask: task performTextForwarding started[39m
+[32m1|demoVoic | [39m[20:56:12.734] [34mDEBUG[39m (31217): [36mTask.runTask: task performAudioForwarding started[39m
+[32m1|demoVoic | [39m[20:56:12.734] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecutions started[39m
+[32m1|demoVoic | [39m[20:56:12.742] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-input started[39m
+[32m1|demoVoic | [39m[20:56:12.742] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-sentence started[39m
+[32m1|demoVoic | [39m[20:56:12.742] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-ws-listener started[39m
+[32m1|demoVoic | [39m[20:56:12.742] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-recv started[39m
+[32m1|demoVoic | [39m[20:56:15.050] [32mINFO[39m (31217): [36mExecuting LLM tool call[39m
+[32m1|demoVoic | [39m    function: "searchProducts"
+[32m1|demoVoic | [39m    arguments: {
+[32m1|demoVoic | [39m      "query": "noise-cancelling headphones",
+[32m1|demoVoic | [39m      "maxPrice": 200
+[32m1|demoVoic | [39m    }
+[32m1|demoVoic | [39m    speech_id: "speech_b6edec62-5a5"
+[32m1|demoVoic | [39m[worker] tool:search_products query="noise-cancelling headphones" maxPrice=200 matches=0
+[32m1|demoVoic | [39m[20:56:15.050] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecution:searchProducts started[39m
+[32m1|demoVoic | [39m[20:56:15.052] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecution:searchProducts done[39m
+[32m1|demoVoic | [39m[20:56:15.057] [34mDEBUG[39m (31217): [36mtools execution completed[39m
+[32m1|demoVoic | [39m    speech_id: "speech_b6edec62-5a5"
+[32m1|demoVoic | [39m[worker] tools:executed count=1
+[32m1|demoVoic | [39m[20:56:15.058] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecutions done[39m
+[32m1|demoVoic | [39m[20:56:15.058] [34mDEBUG[39m (31217): [36mTask.runTask: task performLLMInference done[39m
+[32m1|demoVoic | [39m[20:56:15.058] [34mDEBUG[39m (31217): [36mTask.runTask: task performTextForwarding done[39m
+[32m1|demoVoic | [39m[20:56:15.059] [34mDEBUG[39m (31217): [36mfirstFrameFut cancelled before first frame[39m
+[32m1|demoVoic | [39m[20:56:15.059] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-ws-listener done[39m
+[32m1|demoVoic | [39m[20:56:15.060] [34mDEBUG[39m (31217): [36mTask.runTask: task performAudioForwarding done[39m
+[32m1|demoVoic | [39m[20:56:15.060] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-recv done[39m
+[32m1|demoVoic | [39m[20:56:15.060] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-input done[39m
+[32m1|demoVoic | [39m[20:56:15.060] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-sentence done[39m
+[32m1|demoVoic | [39m[20:56:15.060] [34mDEBUG[39m (31217): [36mTask.runTask: task performTTSInference done[39m
+[32m1|demoVoic | [39m[20:56:15.061] [34mDEBUG[39m (searchProducts/31217): [36mTool call execution finished[39m
+[32m1|demoVoic | [39m    speechId: "speech_b6edec62-5a5"
+[32m1|demoVoic | [39m    args: "{\"maxPrice\":200,\"query\":\"noise-cancelling headphones\"}"
+[32m1|demoVoic | [39m    output: "[]"
+[32m1|demoVoic | [39m    isError: false
+[32m1|demoVoic | [39m[20:56:15.061] [34mDEBUG[39m (31217): [36mTask.runTask: task AgentActivity.pipelineReply started[39m
+[32m1|demoVoic | [39m[20:56:15.061] [34mDEBUG[39m (31217): [36mTask.runTask: task performLLMInference started[39m
+[32m1|demoVoic | [39m[20:56:15.062] [34mDEBUG[39m (31217): [36mTask.runTask: task performTTSInference started[39m
+[32m1|demoVoic | [39m[20:56:15.063] [34mDEBUG[39m (31217): [36mTask.runTask: task AgentActivity.pipelineReply done[39m
+[32m1|demoVoic | [39m[20:56:15.063] [34mDEBUG[39m (31217): [36mTask.runTask: task performTextForwarding started[39m
+[32m1|demoVoic | [39m[20:56:15.063] [34mDEBUG[39m (31217): [36mTask.runTask: task performAudioForwarding started[39m
+[32m1|demoVoic | [39m[20:56:15.063] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecutions started[39m
+[32m1|demoVoic | [39m[20:56:15.067] [34mDEBUG[39m (31217): [36minference.TTS creating new websocket connection (pool miss)[39m
+[32m1|demoVoic | [39m    url: "wss://agent-gateway.livekit.cloud/v1/tts"
+[32m1|demoVoic | [39m[20:56:15.382] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-input started[39m
+[32m1|demoVoic | [39m[20:56:15.383] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-sentence started[39m
+[32m1|demoVoic | [39m[20:56:15.383] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-ws-listener started[39m
+[32m1|demoVoic | [39m[20:56:15.383] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-recv started[39m
+[32m1|demoVoic | [39m[20:56:16.444] [32mINFO[39m (31217): [36mExecuting LLM tool call[39m
+[32m1|demoVoic | [39m    function: "searchProducts"
+[32m1|demoVoic | [39m    arguments: {
+[32m1|demoVoic | [39m      "query": "headphones",
+[32m1|demoVoic | [39m      "maxPrice": 200
+[32m1|demoVoic | [39m    }
+[32m1|demoVoic | [39m    speech_id: "speech_b6edec62-5a5"
+[32m1|demoVoic | [39m[worker] tool:search_products query="headphones" maxPrice=200 matches=1
+[32m1|demoVoic | [39m[worker] tools:executed count=1
+[32m1|demoVoic | [39m[20:56:16.444] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecution:searchProducts started[39m
+[32m1|demoVoic | [39m[20:56:16.445] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecution:searchProducts done[39m
+[32m1|demoVoic | [39m[20:56:16.446] [34mDEBUG[39m (31217): [36mtools execution completed[39m
+[32m1|demoVoic | [39m    speech_id: "speech_b6edec62-5a5"
+[32m1|demoVoic | [39m[20:56:16.446] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecutions done[39m
+[32m1|demoVoic | [39m[20:56:16.446] [34mDEBUG[39m (31217): [36mTask.runTask: task performLLMInference done[39m
+[32m1|demoVoic | [39m[20:56:16.446] [34mDEBUG[39m (31217): [36mTask.runTask: task performTextForwarding done[39m
+[32m1|demoVoic | [39m[20:56:16.447] [34mDEBUG[39m (31217): [36mfirstFrameFut cancelled before first frame[39m
+[32m1|demoVoic | [39m[20:56:16.447] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-ws-listener done[39m
+[32m1|demoVoic | [39m[20:56:16.447] [34mDEBUG[39m (31217): [36mTask.runTask: task performAudioForwarding done[39m
+[32m1|demoVoic | [39m[20:56:16.447] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-input done[39m
+[32m1|demoVoic | [39m[20:56:16.447] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-recv done[39m
+[32m1|demoVoic | [39m[20:56:16.448] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-sentence done[39m
+[32m1|demoVoic | [39m[20:56:16.448] [34mDEBUG[39m (31217): [36mTask.runTask: task performTTSInference done[39m
+[32m1|demoVoic | [39m[20:56:16.448] [34mDEBUG[39m (searchProducts/31217): [36mTool call execution finished[39m
+[32m1|demoVoic | [39m    speechId: "speech_b6edec62-5a5"
+[32m1|demoVoic | [39m    args: "{\"maxPrice\":200,\"query\":\"headphones\"}"
+[32m1|demoVoic | [39m    output: "[{\"slug\":\"quietcore-200\",\"name\":\"QuietCore 200 Headphones\",\"category\":\"audio\",\"price\":179,\"summary\":\"Wireless over-ear headphones with adaptive noise cancellation for travel and office use.\"}]"
+[32m1|demoVoic | [39m    isError: false
+[32m1|demoVoic | [39m[20:56:16.448] [34mDEBUG[39m (31217): [36mTask.runTask: task AgentActivity.pipelineReply started[39m
+[32m1|demoVoic | [39m[20:56:16.449] [34mDEBUG[39m (31217): [36mTask.runTask: task performLLMInference started[39m
+[32m1|demoVoic | [39m[20:56:16.449] [34mDEBUG[39m (31217): [36mTask.runTask: task performTTSInference started[39m
+[32m1|demoVoic | [39m[20:56:16.450] [34mDEBUG[39m (31217): [36mTask.runTask: task AgentActivity.pipelineReply done[39m
+[32m1|demoVoic | [39m[20:56:16.450] [34mDEBUG[39m (31217): [36mTask.runTask: task performTextForwarding started[39m
+[32m1|demoVoic | [39m[20:56:16.450] [34mDEBUG[39m (31217): [36mTask.runTask: task performAudioForwarding started[39m
+[32m1|demoVoic | [39m[20:56:16.450] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecutions started[39m
+[32m1|demoVoic | [39m[20:56:16.454] [34mDEBUG[39m (31217): [36minference.TTS creating new websocket connection (pool miss)[39m
+[32m1|demoVoic | [39m    url: "wss://agent-gateway.livekit.cloud/v1/tts"
+[32m1|demoVoic | [39m[20:56:16.765] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-input started[39m
+[32m1|demoVoic | [39m[20:56:16.766] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-sentence started[39m
+[32m1|demoVoic | [39m[20:56:16.766] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-ws-listener started[39m
+[32m1|demoVoic | [39m[20:56:16.766] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-recv started[39m
+[32m1|demoVoic | [39m[20:56:18.646] [34mDEBUG[39m (31217): [36mTask.runTask: task performToolExecutions done[39m
+[32m1|demoVoic | [39m[20:56:18.646] [34mDEBUG[39m (31217): [36mTask.runTask: task performLLMInference done[39m
+[32m1|demoVoic | [39m[20:56:18.646] [34mDEBUG[39m (31217): [36mTask.runTask: task performTextForwarding done[39m
+[32m1|demoVoic | [39m[20:56:18.647] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-input done[39m
+[32m1|demoVoic | [39m[20:56:18.647] [34mDEBUG[39m (31217): [36mTask.runTask: task inference-tts-sentence done[39m
+[32m1|demoVoic | [39m[worker] agent:state thinking -> speaking
+
