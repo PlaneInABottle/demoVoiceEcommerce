@@ -1,0 +1,68 @@
+[
+  {
+    "id": "headphones-quietcore-200",
+    "slug": "quietcore-200",
+    "name": "QuietCore 200 Headphones",
+    "category": "audio",
+    "price": 179,
+    "summary": "Wireless over-ear headphones with adaptive noise cancellation for travel and office use.",
+    "tags": ["noise-cancelling", "travel", "wireless", "office"],
+    "features": ["30-hour battery", "USB-C fast charging", "multipoint Bluetooth"],
+    "supportPolicy": "30-day returns and a 2-year limited warranty."
+  },
+  {
+    "id": "earbuds-commute-mini",
+    "slug": "commute-mini",
+    "name": "Commute Mini Earbuds",
+    "category": "audio",
+    "price": 129,
+    "summary": "Compact earbuds tuned for commuters who need clear calls and light noise isolation.",
+    "tags": ["earbuds", "commute", "wireless", "calls"],
+    "features": ["Qi charging case", "IPX4 splash resistance", "dual beamforming microphones"],
+    "supportPolicy": "30-day returns and a 1-year limited warranty."
+  },
+  {
+    "id": "speaker-roomfill-portable",
+    "slug": "roomfill-portable",
+    "name": "RoomFill Portable Speaker",
+    "category": "audio",
+    "price": 149,
+    "summary": "Portable speaker with room-filling sound, stereo pairing, and all-day battery life.",
+    "tags": ["speaker", "portable", "party", "wireless"],
+    "features": ["18-hour battery", "stereo pairing", "IP67 dust and water resistance"],
+    "supportPolicy": "30-day returns and a 2-year limited warranty."
+  },
+  {
+    "id": "keyboard-tactile-pro",
+    "slug": "tactile-pro",
+    "name": "Tactile Pro Keyboard",
+    "category": "productivity",
+    "price": 159,
+    "summary": "Mechanical keyboard with hot-swappable switches and low-latency wireless connectivity.",
+    "tags": ["keyboard", "mechanical", "office", "wireless"],
+    "features": ["75% layout", "hot-swappable switches", "tri-mode connectivity"],
+    "supportPolicy": "30-day returns and a 2-year limited warranty."
+  },
+  {
+    "id": "charger-travel-gan-100",
+    "slug": "travel-gan-100",
+    "name": "Travel GaN 100 Charger",
+    "category": "power",
+    "price": 89,
+    "summary": "Compact GaN charger for phones, tablets, and laptops with international plug adapters.",
+    "tags": ["charger", "travel", "usb-c", "laptop"],
+    "features": ["100W max output", "two USB-C ports", "international adapters included"],
+    "supportPolicy": "30-day returns and a 1-year limited warranty."
+  },
+  {
+    "id": "camera-streamlight-hd",
+    "slug": "streamlight-hd",
+    "name": "StreamLight HD Webcam",
+    "category": "productivity",
+    "price": 119,
+    "summary": "4K webcam with auto-framing and low-light correction for meetings and streaming.",
+    "tags": ["webcam", "streaming", "office", "video"],
+    "features": ["4K sensor", "auto-framing", "privacy shutter"],
+    "supportPolicy": "30-day returns and a 2-year limited warranty."
+  }
+]
