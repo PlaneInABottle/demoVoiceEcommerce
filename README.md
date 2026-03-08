@@ -37,7 +37,7 @@ npm --prefix agent install
 ```bash
 npm run dev
 npm run build
-npm run start
+npm run start   # run only after npm run build
 ```
 
 ## Worker commands
@@ -66,7 +66,7 @@ pm2 delete demo-voice-agent
 
 ## MVP boundaries
 
-- In scope: local voice demo, static catalog, transcript UI, typed fallback, local token endpoint
+- In scope: local voice demo, static catalog, transcript UI, typed fallback, grounded shipping/return/warranty guidance, local token endpoint
 - Out of scope: DB, auth system, payments, carts, order mutation flows, analytics, Dockerized infra, public deployment hardening
 
 ## `/api/token` policy
@@ -101,10 +101,17 @@ pm2 delete demo-voice-agent
 
 3. Start both processes with direct CLI commands:
 
-   ```bash
-   npm run start
-   npm --prefix agent run dev
-   ```
+    ```bash
+    npm run dev
+    npm --prefix agent run dev
+    ```
+
+    For a production-style local check, build the web app first and then use `npm run start`:
+
+    ```bash
+    npm run build
+    npm run start
+    ```
 
 ## Verification
 
@@ -123,7 +130,7 @@ pm2 delete demo-voice-agent
 - Token endpoint:
 
   ```bash
-  hurl --test verify/token-endpoint.hurl
+  HURL_VARIABLE_canonical_agent="$LIVEKIT_AGENT_NAME" hurl --test verify/token-endpoint.hurl
   curl -sSf -H 'Content-Type: application/json' -d '{}' http://localhost:3000/api/token
   ```
 

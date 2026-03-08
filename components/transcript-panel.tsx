@@ -8,17 +8,19 @@ import { AgentChatTranscript } from '@/components/agents-ui/agent-chat-transcrip
 const PROMPT_CHIPS = [
   'I need noise-cancelling headphones under $200.',
   'Compare the QuietCore 200 and the Commute Mini.',
-  'What is the warranty for the Travel GaN 100 Charger?',
+  'How fast is shipping and what is the return window for the QuietCore 200?',
 ];
 
 export function TranscriptPanel() {
   const session = useMaybeSessionContext();
-  const { isSending, send } = useSessionMessages(session);
+  const { isSending, messages, send } = useSessionMessages(session);
   const [draft, setDraft] = useState('');
   const isConnected = session?.isConnected ?? false;
+  const hasTranscriptReadySignal = messages.some((message) => message.type === 'agentTranscript');
+  const isTypedInputReady = isConnected && hasTranscriptReadySignal;
 
   const submitText = async (text: string) => {
-    if (!text.trim() || !isConnected) {
+    if (!text.trim() || !isTypedInputReady) {
       return;
     }
 
@@ -48,7 +50,7 @@ export function TranscriptPanel() {
             key={prompt}
             className="chip-button"
             type="button"
-            disabled={!isConnected || isSending}
+            disabled={!isTypedInputReady || isSending}
             onClick={() => void submitText(prompt)}
           >
             {prompt}
@@ -66,11 +68,19 @@ export function TranscriptPanel() {
             className="typed-chat-input"
             type="text"
             value={draft}
-            disabled={!isConnected || isSending}
-            placeholder={isConnected ? 'Ask about products, comparisons, or support policies' : 'Connect first to send text'}
+            disabled={!isTypedInputReady || isSending}
+            placeholder={
+              isTypedInputReady
+                ? 'Ask about products, shipping, returns, or warranty details'
+                : 'Connect and wait for the greeting transcript before sending text'
+            }
             onChange={(event) => setDraft(event.target.value)}
           />
-          <button className="primary-button" type="submit" disabled={!isConnected || isSending}>
+          <button
+            className="primary-button"
+            type="submit"
+            disabled={!isTypedInputReady || isSending}
+          >
             Send
           </button>
         </div>

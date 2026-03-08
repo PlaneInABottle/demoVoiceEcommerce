@@ -11,7 +11,16 @@ test('loadProductCatalog reads the shared root catalog file', async () => {
   const products = await loadProductCatalog();
 
   assert.ok(products.length >= 6);
-  assert.ok(products.every((product) => product.id && product.slug && product.name));
+  assert.ok(
+    products.every(
+      (product) =>
+        product.id &&
+        product.slug &&
+        product.name &&
+        product.shippingSummary &&
+        product.supportPolicy,
+    ),
+  );
 });
 
 test('getProductBySlug finds an exact catalog entry', async () => {
@@ -34,4 +43,11 @@ test('searchProducts returns no matches for blank input', async () => {
   const products = await loadProductCatalog();
 
   assert.deepEqual(searchProducts(products, '   '), []);
+});
+
+test('searchProducts includes grounded shipping text in matching fields', async () => {
+  const products = await loadProductCatalog();
+  const results = searchProducts(products, 'overnight shipping');
+
+  assert.equal(results[0]?.slug, 'travel-gan-100');
 });

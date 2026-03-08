@@ -28,7 +28,7 @@ class EcommerceAgent extends voice.Agent<SessionUserData> {
     );
     await this.session.generateReply({
       userInput:
-        'Greet the shopper, explain that you can help with product discovery, comparisons, and support policy questions, then ask what they need.',
+        'Greet the shopper, explain that you can help with product discovery, comparisons, and grounded shipping, return, and warranty questions, then ask what they need.',
       toolChoice: 'none',
     });
   }

@@ -6,7 +6,7 @@ import { getProductBySlug, loadProductCatalog } from '../catalog.js';
 export function createGetProductDetailsTool() {
   return llm.tool({
     description:
-      'Get full product details, key features, and support policy for a specific catalog slug.',
+      'Get full product details, key features, shipping summary, and support policy for a specific catalog slug.',
     parameters: z.object({
       slug: z.string().min(1).describe('The product slug returned by the product search tool'),
     }),

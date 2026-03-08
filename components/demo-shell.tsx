@@ -28,8 +28,8 @@ export function DemoShell({ appName, agentName }: DemoShellProps) {
           <p className="eyebrow">MVP demo</p>
           <h1>{appName}</h1>
           <p className="hero-copy">
-            Ask the agent for product recommendations, comparisons, and support guidance using
-            voice or typed input.
+            Ask the agent for product recommendations, comparisons, and grounded shipping, return,
+            and warranty guidance using voice or typed input.
           </p>
         </div>
         <div className="agent-card">

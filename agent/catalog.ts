@@ -12,6 +12,7 @@ export type ProductCatalogItem = {
   summary: string;
   tags: string[];
   features: string[];
+  shippingSummary: string;
   supportPolicy: string;
 };
 
@@ -25,6 +26,7 @@ const productCatalogItemSchema = z.object({
   summary: z.string().min(1),
   tags: z.array(z.string().min(1)),
   features: z.array(z.string().min(1)),
+  shippingSummary: z.string().min(1),
   supportPolicy: z.string().min(1),
 });
 const productCatalogSchema = z.array(productCatalogItemSchema);
@@ -55,6 +57,8 @@ function scoreProductMatch(product: ProductCatalogItem, normalizedQuery: string)
     product.category,
     ...product.tags,
     ...product.features,
+    product.shippingSummary,
+    product.supportPolicy,
   ].map((value) => value.toLowerCase());
 
   return haystacks.reduce((score, value) => {

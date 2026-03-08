@@ -124,6 +124,17 @@ code {
   gap: 14px;
 }
 
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.toggle-row input {
+  margin: 0;
+}
+
 .session-summary {
   display: grid;
   gap: 8px;

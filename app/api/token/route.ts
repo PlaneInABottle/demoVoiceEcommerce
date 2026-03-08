@@ -37,8 +37,15 @@ function getRequiredEnv(name: 'LIVEKIT_URL' | 'LIVEKIT_API_KEY' | 'LIVEKIT_API_S
   return value;
 }
 
+function normalizeLocalHostname(hostname: string) {
+  return hostname.replace(/^\[(.*)\]$/, '$1').toLowerCase();
+}
+
 function isLocalHost(hostname: string) {
-  return LOCAL_HOST_PATTERNS.includes(hostname) || hostname.endsWith('.localhost');
+  const normalizedHostname = normalizeLocalHostname(hostname);
+  return (
+    LOCAL_HOST_PATTERNS.includes(normalizedHostname) || normalizedHostname.endsWith('.localhost')
+  );
 }
 
 function isLocalRequest(request: NextRequest) {
@@ -54,9 +61,12 @@ function isLocalRequest(request: NextRequest) {
 
   try {
     const originUrl = new URL(origin);
+    const requestHostname = normalizeLocalHostname(request.nextUrl.hostname);
+    const originHostname = normalizeLocalHostname(originUrl.hostname);
+
     return (
-      isLocalHost(originUrl.hostname) &&
-      originUrl.hostname === request.nextUrl.hostname &&
+      isLocalHost(originHostname) &&
+      originHostname === requestHostname &&
       originUrl.port === request.nextUrl.port
     );
   } catch {

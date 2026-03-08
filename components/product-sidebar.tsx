@@ -23,6 +23,12 @@ export function ProductSidebar() {
                 <li key={feature}>{feature}</li>
               ))}
             </ul>
+            <p className="helper-copy">
+              <strong>Shipping:</strong> {product.shippingSummary}
+            </p>
+            <p className="helper-copy">
+              <strong>Returns & warranty:</strong> {product.supportPolicy}
+            </p>
           </article>
         ))}
       </div>

@@ -19,9 +19,11 @@
    npm --prefix agent run dev
    ```
 
-5. Confirm the logs contain:
-   - `[worker] bootstrap:catalog ...`
-   - `[worker] bootstrap:catalog_count ...`
+5. Confirm the bootstrap logs contain:
+   - `[worker] bootstrap:env ...`
+   - `[worker] bootstrap:catalog ...` (save the resolved absolute catalog path)
+   - `[worker] bootstrap:catalog_count ...` (save the product count)
+   - `[worker] bootstrap:agent_name ...`
    - `[worker] readiness:bootstrap-complete`
    - `[worker] prewarm:ready`
 
@@ -29,5 +31,12 @@
    - `job:accepted`
    - `session:started`
    - an initial greeting after the participant joins
+   - at least one transcript or speech event after a typed `lk.chat` message is sent from the browser flow
 
-This smoke path is the baseline CLI flow. PM2 remains optional.
+7. Record the evidence in your notes:
+   - resolved `.env` path from `bootstrap:env`
+   - resolved catalog path from `bootstrap:catalog`
+   - catalog count from `bootstrap:catalog_count`
+   - canonical agent name from `bootstrap:agent_name`
+
+This smoke path is the baseline CLI flow. PM2 remains optional; direct CLI remains first-class.

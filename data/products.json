@@ -8,6 +8,7 @@
     "summary": "Wireless over-ear headphones with adaptive noise cancellation for travel and office use.",
     "tags": ["noise-cancelling", "travel", "wireless", "office"],
     "features": ["30-hour battery", "USB-C fast charging", "multipoint Bluetooth"],
+    "shippingSummary": "Free standard shipping in 3-5 business days, with 2-day expedited shipping available at checkout.",
     "supportPolicy": "30-day returns and a 2-year limited warranty."
   },
   {
@@ -19,6 +20,7 @@
     "summary": "Compact earbuds tuned for commuters who need clear calls and light noise isolation.",
     "tags": ["earbuds", "commute", "wireless", "calls"],
     "features": ["Qi charging case", "IPX4 splash resistance", "dual beamforming microphones"],
+    "shippingSummary": "Free standard shipping in 3-5 business days, with next-day shipping available in the contiguous US.",
     "supportPolicy": "30-day returns and a 1-year limited warranty."
   },
   {
@@ -30,6 +32,7 @@
     "summary": "Portable speaker with room-filling sound, stereo pairing, and all-day battery life.",
     "tags": ["speaker", "portable", "party", "wireless"],
     "features": ["18-hour battery", "stereo pairing", "IP67 dust and water resistance"],
+    "shippingSummary": "Free ground shipping in 4-6 business days, or 2-day delivery for an added fee.",
     "supportPolicy": "30-day returns and a 2-year limited warranty."
   },
   {
@@ -41,6 +44,7 @@
     "summary": "Mechanical keyboard with hot-swappable switches and low-latency wireless connectivity.",
     "tags": ["keyboard", "mechanical", "office", "wireless"],
     "features": ["75% layout", "hot-swappable switches", "tri-mode connectivity"],
+    "shippingSummary": "Free standard shipping in 3-5 business days, with express delivery available in major metro areas.",
     "supportPolicy": "30-day returns and a 2-year limited warranty."
   },
   {
@@ -52,6 +56,7 @@
     "summary": "Compact GaN charger for phones, tablets, and laptops with international plug adapters.",
     "tags": ["charger", "travel", "usb-c", "laptop"],
     "features": ["100W max output", "two USB-C ports", "international adapters included"],
+    "shippingSummary": "Free standard shipping in 2-4 business days, with overnight shipping available for US orders placed before noon.",
     "supportPolicy": "30-day returns and a 1-year limited warranty."
   },
   {
@@ -63,6 +68,7 @@
     "summary": "4K webcam with auto-framing and low-light correction for meetings and streaming.",
     "tags": ["webcam", "streaming", "office", "video"],
     "features": ["4K sensor", "auto-framing", "privacy shutter"],
+    "shippingSummary": "Free standard shipping in 3-5 business days, with 2-day delivery available for eligible regions.",
     "supportPolicy": "30-day returns and a 2-year limited warranty."
   }
 ]
