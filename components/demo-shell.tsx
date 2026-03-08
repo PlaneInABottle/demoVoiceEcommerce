@@ -1,5 +1,7 @@
 'use client';
 
+import { SessionPanel } from '@/components/session-panel';
+
 type DemoShellProps = {
   appName: string;
   agentName: string;
@@ -42,18 +44,7 @@ export function DemoShell({ appName, agentName }: DemoShellProps) {
           <header className="panel__header">
             <h2>Session controls</h2>
           </header>
-          <div className="control-stack">
-            <button className="primary-button" type="button" disabled>
-              Connect session
-            </button>
-            <button className="secondary-button" type="button" disabled>
-              Disconnect
-            </button>
-            <p className="helper-copy">
-              Secrets stay on the server. The browser will receive only a short-lived participant
-              token from <code>/api/token</code>.
-            </p>
-          </div>
+          <SessionPanel agentName={agentName} />
         </article>
 
         <aside className="panel sidebar-panel">

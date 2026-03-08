@@ -69,4 +69,18 @@ pm2 delete demo-voice-agent
 - In scope: local voice demo, static catalog, transcript UI, typed fallback, local token endpoint
 - Out of scope: DB, auth system, payments, carts, order mutation flows, analytics, Dockerized infra, public deployment hardening
 
-More detailed startup and verification steps will be added as the implementation phases land.
+## `/api/token` policy
+
+- `POST /api/token` is localhost/dev-only in this MVP and is **not** production-safe.
+- Accepted:
+  - `room_name` (optional; defaults to `demoVoice-room`)
+  - `participant_name` (optional display-name hint)
+- Ignored/normalized:
+  - `participant_identity` is always generated server-side
+  - `room_config.agents[0].agent_name` is normalized to `LIVEKIT_AGENT_NAME`
+- Rejected with 4xx:
+  - `participant_metadata`
+  - `participant_attributes`
+  - unsupported `room_config` keys
+
+More detailed startup and verification steps will continue to expand as the implementation phases land.

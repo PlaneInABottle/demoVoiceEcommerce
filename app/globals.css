@@ -124,14 +124,21 @@ code {
   gap: 14px;
 }
 
+.session-summary {
+  display: grid;
+  gap: 8px;
+}
+
 .primary-button,
 .secondary-button {
-  border: 0;
+  border: 1px solid transparent;
   border-radius: 12px;
   padding: 12px 16px;
   font-weight: 600;
-  cursor: not-allowed;
-  opacity: 0.7;
+  transition:
+    transform 120ms ease,
+    opacity 120ms ease,
+    border-color 120ms ease;
 }
 
 .primary-button {
@@ -142,6 +149,28 @@ code {
 .secondary-button {
   background: rgba(148, 163, 184, 0.12);
   color: #cbd5e1;
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.primary-button:not(:disabled),
+.secondary-button:not(:disabled) {
+  cursor: pointer;
+}
+
+.primary-button:not(:disabled):hover,
+.secondary-button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.error-copy {
+  margin: 0;
+  color: #fca5a5;
 }
 
 .placeholder-list {
