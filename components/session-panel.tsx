@@ -1,19 +1,17 @@
 'use client';
 
-import { useSession } from '@livekit/components-react';
-import { ConnectionState, TokenSource } from 'livekit-client';
-import { useMemo, useState } from 'react';
+import { type UseSessionReturn } from '@livekit/components-react';
+import { ConnectionState } from 'livekit-client';
+import { useState } from 'react';
+
+import { AgentStateBadge } from '@/components/agent-state-badge';
 
 type SessionPanelProps = {
   agentName: string;
+  session: UseSessionReturn;
 };
 
-export function SessionPanel({ agentName }: SessionPanelProps) {
-  const tokenSource = useMemo(() => TokenSource.endpoint('/api/token'), []);
-  const session = useSession(tokenSource, {
-    agentName,
-    participantName: 'Demo shopper',
-  });
+export function SessionPanel({ agentName, session }: SessionPanelProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const statusLabel =
@@ -58,6 +56,9 @@ export function SessionPanel({ agentName }: SessionPanelProps) {
         <div>
           <span className="agent-card__label">Session status</span>
           <strong>{statusLabel}</strong>
+        </div>
+        <div className="badge-row">
+          <AgentStateBadge session={session} />
         </div>
         <p className="helper-copy">
           Connects through <code>/api/token</code> using the canonical agent dispatch name:

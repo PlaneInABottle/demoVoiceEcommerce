@@ -1,6 +1,13 @@
 'use client';
 
+import { useSession } from '@livekit/components-react';
+import { TokenSource } from 'livekit-client';
+import { useMemo } from 'react';
+
+import { AgentSessionProvider } from '@/components/agents-ui/agent-session-provider';
+import { ProductSidebar } from '@/components/product-sidebar';
 import { SessionPanel } from '@/components/session-panel';
+import { TranscriptPanel } from '@/components/transcript-panel';
 
 type DemoShellProps = {
   appName: string;
@@ -8,6 +15,12 @@ type DemoShellProps = {
 };
 
 export function DemoShell({ appName, agentName }: DemoShellProps) {
+  const tokenSource = useMemo(() => TokenSource.endpoint('/api/token'), []);
+  const session = useSession(tokenSource, {
+    agentName,
+    participantName: 'Demo shopper',
+  });
+
   return (
     <main className="page-shell">
       <section className="hero-panel">
@@ -25,40 +38,20 @@ export function DemoShell({ appName, agentName }: DemoShellProps) {
         </div>
       </section>
 
-      <section className="content-grid">
-        <article className="panel transcript-panel">
-          <header className="panel__header">
-            <h2>Transcript</h2>
-            <span className="status-pill">Waiting for session wiring</span>
-          </header>
-          <div className="empty-state">
-            <p>No conversation yet.</p>
-            <p>
-              Phase 3 will connect this shell to LiveKit sessions and Phase 6 will add realtime
-              transcript rendering.
-            </p>
-          </div>
-        </article>
+      <AgentSessionProvider session={session}>
+        <section className="content-grid">
+          <TranscriptPanel />
 
-        <article className="panel controls-panel">
-          <header className="panel__header">
-            <h2>Session controls</h2>
-          </header>
-          <SessionPanel agentName={agentName} />
-        </article>
+          <article className="panel controls-panel">
+            <header className="panel__header">
+              <h2>Session controls</h2>
+            </header>
+            <SessionPanel agentName={agentName} session={session} />
+          </article>
 
-        <aside className="panel sidebar-panel">
-          <header className="panel__header">
-            <h2>Featured products</h2>
-          </header>
-          <ul className="placeholder-list">
-            <li>Noise-cancelling headphones</li>
-            <li>Portable speakers</li>
-            <li>Mechanical keyboards</li>
-            <li>Travel chargers</li>
-          </ul>
-        </aside>
-      </section>
+          <ProductSidebar />
+        </section>
+      </AgentSessionProvider>
     </main>
   );
 }
