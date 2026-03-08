@@ -1,4 +1,5 @@
 # Requires: HURL_VARIABLE_canonical_agent="$LIVEKIT_AGENT_NAME"
+# Loopback-only hosts are restricted to localhost, 127.0.0.1, and IPv6 loopback.
 # Supplemental IPv6 loopback check when the local server listens on [::1]:
 # curl -sSf -H 'Content-Type: application/json' -d '{}' http://[::1]:3000/api/token
 
@@ -33,11 +34,13 @@ POST http://localhost:3000/api/token
 Content-Type: application/json
 
 {
+  "room_name": "demoVoice-room-metadata-check",
   "participant_identity": "client-supplied-identity",
   "room_config": {
     "agents": [
       {
-        "agent_name": "client-side-agent"
+        "agent_name": "client-side-agent",
+        "metadata": "browser-smoke"
       }
     ]
   }
@@ -47,11 +50,12 @@ HTTP 201
 [Captures]
 override_payload: jsonpath "$.participant_token" split "." nth 1 base64UrlSafeDecode utf8Decode
 [Asserts]
-variable "override_payload" jsonpath "$.video.room" == "demoVoice-room"
+variable "override_payload" jsonpath "$.video.room" == "demoVoice-room-metadata-check"
 variable "override_payload" jsonpath "$.sub" != "client-supplied-identity"
 variable "override_payload" jsonpath "$.sub" matches /demo-[0-9a-f-]+/
 variable "override_payload" jsonpath "$.roomConfig.agents[0].agentName" == "{{canonical_agent}}"
 variable "override_payload" jsonpath "$.roomConfig.agents[0].agentName" != "client-side-agent"
+variable "override_payload" jsonpath "$.roomConfig.agents[0].metadata" == "browser-smoke"
 
 POST http://localhost:3000/api/token
 Content-Type: application/json

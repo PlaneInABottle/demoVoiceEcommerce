@@ -14,6 +14,8 @@
    agent-browser snapshot -i
    ```
 
+   Use a fresh page load for each verification cycle so the browser receives a fresh demo room name.
+
 3. Confirm the page shows:
    - the canonical agent card
    - the session controls panel
@@ -27,7 +29,7 @@
    ```
 
 5. Use the current snapshot refs to either:
-   - keep **Enable microphone when connecting** checked and connect for the live voice-capable path, or
+   - keep **Enable microphone when connecting for live voice turns** checked and connect for the live voice-capable path, or
    - uncheck it first for deterministic typed-only verification.
 
    Always re-run `agent-browser snapshot -i` after any DOM change before clicking the next control.
@@ -54,8 +56,8 @@
 9. If automation loses the session before the greeting completes, repeat the same flow in a persistent or headed session:
 
    ```bash
-   agent-browser --session-name demo-voice --headed open http://localhost:3000
-   agent-browser --session-name demo-voice snapshot -i
+   agent-browser --session-name demoVoice --headed open http://localhost:3000
+   agent-browser --session-name demoVoice snapshot -i
    ```
 
    Re-snapshot after every navigation, permission prompt, or transcript update.

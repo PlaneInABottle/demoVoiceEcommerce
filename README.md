@@ -56,12 +56,12 @@ The worker explicitly loads the repo-root `.env` from `agent/main.ts`.
 Direct CLI commands remain first-class. PM2 is recommended only if named process management helps:
 
 ```bash
-pm2 start npm --name demo-voice-web -- run dev
-pm2 start npm --name demo-voice-agent --cwd ./agent -- run dev
-pm2 logs demo-voice-web --lines 50 --nostream
-pm2 logs demo-voice-agent --lines 50 --nostream
-pm2 delete demo-voice-web
-pm2 delete demo-voice-agent
+pm2 start npm --name demoVoice-web -- run dev
+pm2 start npm --name demoVoice-agent --cwd ./agent -- run dev
+pm2 logs demoVoice-web --lines 50 --nostream
+pm2 logs demoVoice-agent --lines 50 --nostream
+pm2 delete demoVoice-web
+pm2 delete demoVoice-agent
 ```
 
 ## MVP boundaries
@@ -72,12 +72,15 @@ pm2 delete demo-voice-agent
 ## `/api/token` policy
 
 - `POST /api/token` is localhost/dev-only in this MVP and is **not** production-safe.
+- Loopback-only hosts are restricted to `localhost`, `127.0.0.1`, and IPv6 loopback (`::1` / `[::1]`).
 - Accepted:
   - `room_name` (optional; defaults to `demoVoice-room`)
   - `participant_name` (optional display-name hint)
 - Ignored/normalized:
   - `participant_identity` is always generated server-side
   - `room_config.agents[0].agent_name` is normalized to `LIVEKIT_AGENT_NAME`
+- Passed through when provided:
+  - `room_config.agents[0].metadata`
 - Rejected with 4xx:
   - `participant_metadata`
   - `participant_attributes`
@@ -150,6 +153,7 @@ pm2 delete demo-voice-agent
 - Browser smoke:
 
   See `verify/browser-smoke.md`. The typed fallback must use LiveKit text streams on topic `lk.chat`.
+  The browser shell requests a fresh room name on each page load so explicit agent dispatch is not blocked by a stale prior demo room; generic callers that omit `room_name` still receive the deterministic `demoVoice-room` default from `/api/token`.
 
 ## Teardown
 
@@ -162,6 +166,6 @@ Direct CLI:
 Optional PM2:
 
 ```bash
-pm2 delete demo-voice-web
-pm2 delete demo-voice-agent
+pm2 delete demoVoice-web
+pm2 delete demoVoice-agent
 ```

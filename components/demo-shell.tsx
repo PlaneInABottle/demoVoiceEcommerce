@@ -12,13 +12,15 @@ import { TranscriptPanel } from '@/components/transcript-panel';
 type DemoShellProps = {
   appName: string;
   agentName: string;
+  roomName: string;
 };
 
-export function DemoShell({ appName, agentName }: DemoShellProps) {
+export function DemoShell({ appName, agentName, roomName }: DemoShellProps) {
   const tokenSource = useMemo(() => TokenSource.endpoint('/api/token'), []);
   const session = useSession(tokenSource, {
     agentName,
     participantName: 'Demo shopper',
+    roomName,
   });
 
   return (

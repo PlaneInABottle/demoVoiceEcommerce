@@ -1,0 +1,102 @@
+================================================================================
+RUNTIME VERIFICATION SUMMARY
+LiveKit Ecommerce Voice Demo
+================================================================================
+
+DATE: 2026-03-08
+STATUS: PASS
+
+Successful proof cycle:
+  - web app available at http://localhost:3000
+  - worker started with: npm --prefix agent run dev
+  - browser session: agent-browser --session-name demoVoiceProof3
+  - typed fallback prompt used: I need noise-cancelling headphones under $200.
+
+--------------------------------------------------------------------------------
+1. WORKER EVIDENCE
+--------------------------------------------------------------------------------
+
+Source: verify/artifacts/agent-worker-cycle.log
+
+Key lines captured from the successful cycle:
+
+  [worker] bootstrap:env /Users/Y_ALTAY1/Documents/demoVoice/.env
+  [worker] bootstrap:catalog /Users/Y_ALTAY1/Documents/demoVoice/data/products.json
+  [worker] bootstrap:catalog_count 6
+  [worker] bootstrap:agent_name ecommerce-agent
+  [worker] readiness:bootstrap-complete
+
+  [worker] job:accepted room=connected-room
+  [worker] greeting:start catalog_size=6
+  [worker] session:started
+  [worker] conversation:user I need noise-cancelling headphones under $200.
+  [worker] conversation:assistant Hello! I'm your local shopping assistant. I can help you discover products,
+  [worker] tools:executed count=1
+  [worker] conversation:assistant I'd be happy to help! I can assist with product discovery, comparisons, and answering questions about shipping, returns, and warranties based on our catalog. ...
+
+These lines prove the worker accepted the browser session, started the session,
+began the greeting, received the typed lk.chat prompt, and generated a reply in
+the same verification cycle.
+
+--------------------------------------------------------------------------------
+2. BROWSER EVIDENCE
+--------------------------------------------------------------------------------
+
+Artifacts:
+  - verify/artifacts/browser-smoke-home.png
+  - verify/artifacts/browser-smoke-connected.png
+  - verify/artifacts/browser-smoke-transcript.png
+  - verify/artifacts/browser-smoke-transcript.txt
+
+Observed browser state:
+  - initial connect controls rendered correctly
+  - greeting transcript appeared after connect
+  - typed chips became enabled after the greeting
+  - transcript showed:
+      * agent greeting
+      * Demo shopper typed prompt
+      * agent response
+
+Excerpt:
+
+  Agent
+  4:29:33 PM
+  Hello! I'm your local shopping assistant. I can help you discover products, compare
+
+  Demo shopper
+  4:29:38 PM
+  I need noise-cancelling headphones under $200.
+
+  Agent
+  4:29:42 PM
+  I'd be happy to
+
+--------------------------------------------------------------------------------
+3. ROOT CAUSE FOUND
+--------------------------------------------------------------------------------
+
+The earlier failed proof was caused by stale default-room reuse, not by missing
+provider wiring or a broken typed-input path.
+
+Evidence:
+  - the default demo room already existed with an active participant during
+    diagnostics
+  - a fresh unique room immediately produced job acceptance, greeting output,
+    enabled typed controls, and a successful typed lk.chat turn
+
+Remediation:
+  - the browser session now requests a fresh room name on each page load
+  - /api/token still preserves the documented default demoVoice-room when
+    callers omit room_name
+
+--------------------------------------------------------------------------------
+4. VALIDATION COMMANDS
+--------------------------------------------------------------------------------
+
+  npm test                                      PASS
+  npm run build                                 PASS
+  npm --prefix agent run build                  PASS
+  HURL_VARIABLE_canonical_agent="$LIVEKIT_AGENT_NAME" \
+    hurl --test verify/token-endpoint.hurl      PASS
+
+================================================================================

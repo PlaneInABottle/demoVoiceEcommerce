@@ -39,6 +39,14 @@ function attachSessionLogging(session: voice.AgentSession<SessionUserData>) {
     console.info(`[worker] agent:state ${event.oldState} -> ${event.newState}`);
   });
 
+  session.on(voice.AgentSessionEventTypes.ConversationItemAdded, (event) => {
+    const text = event.item.textContent?.replace(/\s+/g, ' ').trim();
+
+    if (text) {
+      console.info(`[worker] conversation:${event.item.role} ${text}`);
+    }
+  });
+
   session.on(voice.AgentSessionEventTypes.UserInputTranscribed, (event) => {
     if (event.isFinal) {
       console.info(`[worker] transcript:user ${event.transcript}`);

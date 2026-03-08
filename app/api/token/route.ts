@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'node:crypto';
 
 const DEFAULT_ROOM_NAME = 'demoVoice-room';
-const LOCAL_HOST_PATTERNS = ['localhost', '127.0.0.1', '::1'];
+const LOOPBACK_HOSTS = new Set(['localhost', '127.0.0.1', '::1', '0:0:0:0:0:0:0:1']);
 const ALLOWED_ROOM_CONFIG_KEYS = new Set(['agents']);
-const ALLOWED_AGENT_KEYS = new Set(['agent_name']);
+const ALLOWED_AGENT_KEYS = new Set(['agent_name', 'metadata']);
 
 type TokenRequestBody = {
   participant_name?: string;
@@ -37,15 +37,13 @@ function getRequiredEnv(name: 'LIVEKIT_URL' | 'LIVEKIT_API_KEY' | 'LIVEKIT_API_S
   return value;
 }
 
-function normalizeLocalHostname(hostname: string) {
+export function normalizeLocalHostname(hostname: string) {
   return hostname.replace(/^\[(.*)\]$/, '$1').toLowerCase();
 }
 
-function isLocalHost(hostname: string) {
+export function isLocalHost(hostname: string) {
   const normalizedHostname = normalizeLocalHostname(hostname);
-  return (
-    LOCAL_HOST_PATTERNS.includes(normalizedHostname) || normalizedHostname.endsWith('.localhost')
-  );
+  return LOOPBACK_HOSTS.has(normalizedHostname);
 }
 
 function isLocalRequest(request: NextRequest) {
@@ -79,7 +77,7 @@ async function parseTokenRequest(request: NextRequest) {
   return body;
 }
 
-function buildNormalizedRoomConfig(
+export function buildNormalizedRoomConfig(
   roomConfig: TokenRequestBody['room_config'],
   canonicalAgentName: string,
 ) {
@@ -112,6 +110,18 @@ function buildNormalizedRoomConfig(
       if (!ALLOWED_AGENT_KEYS.has(key)) {
         throw new Error(`Unsupported room_config.agents[0] key: ${key}`);
       }
+    }
+
+    if (providedAgent.agent_name !== undefined && typeof providedAgent.agent_name !== 'string') {
+      throw new Error('room_config.agents[0].agent_name must be a string when provided');
+    }
+
+    if (providedAgent.metadata !== undefined) {
+      if (typeof providedAgent.metadata !== 'string') {
+        throw new Error('room_config.agents[0].metadata must be a string when provided');
+      }
+
+      dispatch.metadata = providedAgent.metadata;
     }
   }
 

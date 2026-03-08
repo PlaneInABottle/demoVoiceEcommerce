@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import { DemoShell } from '@/components/demo-shell';
 
 function getCanonicalAgentName() {
@@ -13,6 +15,7 @@ function getCanonicalAgentName() {
 export default function HomePage() {
   const appName = process.env.NEXT_PUBLIC_APP_NAME ?? 'LiveKit Ecommerce Voice Demo';
   const agentName = getCanonicalAgentName();
+  const roomName = `demoVoice-room-${randomUUID()}`;
 
-  return <DemoShell appName={appName} agentName={agentName} />;
+  return <DemoShell appName={appName} agentName={agentName} roomName={roomName} />;
 }

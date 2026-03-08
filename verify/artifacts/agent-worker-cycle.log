@@ -1,0 +1,212 @@
+
+> livekit-ecommerce-voice-demo-agent@0.1.0 dev
+> tsx main.ts dev
+
+[dotenv@17.3.1] injecting env (4) from ../.env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[worker] bootstrap:env /Users/Y_ALTAY1/Documents/demoVoice/.env
+[worker] bootstrap:catalog /Users/Y_ALTAY1/Documents/demoVoice/data/products.json
+[worker] bootstrap:catalog_count 6
+[worker] bootstrap:agent_name ecommerce-agent
+[worker] readiness:bootstrap-complete
+[16:28:57.934] [34mDEBUG[39m (89185): [36minitializing inference runner[39m
+    runner: "lk_end_of_utterance_en"
+[16:28:57.937] [34mDEBUG[39m (89185): [36minitializing inference runner[39m
+    runner: "lk_end_of_utterance_multilingual"
+[16:28:57.938] [34mDEBUG[39m (89185): [36mLocal file only mode - checking cache[39m
+    repoId: "livekit/turn-detector"
+    path: "onnx/model_q8.onnx"
+    revision: "v1.2.2-en"
+[16:28:57.938] [34mDEBUG[39m (89185): [36mLocal file only mode - checking cache[39m
+    repoId: "livekit/turn-detector"
+    path: "onnx/model_q8.onnx"
+    revision: "v0.4.1-intl"
+[16:28:57.939] [34mDEBUG[39m (89185): [36mFile found in cache (via refs)[39m
+    resolvedPath: "/Users/Y_ALTAY1/.cache/huggingface/hub/models--livekit--turn-detector/snapshots/ebcab0c09c2b62d926e92180d364df3aaae68a09/onnx/model_q8.onnx"
+    resolvedHash: "ebcab0c09c2b62d926e92180d364df3aaae68a09"
+[16:28:57.999] [34mDEBUG[39m (89185): [36mFile found in cache (via refs)[39m
+    resolvedPath: "/Users/Y_ALTAY1/.cache/huggingface/hub/models--livekit--turn-detector/snapshots/87e35fcb1e60a569bea70346191c4886ea92e281/onnx/model_q8.onnx"
+    resolvedHash: "87e35fcb1e60a569bea70346191c4886ea92e281"
+[16:28:58.512] [34mDEBUG[39m (89185): [36mall inference runners initialized[39m
+[16:28:58.513] [32mINFO[39m (89181): [36mstarting worker[39m
+    version: "1.0.48"
+[16:28:58.529] [32mINFO[39m (89181): [36mServer is listening on port 62329[39m
+[16:28:58.833] [34mDEBUG[39m (89181): [36mconnected to LiveKit server[39m
+    version: "1.0.48"
+[16:28:58.932] [32mINFO[39m (89181): [36mregistered worker[39m
+    version: "1.0.48"
+    id: "AW_gSQZHm4boAcz"
+    server_info: {
+      "edition": "Cloud",
+      "version": "1.9.11",
+      "protocol": 16,
+      "region": "Israel",
+      "nodeId": "NC_OJERUSALEM1A_2pHdWv69ysYG",
+      "debugInfo": "",
+      "agentProtocol": 0
+    }
+[16:29:27.594] [32mINFO[39m (89181): [36mreceived job request[39m
+    version: "1.0.48"
+    jobId: "AJ_CFuHKKMBdNnt"
+    resuming: false
+    agentName: "ecommerce-agent"
+[16:29:28.525] [34mDEBUG[39m (90077): [36minitializing job runner[39m
+[worker] prewarm:start
+[worker] prewarm:ready
+[16:29:28.562] [34mDEBUG[39m (90077): [36mjob runner initialized[39m
+[16:29:28.564] [34mDEBUG[39m (90077): [36mjob started[39m
+    jobID: "AJ_CFuHKKMBdNnt"
+[worker] job:accepted room=connected-room
+[worker] catalog:loaded count=6
+[16:29:28.567] [34mDEBUG[39m (90077): [36mLocal file only mode - checking cache[39m
+    repoId: "livekit/turn-detector"
+    path: "languages.json"
+    revision: "v0.4.1-intl"
+[worker] greeting:start catalog_size=6
+[worker] speech:created source=generate_reply
+[worker] conversation:user Greet the shopper, explain that you can help with product discovery, comparisons, and grounded shipping, return, and warranty questions, then ask what they need.
+[worker] agent:state initializing -> thinking
+[16:29:28.570] [34mDEBUG[39m (90077): [36mAuto-connecting to room via job context[39m
+[16:29:28.571] [34mDEBUG[39m (90077): [36mAgent handoff inserted into chat context[39m
+    newAgentId: "ecommerce_agent"
+[16:29:28.573] [34mDEBUG[39m (90077): [36mcreateSttTask: create stt stream from stt node[39m
+[16:29:28.574] [34mDEBUG[39m (90077): [36mTask.runTask: task AgentActivity_onEnter started[39m
+[16:29:28.574] [32mINFO[39m (90077): [36mCreating speech handle[39m
+    speech_id: "speech_6d881504-ab4"
+[16:29:28.575] [34mDEBUG[39m (90077): [36mTask.runTask: task AgentActivity.pipelineReply started[39m
+[16:29:28.575] [34mDEBUG[39m (90077): [36mTask.runTask: task performLLMInference started[39m
+[16:29:28.576] [34mDEBUG[39m (90077): [36mTask.runTask: task performTTSInference started[39m
+[16:29:28.579] [34mDEBUG[39m (90077): [36mTask.runTask: task AgentActivity_onEnter done[39m
+[16:29:28.579] [34mDEBUG[39m (90077): [36mTask.runTask: task performTextForwarding started[39m
+[16:29:28.580] [34mDEBUG[39m (90077): [36mTask.runTask: task performAudioForwarding started[39m
+[16:29:28.580] [34mDEBUG[39m (90077): [36mTask.runTask: task performToolExecutions started[39m
+[16:29:28.603] [34mDEBUG[39m (90077): [36minference.TTS creating new websocket connection (pool miss)[39m
+    url: "wss://agent-gateway.livekit.cloud/v1/tts"
+[16:29:28.604] [34mDEBUG[39m (90077): [36mFile found in cache (via refs)[39m
+    resolvedPath: "/Users/Y_ALTAY1/.cache/huggingface/hub/models--livekit--turn-detector/snapshots/87e35fcb1e60a569bea70346191c4886ea92e281/languages.json"
+    resolvedHash: "87e35fcb1e60a569bea70346191c4886ea92e281"
+[16:29:28.907] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-input started[39m
+[16:29:28.907] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-sentence started[39m
+[16:29:28.908] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-ws-listener started[39m
+[16:29:28.908] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-recv started[39m
+[16:29:30.317] [34mDEBUG[39m (90077): [36mTask.runTask: task performToolExecutions done[39m
+[16:29:30.317] [34mDEBUG[39m (90077): [36mTask.runTask: task performLLMInference done[39m
+[16:29:30.317] [34mDEBUG[39m (90077): [36mTask.runTask: task performTextForwarding done[39m
+[16:29:30.318] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-input done[39m
+[16:29:30.318] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-sentence done[39m
+{"level":20,"time":1772976570878,"pid":90077,"hostname":"192.168.1.4","name":"lk-rtc","msg":"Connect callback received"}
+[16:29:30.878] [34mDEBUG[39m (90077): [36musing audio io: `ParticipantAudioInputStream` -> `AgentSession` -> `SyncedAudioOutput`[39m
+[worker] agent:state thinking -> listening
+[worker] session:started
+[16:29:30.878] [34mDEBUG[39m (90077): [36musing transcript io: `AgentSession` -> `SyncedTextOutput`[39m
+[16:29:30.880] [34mDEBUG[39m (90077): [36mconnection state changed[39m
+    state: 1
+[16:29:30.880] [34mDEBUG[39m (90077): [36msetting participant[39m
+    participantIdentity: "demo-57d15e05-aa9d-4b0f-b7b3-584cd22409bc"
+[16:29:30.880] [34mDEBUG[39m (90077): [36msetting participant audio input[39m
+    participant: "demo-57d15e05-aa9d-4b0f-b7b3-584cd22409bc"
+[16:29:30.880] [32mINFO[39m (90077): [36mparticipantValue.trackPublications[39m
+    participantValue: "demo-57d15e05-aa9d-4b0f-b7b3-584cd22409bc"
+    trackPublications: []
+    lengthOfTrackPublications: 0
+[worker] agent:state listening -> speaking
+[16:29:34.149] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-ws-listener done[39m
+[16:29:34.149] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-recv done[39m
+[16:29:34.149] [34mDEBUG[39m (90077): [36mTask.runTask: task performTTSInference done[39m
+[worker] speech:created source=generate_reply
+[16:29:38.152] [32mINFO[39m (90077): [36mCreating speech handle[39m
+    speech_id: "speech_d64ff16e-cf4"
+[worker] conversation:user I need noise-cancelling headphones under $200.
+[worker] agent:state speaking -> thinking
+[16:29:38.152] [34mDEBUG[39m (90077): [36mTask.runTask: task AgentActivity.pipelineReply started[39m
+[16:29:38.152] [34mDEBUG[39m (90077): [36mTask.runTask: task performLLMInference started[39m
+[16:29:38.152] [34mDEBUG[39m (90077): [36mTask.runTask: task performTTSInference started[39m
+[16:29:38.153] [34mDEBUG[39m (90077): [36mAborting all pipeline reply tasks due to interruption[39m
+    speech_id: "speech_6d881504-ab4"
+[16:29:38.155] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-input started[39m
+[16:29:38.156] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-sentence started[39m
+[16:29:38.156] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-ws-listener started[39m
+[16:29:38.156] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-recv started[39m
+[16:29:38.252] [34mDEBUG[39m (90077): [36mTask.runTask: task performAudioForwarding done[39m
+[worker] conversation:assistant Hello! I'm your local shopping assistant. I can help you discover products,
+[16:29:38.252] [32mINFO[39m (90077): [36mplayout interrupted[39m
+    speech_id: "speech_6d881504-ab4"
+    playbackPositionInS: 5.490999999999991
+[16:29:38.252] [32mINFO[39m (90077): [36mplayout completed with interrupt[39m
+    speech_id: "speech_6d881504-ab4"
+    message: "Hello! I'm your local shopping assistant. I can help you discover products,"
+[16:29:38.253] [34mDEBUG[39m (90077): [36mTask.runTask: task performTextForwarding started[39m
+[16:29:38.253] [34mDEBUG[39m (90077): [36mTask.runTask: task performAudioForwarding started[39m
+[16:29:38.253] [34mDEBUG[39m (90077): [36mTask.runTask: task performToolExecutions started[39m
+[16:29:38.253] [34mDEBUG[39m (90077): [36mTask.runTask: task AgentActivity.pipelineReply done[39m
+[16:29:40.238] [32mINFO[39m (90077): [36mExecuting LLM tool call[39m
+    function: "searchProducts"
+    arguments: {
+      "query": "noise-cancelling headphones",
+      "maxPrice": 200
+    }
+    speech_id: "speech_d64ff16e-cf4"
+[worker] tool:search_products query="noise-cancelling headphones" maxPrice=200 matches=0
+[16:29:40.238] [34mDEBUG[39m (90077): [36mTask.runTask: task performToolExecution:searchProducts started[39m
+[16:29:40.239] [34mDEBUG[39m (90077): [36mTask.runTask: task performToolExecution:searchProducts done[39m
+[16:29:40.244] [34mDEBUG[39m (90077): [36mtools execution completed[39m
+    speech_id: "speech_d64ff16e-cf4"
+[worker] tools:executed count=1
+[16:29:40.244] [34mDEBUG[39m (90077): [36mTask.runTask: task performToolExecutions done[39m
+[16:29:40.244] [34mDEBUG[39m (90077): [36mTask.runTask: task performLLMInference done[39m
+[16:29:40.244] [34mDEBUG[39m (90077): [36mTask.runTask: task performTextForwarding done[39m
+[16:29:40.245] [34mDEBUG[39m (90077): [36mfirstFrameFut cancelled before first frame[39m
+[16:29:40.245] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-ws-listener done[39m
+[16:29:40.245] [34mDEBUG[39m (90077): [36mTask.runTask: task performAudioForwarding done[39m
+[16:29:40.245] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-recv done[39m
+[16:29:40.245] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-input done[39m
+[16:29:40.245] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-sentence done[39m
+[16:29:40.245] [34mDEBUG[39m (90077): [36mTask.runTask: task performTTSInference done[39m
+[16:29:40.245] [34mDEBUG[39m (searchProducts/90077): [36mTool call execution finished[39m
+    speechId: "speech_d64ff16e-cf4"
+    args: "{\"maxPrice\":200,\"query\":\"noise-cancelling headphones\"}"
+    output: "[]"
+    isError: false
+[16:29:40.245] [34mDEBUG[39m (90077): [36mTask.runTask: task AgentActivity.pipelineReply started[39m
+[16:29:40.245] [34mDEBUG[39m (90077): [36mTask.runTask: task performLLMInference started[39m
+[16:29:40.245] [34mDEBUG[39m (90077): [36mTask.runTask: task performTTSInference started[39m
+[16:29:40.246] [34mDEBUG[39m (90077): [36mTask.runTask: task AgentActivity.pipelineReply done[39m
+[16:29:40.246] [34mDEBUG[39m (90077): [36mTask.runTask: task performTextForwarding started[39m
+[16:29:40.246] [34mDEBUG[39m (90077): [36mTask.runTask: task performAudioForwarding started[39m
+[16:29:40.246] [34mDEBUG[39m (90077): [36mTask.runTask: task performToolExecutions started[39m
+[16:29:40.248] [34mDEBUG[39m (90077): [36minference.TTS creating new websocket connection (pool miss)[39m
+    url: "wss://agent-gateway.livekit.cloud/v1/tts"
+[16:29:40.552] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-input started[39m
+[16:29:40.553] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-sentence started[39m
+[16:29:40.553] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-ws-listener started[39m
+[16:29:40.553] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-recv started[39m
+[16:29:42.203] [34mDEBUG[39m (90077): [36mTask.runTask: task performToolExecutions done[39m
+[16:29:42.203] [34mDEBUG[39m (90077): [36mTask.runTask: task performLLMInference done[39m
+[16:29:42.204] [34mDEBUG[39m (90077): [36mTask.runTask: task performTextForwarding done[39m
+[16:29:42.204] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-input done[39m
+[16:29:42.204] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-sentence done[39m
+[worker] agent:state thinking -> speaking
+[16:29:47.646] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-ws-listener done[39m
+[16:29:47.646] [34mDEBUG[39m (90077): [36mTask.runTask: task inference-tts-recv done[39m
+[16:29:47.647] [34mDEBUG[39m (90077): [36mTask.runTask: task performTTSInference done[39m
+[16:30:01.720] [34mDEBUG[39m (90077): [36mTask.runTask: task performAudioForwarding done[39m
+[worker] conversation:assistant I'd be happy to help! I can assist with product discovery, comparisons, and answering questions about shipping, returns, and warranties based on our catalog. I searched for noise-cancelling headphones under $200, but I don't have any products matching that specific criteria right now. Would you like to see the noise-cancelling options I have available at a higher price point, or are you looking for a different type of audio gear?
+[worker] agent:state speaking -> listening
+[16:30:01.720] [32mINFO[39m (90077): [36mplayout completed without interruption[39m
+    speech_id: "speech_d64ff16e-cf4"
+    message: "I'd be happy to help! I can assist with product discovery, comparisons, and answering questions about shipping, returns, and warranties based on our catalog.\n\nI searched for noise-cancelling headphones under $200, but I don't have any products matching that specific criteria right now. Would you like to see the noise-cancelling options I have available at a higher price point, or are you looking for a different type of audio gear?"
+[16:30:01.720] [34mDEBUG[39m (90077): [36mTask.runTask: task AgentActivity.pipelineReply done[39m
+[16:30:16.721] [34mDEBUG[39m (90077): [36mUser away timeout triggered[39m
+[16:31:42.423] [32mINFO[39m (90077): [36mclosing agent session due to participant disconnect (disable via `RoomInputOptions.closeOnDisconnect=False`)[39m
+    participant: "demo-57d15e05-aa9d-4b0f-b7b3-584cd22409bc"
+    reason: "CLIENT_INITIATED"
+[16:31:42.423] [34mDEBUG[39m (90077): [36mTask.runTask: task AgentActivity_onExit started[39m
+[16:31:42.423] [34mDEBUG[39m (90077): [36mTask.runTask: task AgentActivity_onExit done[39m
+[16:31:42.423] [32mINFO[39m (90077): [36mmainTask: scheduling paused and no more speech tasks to wait[39m
+[16:31:42.423] [32mINFO[39m (90077): [36mAgentActivity mainTask: exiting[39m
+[16:31:42.424] [34mDEBUG[39m (90077): [36mUser turn commit task cancelled[39m
+[16:31:42.424] [34mDEBUG[39m (90077): [36mVAD task closed[39m
+[16:31:42.425] [32mINFO[39m (90077): [36mAgentSession closed[39m
+    reason: "participant_disconnected"
+    error: null
+[16:31:43.813] [34mDEBUG[39m (90077): [36mUnhandled promise rejection[39m
+    jobID: "AJ_CFuHKKMBdNnt"
