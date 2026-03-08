@@ -1,6 +1,6 @@
 'use client';
 
-import type { UseSessionReturn } from '@livekit/components-react';
+import { useAgent, type UseSessionReturn } from '@livekit/components-react';
 
 import { AgentStateBadge } from '@/components/agent-state-badge';
 import { SessionPanel } from '@/components/session-panel';
@@ -11,37 +11,117 @@ type AgentPaneProps = {
 };
 
 export function AgentPane({ agentName, session }: AgentPaneProps) {
+  const agent = useAgent(session);
+  const stageSummary =
+    agent.state === 'failed'
+      ? agent.failureReasons?.[0] ?? 'The session needs attention before the next handoff.'
+      : agent.state === 'speaking'
+        ? 'The agent is actively responding and should feel present on this side of the shell.'
+        : agent.state === 'thinking'
+          ? 'The agent is processing the latest turn and preparing the next response.'
+          : agent.state === 'listening'
+            ? 'The agent is live in the room and listening for the next customer turn.'
+            : agent.state === 'idle'
+              ? 'The agent has joined the room and is finishing setup before the next turn opens up.'
+              : agent.state === 'initializing'
+                ? 'The agent is setting up the session context before the conversation opens up.'
+                : agent.state === 'pre-connect-buffering'
+                  ? 'Audio is primed while the session finishes connecting the agent to the room.'
+                  : agent.state === 'connecting'
+                    ? 'The agent is joining the room and preparing its presence surface.'
+                    : 'Connect to bring the agent into the room and keep the transcript flow intact.';
+  const conversationFlowLabel = agent.state === 'listening'
+    ? 'Awaiting turn'
+    : agent.state === 'speaking'
+      ? 'Responding'
+      : agent.state === 'thinking'
+        ? 'Processing'
+        : agent.state === 'idle'
+          ? 'Standing by'
+          : agent.state === 'pre-connect-buffering' ||
+              agent.state === 'connecting' ||
+              agent.state === 'initializing'
+            ? 'Preparing'
+            : agent.isFinished
+              ? 'Ended'
+              : 'Waiting';
+  const sessionPhaseLabel = agent.state === 'failed'
+    ? 'Failed'
+    : agent.state === 'disconnected'
+      ? 'Not connected'
+      : agent.state === 'connecting' ||
+          agent.state === 'pre-connect-buffering' ||
+          agent.state === 'initializing' ||
+          agent.state === 'idle'
+        ? 'Preparing'
+        : 'Active';
+
   return (
     <aside className="agent-pane">
-      <article className="agent-card agent-pane__identity">
-        <span className="agent-card__label">Canonical agent</span>
-        <strong>{agentName}</strong>
-        <p className="helper-copy">
-          This pane keeps the active agent identity, session state, and control surface together
-          while the conversation stays isolated on the left.
-        </p>
-      </article>
-
-      <article className="panel agent-pane__state">
-        <header className="panel__header">
-          <div>
-            <h2>Agent state</h2>
-            <p className="helper-copy">Live state stays visible while you connect, speak, or type.</p>
+      <article className="panel agent-stage" data-state={agent.state}>
+        <header className="agent-stage__header">
+          <div className="agent-stage__identity">
+            <span className="agent-card__label">Agent presence</span>
+            <strong>{agent.name || agentName}</strong>
+            <p className="helper-copy">
+              Keep the agent visibly anchored here while the shared transcript and typed fallback
+              remain isolated on the left.
+            </p>
           </div>
-        </header>
-        <div className="badge-row">
           <AgentStateBadge session={session} />
-        </div>
-      </article>
-
-      <article className="panel controls-panel agent-pane__controls">
-        <header className="panel__header">
-          <div>
-            <h2>Session controls</h2>
-            <p className="helper-copy">Use the existing session flow without changing token or room wiring.</p>
-          </div>
         </header>
+
+        <section className="agent-stage__presence" aria-label="Agent presence surface">
+          <div
+            aria-hidden="true"
+            className="agent-stage__visual"
+            data-audio={agent.microphoneTrack ? 'live' : 'idle'}
+            data-state={agent.state}
+          >
+            <div className="agent-stage__halo" />
+            <div className="agent-stage__core">
+              <span>AI</span>
+            </div>
+            <div className="agent-stage__bars">
+              <span className="agent-stage__bar" />
+              <span className="agent-stage__bar" />
+              <span className="agent-stage__bar" />
+              <span className="agent-stage__bar" />
+              <span className="agent-stage__bar" />
+            </div>
+          </div>
+
+          <div className="agent-stage__details">
+            <p className="agent-stage__summary">{stageSummary}</p>
+            <div className="agent-stage__chips">
+              <span className="agent-stage__chip">
+                <span className="agent-card__label">Voice link</span>
+                <strong>{agent.microphoneTrack ? 'Streaming' : 'Standby'}</strong>
+              </span>
+              <span className="agent-stage__chip">
+                <span className="agent-card__label">Turn flow</span>
+                <strong>{conversationFlowLabel}</strong>
+              </span>
+              <span className="agent-stage__chip">
+                <span className="agent-card__label">Session phase</span>
+                <strong>{sessionPhaseLabel}</strong>
+              </span>
+            </div>
+          </div>
+        </section>
+
         <SessionPanel agentName={agentName} session={session} />
+
+        <footer className="agent-stage__footer">
+          <div className="agent-stage__fact">
+            <span className="agent-card__label">Canonical agent</span>
+            <strong>{agentName}</strong>
+          </div>
+          <div className="agent-stage__fact">
+            <span className="agent-card__label">Session lane</span>
+            <strong>{session.room.name || 'Awaiting room join'}</strong>
+          </div>
+        </footer>
       </article>
     </aside>
   );

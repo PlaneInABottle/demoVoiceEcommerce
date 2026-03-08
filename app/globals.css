@@ -128,14 +128,214 @@ code {
   min-height: 200px;
 }
 
-.agent-pane__identity,
-.agent-pane__state,
-.agent-pane__controls {
+.agent-stage {
+  display: grid;
+  gap: 24px;
   height: 100%;
 }
 
-.agent-pane__identity strong {
+.agent-stage__header,
+.agent-stage__presence,
+.agent-stage__details,
+.agent-stage__chips,
+.agent-stage__footer,
+.agent-control-bar,
+.agent-control-bar__status {
+  display: grid;
+  gap: 16px;
+}
+
+.agent-stage__header {
+  align-items: start;
+}
+
+.agent-stage__identity {
+  display: grid;
+  gap: 8px;
+}
+
+.agent-stage__identity strong,
+.agent-stage__fact strong {
   font-size: 1.25rem;
+}
+
+.agent-stage__presence {
+  grid-template-columns: minmax(0, 1fr);
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  background:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.2), transparent 55%),
+    linear-gradient(180deg, rgba(8, 17, 31, 0.9) 0%, rgba(15, 23, 42, 0.82) 100%);
+}
+
+.agent-stage__visual {
+  position: relative;
+  min-height: 240px;
+  border-radius: 22px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle, rgba(59, 130, 246, 0.22) 0%, rgba(15, 23, 42, 0.08) 48%, transparent 68%),
+    linear-gradient(180deg, rgba(8, 47, 73, 0.25) 0%, rgba(8, 17, 31, 0.32) 100%);
+}
+
+.agent-stage__halo,
+.agent-stage__core,
+.agent-stage__bars {
+  position: absolute;
+}
+
+.agent-stage__halo {
+  inset: 20%;
+  border-radius: 999px;
+  border: 1px solid rgba(125, 211, 252, 0.22);
+  box-shadow:
+    0 0 0 24px rgba(59, 130, 246, 0.06),
+    0 0 60px rgba(56, 189, 248, 0.18);
+  animation: agent-stage-pulse 3.2s ease-in-out infinite;
+}
+
+.agent-stage__core {
+  width: 112px;
+  height: 112px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(191, 219, 254, 0.28);
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.32) 0%, rgba(37, 99, 235, 0.2) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 20px 50px rgba(2, 132, 199, 0.24);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.agent-stage__bars {
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: end;
+  gap: 10px;
+}
+
+.agent-stage__bar {
+  width: 12px;
+  height: 38px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(125, 211, 252, 0.95) 0%, rgba(37, 99, 235, 0.36) 100%);
+  opacity: 0.55;
+  transform-origin: center bottom;
+  animation: agent-stage-bars 1.4s ease-in-out infinite;
+}
+
+.agent-stage__bar:nth-child(2),
+.agent-stage__bar:nth-child(4) {
+  animation-delay: 0.16s;
+}
+
+.agent-stage__bar:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+.agent-stage__summary {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.agent-stage__chips {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.agent-stage__chip,
+.agent-control-pill,
+.agent-stage__fact {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background: rgba(15, 23, 42, 0.54);
+}
+
+.agent-stage__chip strong,
+.agent-control-pill strong {
+  font-size: 0.95rem;
+}
+
+.agent-control-bar {
+  padding-top: 4px;
+  border-top: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.agent-control-bar__status {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.agent-control-bar__buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.agent-control-bar__toggle {
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.agent-control-bar__helper {
+  margin: 0;
+}
+
+.agent-stage__footer {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.agent-stage[data-state='speaking'] .agent-stage__halo,
+.agent-stage__visual[data-state='speaking'] .agent-stage__halo {
+  box-shadow:
+    0 0 0 24px rgba(14, 165, 233, 0.08),
+    0 0 80px rgba(14, 165, 233, 0.32);
+}
+
+.agent-stage__visual[data-state='listening'] .agent-stage__bar,
+.agent-stage__visual[data-state='speaking'] .agent-stage__bar {
+  opacity: 0.9;
+}
+
+.agent-stage__visual[data-state='thinking'] .agent-stage__bar,
+.agent-stage__visual[data-state='connecting'] .agent-stage__bar,
+.agent-stage__visual[data-state='initializing'] .agent-stage__bar,
+.agent-stage__visual[data-state='pre-connect-buffering'] .agent-stage__bar {
+  height: 24px;
+  animation-duration: 0.8s;
+}
+
+.agent-stage__visual[data-state='disconnected'] .agent-stage__bar,
+.agent-stage__visual[data-state='failed'] .agent-stage__bar {
+  height: 18px;
+  opacity: 0.3;
+}
+
+.agent-stage__visual[data-audio='live'][data-state='speaking'] .agent-stage__bar:nth-child(1),
+.agent-stage__visual[data-audio='live'][data-state='speaking'] .agent-stage__bar:nth-child(5) {
+  height: 52px;
+}
+
+.agent-stage__visual[data-audio='live'][data-state='speaking'] .agent-stage__bar:nth-child(2),
+.agent-stage__visual[data-audio='live'][data-state='speaking'] .agent-stage__bar:nth-child(4) {
+  height: 68px;
+}
+
+.agent-stage__visual[data-audio='live'][data-state='speaking'] .agent-stage__bar:nth-child(3) {
+  height: 84px;
 }
 
 .panel {
@@ -265,6 +465,12 @@ code {
   background: rgba(148, 163, 184, 0.12);
   color: #cbd5e1;
   border-color: rgba(148, 163, 184, 0.18);
+}
+
+.secondary-button--danger {
+  border-color: rgba(248, 113, 113, 0.22);
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.18);
 }
 
 .primary-button:disabled,
@@ -456,6 +662,30 @@ code {
   color: #bbf7d0;
 }
 
+@keyframes agent-stage-pulse {
+  0%,
+  100% {
+    transform: scale(0.96);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes agent-stage-bars {
+  0%,
+  100% {
+    transform: scaleY(0.65);
+  }
+
+  50% {
+    transform: scaleY(1.1);
+  }
+}
+
 .product-card-list {
   max-height: 720px;
   overflow: auto;
@@ -490,6 +720,13 @@ code {
 
   .transcript-panel__header {
     flex-direction: column;
+  }
+
+  .agent-stage__header,
+  .agent-stage__footer,
+  .agent-control-bar__status,
+  .agent-control-bar__buttons {
+    grid-template-columns: 1fr;
   }
 
   .transcript-panel {

@@ -28,6 +28,12 @@ export function SessionPanel({ agentName, session }: SessionPanelProps) {
             session.connectionState === ConnectionState.SignalReconnecting
           ? 'Reconnecting'
           : 'Disconnected';
+  const isConnecting = session.connectionState === ConnectionState.Connecting;
+  const connectLabel = session.isConnected
+    ? 'Connected'
+    : microphoneEnabledOnConnect
+      ? 'Connect with microphone'
+      : 'Connect typed-only';
 
   const microphoneStatusLabel = session.isConnected
     ? isMicrophoneEnabled
@@ -81,73 +87,77 @@ export function SessionPanel({ agentName, session }: SessionPanelProps) {
   };
 
   return (
-    <div className="control-stack">
-      <div className="session-summary">
-        <div>
-          <span className="agent-card__label">Session status</span>
+    <section className="agent-control-bar" aria-label="Session controls">
+      <div className="agent-control-bar__status">
+        <div className="agent-control-pill">
+          <span className="agent-card__label">Session</span>
           <strong>{statusLabel}</strong>
         </div>
-        <div>
+        <div className="agent-control-pill">
           <span className="agent-card__label">Microphone</span>
           <strong>{microphoneStatusLabel}</strong>
         </div>
-        <p className="helper-copy">
-          Connects through <code>/api/token</code> using the canonical agent dispatch name:
-          <strong> {agentName}</strong>
-        </p>
       </div>
 
-      <label className="toggle-row">
+      <div className="agent-control-bar__buttons">
+        <button
+          className="primary-button"
+          type="button"
+          disabled={session.isConnected || isConnecting}
+          onClick={handleConnect}
+        >
+          {connectLabel}
+        </button>
+
+        <button
+          aria-pressed={isMicrophoneEnabled}
+          className="secondary-button"
+          type="button"
+          disabled={!session.isConnected}
+          onClick={handleMicrophoneToggle}
+        >
+          {isMicrophoneEnabled ? 'Mute microphone' : 'Turn microphone on'}
+        </button>
+
+        <button
+          className="secondary-button secondary-button--danger"
+          type="button"
+          disabled={!session.isConnected}
+          onClick={handleDisconnect}
+        >
+          Disconnect
+        </button>
+      </div>
+
+      <label className="toggle-row agent-control-bar__toggle">
         <input
           type="checkbox"
           checked={microphoneEnabledOnConnect}
-          disabled={session.isConnected || session.connectionState === ConnectionState.Connecting}
+          disabled={session.isConnected || isConnecting}
           onChange={(event) => setMicrophoneEnabledOnConnect(event.target.checked)}
         />
         <span>Enable microphone when connecting for live voice turns</span>
       </label>
 
-      <button
-        className="primary-button"
-        type="button"
-        disabled={session.connectionState === ConnectionState.Connecting}
-        onClick={handleConnect}
-      >
-        {microphoneEnabledOnConnect ? 'Connect with microphone' : 'Connect typed-only'}
-      </button>
-
-      <button
-        className="secondary-button"
-        type="button"
-        disabled={!session.isConnected}
-        onClick={handleMicrophoneToggle}
-      >
-        {isMicrophoneEnabled ? 'Mute microphone' : 'Turn microphone on'}
-      </button>
-
-      <button
-        className="secondary-button"
-        type="button"
-        disabled={!session.isConnected}
-        onClick={handleDisconnect}
-      >
-        Disconnect
-      </button>
-
-      <p className="helper-copy">
+      <p className="helper-copy agent-control-bar__helper">
         The typed <code>lk.chat</code> path remains available for deterministic verification. Uncheck
         the toggle above if you want a typed-only session, or connect with the microphone enabled
         for live voice capture.
       </p>
 
+      <p className="helper-copy agent-control-bar__helper">
+        Connects through <code>/api/token</code> using the canonical agent dispatch name:
+        <strong> {agentName}</strong>
+      </p>
+
       {session.isConnected ? (
-        <p className="helper-copy">
+        <p className="helper-copy agent-control-bar__helper">
           Microphone track: <strong>{microphoneTrack ? 'published to the LiveKit session' : 'not published yet'}</strong>
         </p>
       ) : null}
 
       {lastMicrophoneError ? <p className="error-copy">{lastMicrophoneError.message}</p> : null}
       {errorMessage ? <p className="error-copy">{errorMessage}</p> : null}
-    </div>
+    </section>
   );
 }
