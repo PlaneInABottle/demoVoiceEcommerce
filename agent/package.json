@@ -7,7 +7,7 @@
     "dev": "tsx main.ts dev",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/main.js start",
-    "download-files": "node dist/main.js download-files"
+    "download-files": "tsc -p tsconfig.json && node dist/main.js download-files"
   },
   "dependencies": {
     "@livekit/agents": "1.0.48",
