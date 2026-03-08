@@ -16,10 +16,10 @@
 
    Use a fresh page load for each verification cycle so the browser receives a fresh demo room name.
 
-3. Confirm the page shows:
-   - the canonical agent card
-   - the session controls panel
-   - the featured products sidebar with grounded shipping and returns/warranty details
+3. Confirm the Phase 1 split-shell layout shows:
+   - a left conversation pane with the MVP demo intro card and shared transcript area
+   - a right agent pane with the canonical agent card, visible agent state, and session controls
+   - no featured products sidebar in the primary interaction area
 
 4. Capture a baseline screenshot:
 
