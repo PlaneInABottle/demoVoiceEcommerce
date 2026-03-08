@@ -6,6 +6,7 @@ import { useMemo } from 'react';
 
 import { AgentPane } from '@/components/agent-pane';
 import { AgentSessionProvider } from '@/components/agents-ui/agent-session-provider';
+import { LiveKitRoomAudio } from '@/components/livekit-room-audio';
 import { TranscriptPanel } from '@/components/transcript-panel';
 
 type DemoShellProps = {
@@ -25,6 +26,7 @@ export function DemoShell({ appName, agentName, roomName }: DemoShellProps) {
   return (
     <main className="page-shell">
       <AgentSessionProvider session={session}>
+        <LiveKitRoomAudio room={session.room} isConnected={session.isConnected} />
         <section className="split-shell">
           <section className="conversation-pane">
             <article className="panel conversation-pane__intro">

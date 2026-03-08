@@ -3,9 +3,11 @@
 1. Start the current local runtime before any browser claims:
 
    ```bash
-   npm run dev
-   npm --prefix agent run dev
-   ```
+    npm run dev
+    VOICE_PIPELINE_MODE=realtime OPENAI_API_KEY=<real-key> npm --prefix agent run dev
+    ```
+
+   Rollback verification should repeat the same flow with `VOICE_PIPELINE_MODE=chained npm --prefix agent run dev` after running `npm --prefix agent run download-files`.
 
    Browser proof for connect, greeting, mute/unmute, typed chat, and disconnect is only valid
    when the separate agent worker is running alongside the web app.

@@ -1,6 +1,10 @@
 'use client';
 
-import { useLocalParticipant, type UseSessionReturn } from '@livekit/components-react';
+import {
+  useAudioPlayback,
+  useLocalParticipant,
+  type UseSessionReturn,
+} from '@livekit/components-react';
 import { ConnectionState } from 'livekit-client';
 import { useState } from 'react';
 
@@ -12,6 +16,7 @@ type SessionPanelProps = {
 export function SessionPanel({ agentName, session }: SessionPanelProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [microphoneEnabledOnConnect, setMicrophoneEnabledOnConnect] = useState(true);
+  const { startAudio } = useAudioPlayback(session.room);
   const {
     isMicrophoneEnabled,
     lastMicrophoneError,
@@ -63,6 +68,19 @@ export function SessionPanel({ agentName, session }: SessionPanelProps) {
       });
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : 'Failed to connect the session');
+      return;
+    }
+
+    if (!session.room.canPlaybackAudio) {
+      try {
+        await startAudio();
+      } catch (error) {
+        setErrorMessage(
+          error instanceof Error
+            ? `${error.message}. If the browser still blocks playback, use the speaker audio button below.`
+            : 'Connected, but speaker audio still needs a click. Use the speaker audio button below.',
+        );
+      }
     }
   };
 

@@ -444,6 +444,25 @@ code {
   gap: 8px;
 }
 
+.audio-status,
+.audio-status__blocked {
+  display: grid;
+  gap: 10px;
+}
+
+.audio-status {
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  border: 1px solid rgba(125, 211, 252, 0.2);
+  border-radius: 16px;
+  background: rgba(14, 116, 144, 0.12);
+}
+
+.audio-status__copy {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.92);
+}
+
 .primary-button,
 .secondary-button {
   border: 1px solid transparent;

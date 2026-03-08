@@ -23,6 +23,8 @@ Minimal MVP for a local ecommerce voice assistant built with a root Next.js app 
 - `.env.example` contains placeholders only.
 - The repo-root `.env` is the only local credential source for MVP.
 - `LIVEKIT_AGENT_NAME` is the canonical agent dispatch name shared by the web app, `/api/token`, and the worker.
+- `VOICE_PIPELINE_MODE` controls the worker rollout path and defaults to `chained`.
+- `OPENAI_API_KEY` is required only when `VOICE_PIPELINE_MODE=realtime`.
 - Do **not** create `agent/.env`, `agent/.env.local`, or `NEXT_PUBLIC_LIVEKIT_AGENT_NAME`.
 
 ## Install
@@ -47,9 +49,17 @@ npm --prefix agent run dev
 npm --prefix agent run build
 npm --prefix agent run start
 npm --prefix agent run download-files
+npm --prefix agent test
 ```
 
 The worker explicitly loads the repo-root `.env` from `agent/main.ts`.
+
+### Worker pipeline modes
+
+- `VOICE_PIPELINE_MODE=chained` keeps the current Deepgram + Gemini + Cartesia flow and remains the rollback path.
+- `VOICE_PIPELINE_MODE=realtime` switches the worker to `@livekit/agents-plugin-openai` with `openai.realtime.RealtimeModel`.
+- The realtime rollout uses `voice: 'marin'` with documented `server_vad` settings.
+- Realtime mode fails fast during bootstrap if `OPENAI_API_KEY` is missing.
 
 ## Optional PM2 flow
 
@@ -95,19 +105,23 @@ pm2 delete demoVoice-agent
    npm --prefix agent install
    ```
 
-2. Build the worker and download model files:
+2. Build the worker and install/download the dependencies required for your selected mode:
 
    ```bash
-   npm --prefix agent run build
-   npm --prefix agent run download-files
-   ```
+    npm --prefix agent run build
+    npm --prefix agent run download-files
+    ```
+
+   `download-files` remains required for chained mode and rollback readiness because the Silero-backed path is still preserved.
 
 3. Start both processes with direct CLI commands:
 
-    ```bash
-    npm run dev
-    npm --prefix agent run dev
-    ```
+     ```bash
+     npm run dev
+     npm --prefix agent run dev
+     ```
+
+   To activate realtime mode, add `VOICE_PIPELINE_MODE=realtime` and provide `OPENAI_API_KEY` in the repo-root `.env` before starting the worker.
 
     For a production-style local check, build the web app first and then use `npm run start`:
 
@@ -141,14 +155,18 @@ pm2 delete demoVoice-agent
 
   ```bash
   npm --prefix agent run build
-  npm --prefix agent run dev
+  VOICE_PIPELINE_MODE=chained npm --prefix agent run dev
+  VOICE_PIPELINE_MODE=realtime OPENAI_API_KEY=placeholder npm --prefix agent run dev
   ```
 
   Confirm the logs include:
   - `[worker] readiness:bootstrap-complete`
+  - `[worker] bootstrap:pipeline_mode ...`
   - `[worker] catalog:loaded count=...`
   - `[worker] session:started`
   - `[worker] greeting:start ...`
+
+  Realtime runtime parity beyond placeholder bootstrap remains blocked until a real `OPENAI_API_KEY` is available.
 
 - Browser smoke:
 
@@ -156,6 +174,12 @@ pm2 delete demoVoice-agent
   The homepage is explicitly request-time dynamic (`export const dynamic = 'force-dynamic'`), so `next build && next start` generates a fresh `demoVoice-room-<uuid>` on every page request. Generic callers that omit `room_name` still receive the deterministic `demoVoice-room` default from `/api/token`.
 
 ## Teardown
+
+## Rollback
+
+- Set `VOICE_PIPELINE_MODE=chained` in the repo-root `.env`.
+- Restart the worker.
+- Keep `@livekit/agents-plugin-silero` installed and keep using `npm --prefix agent run download-files` so chained mode remains runnable on a fresh environment.
 
 Direct CLI:
 
