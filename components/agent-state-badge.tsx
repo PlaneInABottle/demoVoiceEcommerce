@@ -6,7 +6,7 @@ type AgentStateBadgeProps = {
   session: UseSessionReturn;
 };
 
-const STATE_LABELS: Record<string, string> = {
+export const AGENT_STATE_LABELS: Record<string, string> = {
   disconnected: 'Disconnected',
   connecting: 'Connecting',
   'pre-connect-buffering': 'Preparing audio',
@@ -20,7 +20,7 @@ const STATE_LABELS: Record<string, string> = {
 
 export function AgentStateBadge({ session }: AgentStateBadgeProps) {
   const agent = useAgent(session);
-  const label = STATE_LABELS[agent.state] ?? agent.state;
+  const label = AGENT_STATE_LABELS[agent.state] ?? agent.state;
 
   return <span className={`status-pill status-pill--${agent.state.replace(/[^a-z-]/g, '-')}`}>{label}</span>;
 }

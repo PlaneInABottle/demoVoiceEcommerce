@@ -2,7 +2,7 @@
 
 import { useAgent, type UseSessionReturn } from '@livekit/components-react';
 
-import { AgentStateBadge } from '@/components/agent-state-badge';
+import { AGENT_STATE_LABELS, AgentStateBadge } from '@/components/agent-state-badge';
 import { SessionPanel } from '@/components/session-panel';
 
 type AgentPaneProps = {
@@ -10,51 +10,37 @@ type AgentPaneProps = {
   session: UseSessionReturn;
 };
 
+function getStageSummary(state: string, failureReasons?: string[] | null) {
+  switch (state) {
+    case 'failed':
+      return failureReasons?.[0] ?? 'The session needs attention before the next handoff.';
+    case 'speaking':
+      return 'The agent is actively responding and should feel present on this side of the shell.';
+    case 'thinking':
+      return 'The agent is processing the latest turn and preparing the next response.';
+    case 'listening':
+      return 'The agent is live in the room and listening for the next customer turn.';
+    case 'idle':
+      return 'The agent is connected and idle, waiting for the next customer turn.';
+    case 'initializing':
+      return 'The agent is connecting and setting up before the next turn opens up.';
+    case 'pre-connect-buffering':
+      return 'Audio is primed while the session finishes connecting the agent to the room.';
+    case 'connecting':
+      return 'The agent is joining the room and preparing its presence surface.';
+    case 'disconnected':
+      return 'The last session ended cleanly. Connect again to bring the agent back into the room.';
+    default:
+      return 'Connect to bring the agent into the room and keep the transcript flow intact.';
+  }
+}
+
 export function AgentPane({ agentName, session }: AgentPaneProps) {
   const agent = useAgent(session);
-  const stageSummary =
-    agent.state === 'failed'
-      ? agent.failureReasons?.[0] ?? 'The session needs attention before the next handoff.'
-      : agent.state === 'speaking'
-        ? 'The agent is actively responding and should feel present on this side of the shell.'
-        : agent.state === 'thinking'
-          ? 'The agent is processing the latest turn and preparing the next response.'
-          : agent.state === 'listening'
-            ? 'The agent is live in the room and listening for the next customer turn.'
-            : agent.state === 'idle'
-              ? 'The agent has joined the room and is finishing setup before the next turn opens up.'
-              : agent.state === 'initializing'
-                ? 'The agent is setting up the session context before the conversation opens up.'
-                : agent.state === 'pre-connect-buffering'
-                  ? 'Audio is primed while the session finishes connecting the agent to the room.'
-                  : agent.state === 'connecting'
-                    ? 'The agent is joining the room and preparing its presence surface.'
-                    : 'Connect to bring the agent into the room and keep the transcript flow intact.';
-  const conversationFlowLabel = agent.state === 'listening'
-    ? 'Awaiting turn'
-    : agent.state === 'speaking'
-      ? 'Responding'
-      : agent.state === 'thinking'
-        ? 'Processing'
-        : agent.state === 'idle'
-          ? 'Standing by'
-          : agent.state === 'pre-connect-buffering' ||
-              agent.state === 'connecting' ||
-              agent.state === 'initializing'
-            ? 'Preparing'
-            : agent.isFinished
-              ? 'Ended'
-              : 'Waiting';
-  const sessionPhaseLabel = agent.state === 'failed'
-    ? 'Failed'
-    : agent.state === 'disconnected'
-      ? 'Not connected'
-      : agent.state === 'connecting' ||
-          agent.state === 'pre-connect-buffering' ||
-          agent.state === 'initializing' ||
-          agent.state === 'idle'
-        ? 'Preparing'
-        : 'Active';
+  const stageSummary = getStageSummary(agent.state, agent.failureReasons);
+  const agentStateLabel = AGENT_STATE_LABELS[agent.state] ?? agent.state;
+  const sessionOutcomeLabel =
+    agent.state === 'failed' ? 'Error' : agent.state === 'disconnected' ? 'Ended' : 'In progress';
 
   return (
     <aside className="agent-pane">
@@ -99,12 +85,12 @@ export function AgentPane({ agentName, session }: AgentPaneProps) {
                 <strong>{agent.microphoneTrack ? 'Streaming' : 'Standby'}</strong>
               </span>
               <span className="agent-stage__chip">
-                <span className="agent-card__label">Turn flow</span>
-                <strong>{conversationFlowLabel}</strong>
+                <span className="agent-card__label">Agent state</span>
+                <strong>{agentStateLabel}</strong>
               </span>
               <span className="agent-stage__chip">
-                <span className="agent-card__label">Session phase</span>
-                <strong>{sessionPhaseLabel}</strong>
+                <span className="agent-card__label">Session outcome</span>
+                <strong>{sessionOutcomeLabel}</strong>
               </span>
             </div>
           </div>
