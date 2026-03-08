@@ -153,7 +153,7 @@ pm2 delete demoVoice-agent
 - Browser smoke:
 
   See `verify/browser-smoke.md`. The typed fallback must use LiveKit text streams on topic `lk.chat`.
-  The browser shell requests a fresh room name on each page load so explicit agent dispatch is not blocked by a stale prior demo room; generic callers that omit `room_name` still receive the deterministic `demoVoice-room` default from `/api/token`.
+  The homepage is explicitly request-time dynamic (`export const dynamic = 'force-dynamic'`), so `next build && next start` generates a fresh `demoVoice-room-<uuid>` on every page request. Generic callers that omit `room_name` still receive the deterministic `demoVoice-room` default from `/api/token`.
 
 ## Teardown
 

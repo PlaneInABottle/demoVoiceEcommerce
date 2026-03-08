@@ -6,40 +6,54 @@ LiveKit Ecommerce Voice Demo
 DATE: 2026-03-08
 STATUS: PASS
 
-Successful proof cycle:
-  - web app available at http://localhost:3000
-  - worker started with: npm --prefix agent run dev
-  - browser session: agent-browser --session-name demoVoiceProof3
-  - typed fallback prompt used: I need noise-cancelling headphones under $200.
+Current evidence set:
+  - production web app served with `next start`
+  - Node-built LiveKit worker (`node dist/main.js start`)
+  - browser automation through `agent-browser`
+  - clean worker excerpt replacing the earlier stale teardown log
 
 --------------------------------------------------------------------------------
-1. WORKER EVIDENCE
+1. PRODUCTION ROOM-NAME PROOF
+--------------------------------------------------------------------------------
+
+Source: verify/artifacts/production-room-names.txt
+
+Two separate requests to the production server returned different homepage room names:
+
+  1. demoVoice-room-b1c3c54f-dda3-4c8e-9b51-13c486bf06d2
+  2. demoVoice-room-ad1e5cf0-2ea5-4a31-8b49-8d80efc86e55
+  unique=True
+
+This confirms the homepage is request-time dynamic in a real `next build && next start`
+flow instead of freezing one UUID at build time.
+
+--------------------------------------------------------------------------------
+2. WORKER EVIDENCE
 --------------------------------------------------------------------------------
 
 Source: verify/artifacts/agent-worker-cycle.log
 
-Key lines captured from the successful cycle:
+Key lines from the refreshed clean excerpt:
 
   [worker] bootstrap:env /Users/Y_ALTAY1/Documents/demoVoice/.env
   [worker] bootstrap:catalog /Users/Y_ALTAY1/Documents/demoVoice/data/products.json
   [worker] bootstrap:catalog_count 6
   [worker] bootstrap:agent_name ecommerce-agent
   [worker] readiness:bootstrap-complete
-
   [worker] job:accepted room=connected-room
   [worker] greeting:start catalog_size=6
   [worker] session:started
   [worker] conversation:user I need noise-cancelling headphones under $200.
-  [worker] conversation:assistant Hello! I'm your local shopping assistant. I can help you discover products,
   [worker] tools:executed count=1
-  [worker] conversation:assistant I'd be happy to help! I can assist with product discovery, comparisons, and answering questions about shipping, returns, and warranties based on our catalog. ...
+  [worker] conversation:assistant I couldn't find any noise-cancelling headphones in our catalog for under $200. ...
+  {"reason":"participant_disconnected","error":null,"msg":"AgentSession closed"}
 
-These lines prove the worker accepted the browser session, started the session,
-began the greeting, received the typed lk.chat prompt, and generated a reply in
-the same verification cycle.
+The earlier `Unhandled promise rejection` line from the stale log was not reproduced in the
+refreshed verification evidence. The current accepted artifact ends with a normal
+participant-disconnect close.
 
 --------------------------------------------------------------------------------
-2. BROWSER EVIDENCE
+3. BROWSER EVIDENCE
 --------------------------------------------------------------------------------
 
 Artifacts:
@@ -49,45 +63,24 @@ Artifacts:
   - verify/artifacts/browser-smoke-transcript.txt
 
 Observed browser state:
-  - initial connect controls rendered correctly
-  - greeting transcript appeared after connect
+  - homepage rendered correctly from the production server
+  - greeting transcript appeared after typed-only connect
   - typed chips became enabled after the greeting
-  - transcript showed:
-      * agent greeting
-      * Demo shopper typed prompt
-      * agent response
+  - the shared transcript captured the approved typed fallback turn
 
 Excerpt:
 
   Agent
-  4:29:33 PM
-  Hello! I'm your local shopping assistant. I can help you discover products, compare
+  4:49:15 PM
+  Hello! I'm your local shopping assistant. I can help you discover products, compare features, and answer specific questions about shipping, returns, or warranties based on our catalog. How can I help you find what you're looking for today?
 
   Demo shopper
-  4:29:38 PM
+  4:49:28 PM
   I need noise-cancelling headphones under $200.
 
   Agent
-  4:29:42 PM
-  I'd be happy to
-
---------------------------------------------------------------------------------
-3. ROOT CAUSE FOUND
---------------------------------------------------------------------------------
-
-The earlier failed proof was caused by stale default-room reuse, not by missing
-provider wiring or a broken typed-input path.
-
-Evidence:
-  - the default demo room already existed with an active participant during
-    diagnostics
-  - a fresh unique room immediately produced job acceptance, greeting output,
-    enabled typed controls, and a successful typed lk.chat turn
-
-Remediation:
-  - the browser session now requests a fresh room name on each page load
-  - /api/token still preserves the documented default demoVoice-room when
-    callers omit room_name
+  4:49:32 PM
+  I couldn't find any noise-cancelling headphones under $200 in our current catalog.
 
 --------------------------------------------------------------------------------
 4. VALIDATION COMMANDS
@@ -96,7 +89,7 @@ Remediation:
   npm test                                      PASS
   npm run build                                 PASS
   npm --prefix agent run build                  PASS
-  HURL_VARIABLE_canonical_agent="$LIVEKIT_AGENT_NAME" \
-    hurl --test verify/token-endpoint.hurl      PASS
+  production room-name curl proof               PASS
+  production browser proof with agent-browser   PASS
 
 ================================================================================

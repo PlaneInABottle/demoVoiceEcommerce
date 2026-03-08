@@ -1,1 +1,123 @@
-"MVP DEMO\n\nLiveKit Ecommerce Voice Demo\n\nAsk the agent for product recommendations, comparisons, and grounded shipping, return, and warranty guidance using voice or typed input.\n\nCANONICAL AGENT\necommerce-agent\nTranscript\n\nVoice and typed messages share the same LiveKit transcript.\n\nAgent\n4:29:33 PM\n\nHello! I'm your local shopping assistant. I can help you discover products, compare\n\nDemo shopper\n4:29:38 PM\n\nI need noise-cancelling headphones under $200.\n\nAgent\n4:29:42 PM\n\nI'd be happy to\n\nI need noise-cancelling headphones under $200.\nCompare the QuietCore 200 and the Commute Mini.\nHow fast is shipping and what is the return window for the QuietCore 200?\nTyped fallback (`lk.chat`)\nSend\nSession controls\nSESSION STATUSConnected\nMICROPHONELive microphone off\nSpeaking\n\nConnects through /api/token using the canonical agent dispatch name: ecommerce-agent\n\nEnable microphone when connecting for live voice turns\nConnect typed-only\nTurn microphone on\nDisconnect\n\nThe typed lk.chat path remains available for deterministic verification. Uncheck the toggle above if you want a typed-only session, or connect with the microphone enabled for live voice capture.\n\nMicrophone track: not published yet\n\nFeatured products\n\nStatic catalog data shared by the web app and agent worker.\n\nQuietCore 200 Headphones\n$179\n\nWireless over-ear headphones with adaptive noise cancellation for travel and office use.\n\n30-hour battery\nUSB-C fast charging\n\nShipping: Free standard shipping in 3-5 business days, with 2-day expedited shipping available at checkout.\n\nReturns & warranty: 30-day returns and a 2-year limited warranty.\n\nCommute Mini Earbuds\n$129\n\nCompact earbuds tuned for commuters who need clear calls and light noise isolation.\n\nQi charging case\nIPX4 splash resistance\n\nShipping: Free standard shipping in 3-5 business days, with next-day shipping available in the contiguous US.\n\nReturns & warranty: 30-day returns and a 1-year limited warranty.\n\nRoomFill Portable Speaker\n$149\n\nPortable speaker with room-filling sound, stereo pairing, and all-day battery life.\n\n18-hour battery\nstereo pairing\n\nShipping: Free ground shipping in 4-6 business days, or 2-day delivery for an added fee.\n\nReturns & warranty: 30-day returns and a 2-year limited warranty.\n\nTactile Pro Keyboard\n$159\n\nMechanical keyboard with hot-swappable switches and low-latency wireless connectivity.\n\n75% layout\nhot-swappable switches\n\nShipping: Free standard shipping in 3-5 business days, with express delivery available in major metro areas.\n\nReturns & warranty: 30-day returns and a 2-year limited warranty.\n\nTravel GaN 100 Charger\n$89\n\nCompact GaN charger for phones, tablets, and laptops with international plug adapters.\n\n100W max output\ntwo USB-C ports\n\nShipping: Free standard shipping in 2-4 business days, with overnight shipping available for US orders placed before noon.\n\nReturns & warranty: 30-day returns and a 1-year limited warranty.\n\nStreamLight HD Webcam\n$119\n\n4K webcam with auto-framing and low-light correction for meetings and streaming.\n\n4K sensor\nauto-framing\n\nShipping: Free standard shipping in 3-5 business days, with 2-day delivery available for eligible regions.\n\nReturns & warranty: 30-day returns and a 2-year limited warranty."
+MVP DEMO
+
+LiveKit Ecommerce Voice Demo
+
+Ask the agent for product recommendations, comparisons, and grounded shipping, return, and warranty guidance using voice or typed input.
+
+CANONICAL AGENT
+ecommerce-agent
+Transcript
+
+Voice and typed messages share the same LiveKit transcript.
+
+Agent
+4:49:15 PM
+
+Hello! I'm your local shopping assistant. I can help you discover products, compare features, and answer specific questions about shipping, returns, or warranties based on our catalog. How can I help you find what you're looking for today?
+
+Demo shopper
+4:49:28 PM
+
+I need noise-cancelling headphones under $200.
+
+Agent
+4:49:32 PM
+
+I couldn't find any noise-cancelling headphones under $200 in our current catalog. Would you like to see our available
+
+I need noise-cancelling headphones under $200.
+Compare the QuietCore 200 and the Commute Mini.
+How fast is shipping and what is the return window for the QuietCore 200?
+Typed fallback (`lk.chat`)
+Send
+Session controls
+SESSION STATUSConnected
+MICROPHONELive microphone off
+Speaking
+
+Connects through /api/token using the canonical agent dispatch name: ecommerce-agent
+
+Enable microphone when connecting for live voice turns
+Connect typed-only
+Turn microphone on
+Disconnect
+
+The typed lk.chat path remains available for deterministic verification. Uncheck the toggle above if you want a typed-only session, or connect with the microphone enabled for live voice capture.
+
+Microphone track: not published yet
+
+Featured products
+
+Static catalog data shared by the web app and agent worker.
+
+QuietCore 200 Headphones
+$179
+
+Wireless over-ear headphones with adaptive noise cancellation for travel and office use.
+
+30-hour battery
+USB-C fast charging
+
+Shipping: Free standard shipping in 3-5 business days, with 2-day expedited shipping available at checkout.
+
+Returns & warranty: 30-day returns and a 2-year limited warranty.
+
+Commute Mini Earbuds
+$129
+
+Compact earbuds tuned for commuters who need clear calls and light noise isolation.
+
+Qi charging case
+IPX4 splash resistance
+
+Shipping: Free standard shipping in 3-5 business days, with next-day shipping available in the contiguous US.
+
+Returns & warranty: 30-day returns and a 1-year limited warranty.
+
+RoomFill Portable Speaker
+$149
+
+Portable speaker with room-filling sound, stereo pairing, and all-day battery life.
+
+18-hour battery
+stereo pairing
+
+Shipping: Free ground shipping in 4-6 business days, or 2-day delivery for an added fee.
+
+Returns & warranty: 30-day returns and a 2-year limited warranty.
+
+Tactile Pro Keyboard
+$159
+
+Mechanical keyboard with hot-swappable switches and low-latency wireless connectivity.
+
+75% layout
+hot-swappable switches
+
+Shipping: Free standard shipping in 3-5 business days, with express delivery available in major metro areas.
+
+Returns & warranty: 30-day returns and a 2-year limited warranty.
+
+Travel GaN 100 Charger
+$89
+
+Compact GaN charger for phones, tablets, and laptops with international plug adapters.
+
+100W max output
+two USB-C ports
+
+Shipping: Free standard shipping in 2-4 business days, with overnight shipping available for US orders placed before noon.
+
+Returns & warranty: 30-day returns and a 1-year limited warranty.
+
+StreamLight HD Webcam
+$119
+
+4K webcam with auto-framing and low-light correction for meetings and streaming.
+
+4K sensor
+auto-framing
+
+Shipping: Free standard shipping in 3-5 business days, with 2-day delivery available for eligible regions.
+
+Returns & warranty: 30-day returns and a 2-year limited warranty.

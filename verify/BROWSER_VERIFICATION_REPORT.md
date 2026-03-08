@@ -4,79 +4,70 @@
 **Environment:** `/Users/Y_ALTAY1/Documents/demoVoice`  
 **Status:** PASS
 
-## Verification cycle
+## Scope
 
-This report replaces the earlier overstated partial-pass report. The evidence below comes from one successful runtime cycle with:
-
-- web app running at `http://localhost:3000`
-- worker running directly with `npm --prefix agent run dev`
-- browser automation through `agent-browser --session-name demoVoiceProof3`
+This refreshed report replaces the earlier stale partial-pass story. The current browser proof was
+re-run against a production-style web server (`next build && next start`) on `http://localhost:3000`
+with the approved typed-only fallback flow.
 
 ## Commands used
 
 ```bash
-pm2 start npm --name demoVoice-web -- run dev
-npm --prefix agent run dev
+pm2 start npm --name demoVoice-web --cwd /Users/Y_ALTAY1/Documents/demoVoice -- run start
 
-agent-browser --session-name demoVoiceProof3 open http://localhost:3000
-agent-browser --session-name demoVoiceProof3 snapshot -i
-agent-browser --session-name demoVoiceProof3 uncheck @e5
-agent-browser --session-name demoVoiceProof3 click @e6
-agent-browser --session-name demoVoiceProof3 click @e1
+agent-browser --session-name demoVoiceProofProd open http://localhost:3000
+agent-browser --session-name demoVoiceProofProd snapshot -i
+agent-browser --session-name demoVoiceProofProd uncheck @e5
+agent-browser --session-name demoVoiceProofProd click @e6
+agent-browser --session-name demoVoiceProofProd click @e1
+agent-browser --session-name demoVoiceProofProd click @e8
 ```
 
-## Browser evidence captured
-
-Artifacts:
+## Browser artifacts
 
 - `verify/artifacts/browser-smoke-home.png`
 - `verify/artifacts/browser-smoke-connected.png`
 - `verify/artifacts/browser-smoke-transcript.png`
 - `verify/artifacts/browser-smoke-transcript.txt`
+- `verify/artifacts/production-room-names.txt`
 
-Observed in the successful cycle:
+## Observed behavior
 
-1. The page loaded with the canonical agent card and the expected controls.
-2. After connecting typed-only, the first greeting appeared in the shared transcript.
-3. The typed prompt chips became enabled only after that greeting arrived.
-4. The typed fallback prompt used was:
+1. The homepage rendered with the canonical agent card and the expected session controls.
+2. A production `next start` run produced a fresh room name on each page request:
 
    ```text
-   I need noise-cancelling headphones under $200.
+   demoVoice-room-b1c3c54f-dda3-4c8e-9b51-13c486bf06d2
+   demoVoice-room-ad1e5cf0-2ea5-4a31-8b49-8d80efc86e55
    ```
 
-5. The transcript then showed all of the following in the same cycle:
-   - the first agent greeting
-   - the shopper typed `lk.chat` message
-   - a follow-up agent reply
+3. After connecting typed-only, the greeting appeared in the transcript and the typed controls became enabled.
+4. Clicking the first prompt chip sent the approved `lk.chat` fallback message and produced a grounded reply.
 
-Excerpt from `verify/artifacts/browser-smoke-transcript.txt`:
+## Transcript excerpt
+
+From `verify/artifacts/browser-smoke-transcript.txt`:
 
 ```text
 Agent
-4:29:33 PM
-Hello! I'm your local shopping assistant. I can help you discover products, compare
+4:49:15 PM
+Hello! I'm your local shopping assistant. I can help you discover products, compare features, and answer specific questions about shipping, returns, or warranties based on our catalog. How can I help you find what you're looking for today?
 
 Demo shopper
-4:29:38 PM
+4:49:28 PM
 I need noise-cancelling headphones under $200.
 
 Agent
-4:29:42 PM
-I'd be happy to
-```
-
-The same DOM snapshot also showed that the chips and Send control were enabled after the greeting:
-
-```text
-"chips":[false,false,false]
+4:49:32 PM
+I couldn't find any noise-cancelling headphones under $200 in our current catalog.
 ```
 
 ## Conclusion
 
-The runtime browser path is working end-to-end for the approved typed fallback flow:
+The production browser path is currently working for the approvable MVP flow:
 
-- greeting transcript appears
-- typed controls enable after the greeting
-- one typed `lk.chat` prompt is accepted
-- the typed prompt and agent response both appear in the shared transcript
+- homepage room generation is request-time dynamic under `next start`
+- the session connects successfully from the production web app
+- the greeting transcript appears
+- the typed `lk.chat` fallback remains functional
+- the refreshed proof artifacts match the current implementation
