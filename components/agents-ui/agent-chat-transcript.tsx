@@ -1,7 +1,38 @@
 'use client';
 
-import { useLocalParticipant, useMaybeSessionContext, useSessionMessages } from '@livekit/components-react';
+import {
+  useAgent,
+  useLocalParticipant,
+  useMaybeSessionContext,
+  useSessionMessages,
+} from '@livekit/components-react';
 import { useEffect, useRef } from 'react';
+
+type TranscriptTone = 'agent' | 'user' | 'chat';
+
+function getDisplayableBody(message: { message?: string }) {
+  return message.message?.trim() ?? '';
+}
+
+function getTranscriptTone({
+  messageType,
+  isAgentAuthoredChat,
+  isLocalTypedMessage,
+}: {
+  messageType?: string;
+  isAgentAuthoredChat: boolean;
+  isLocalTypedMessage: boolean;
+}): TranscriptTone {
+  if (messageType === 'agentTranscript' || isAgentAuthoredChat) {
+    return 'agent';
+  }
+
+  if (messageType === 'userTranscript' || isLocalTypedMessage) {
+    return 'user';
+  }
+
+  return 'chat';
+}
 
 const TIMESTAMP_FORMATTER = new Intl.DateTimeFormat([], {
   hour: 'numeric',
@@ -10,11 +41,13 @@ const TIMESTAMP_FORMATTER = new Intl.DateTimeFormat([], {
 
 export function AgentChatTranscript() {
   const session = useMaybeSessionContext();
+  const agent = useAgent(session);
   const { messages } = useSessionMessages(session);
   const { localParticipant } = useLocalParticipant({ room: session?.room });
+  const displayableMessages = messages.filter((message) => getDisplayableBody(message).length > 0);
   const scrollAnchorRef = useRef<HTMLDivElement | null>(null);
-  const lastMessage = messages.at(-1);
-  const lastMessageText = lastMessage && 'message' in lastMessage ? lastMessage.message : '';
+  const lastMessage = displayableMessages.at(-1);
+  const lastMessageText = lastMessage ? getDisplayableBody(lastMessage) : '';
   const lastMessageSignature = `${lastMessage?.id ?? 'none'}:${lastMessage?.timestamp ?? 0}:${lastMessageText}`;
 
   useEffect(() => {
@@ -22,27 +55,30 @@ export function AgentChatTranscript() {
       behavior: 'auto',
       block: 'end',
     });
-  }, [lastMessageSignature, messages.length]);
+  }, [lastMessageSignature, displayableMessages.length]);
 
   return (
     <div className="transcript-list" aria-live="polite" role="log">
-      {messages.length === 0 ? (
+      {displayableMessages.length === 0 ? (
         <div className="empty-state transcript-empty-state">
           <p className="transcript-empty-state__eyebrow">Waiting for the first turn</p>
           <h3>Shared transcript appears here</h3>
           <p>Connect the session and use voice or the typed chat fallback to populate the history.</p>
         </div>
       ) : (
-        messages.map((message) => {
-          const body = 'message' in message ? message.message : '';
+        displayableMessages.map((message) => {
+          const body = getDisplayableBody(message);
           const senderIdentity = message.from?.identity;
           const isLocalTypedMessage = Boolean(senderIdentity) && senderIdentity === localParticipant?.identity;
-          const tone =
-            message.type === 'agentTranscript'
-              ? 'agent'
-              : message.type === 'userTranscript' || isLocalTypedMessage
-                ? 'user'
-                : 'chat';
+          const isAgentAuthoredChat =
+            Boolean(senderIdentity) &&
+            (senderIdentity === agent.internal.agentParticipant?.identity ||
+              senderIdentity === agent.internal.workerParticipant?.identity);
+          const tone = getTranscriptTone({
+            messageType: message.type,
+            isAgentAuthoredChat,
+            isLocalTypedMessage,
+          });
           const label =
             tone === 'agent'
               ? 'Agent'
