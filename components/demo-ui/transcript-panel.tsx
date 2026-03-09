@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 
-import { useMaybeSessionContext, useSessionMessages } from '@livekit/components-react';
+import { useAgent, useMaybeSessionContext, useSessionMessages } from '@livekit/components-react';
 
 import { AgentChatTranscript } from '@/components/demo-ui/agent-chat-transcript';
 import { AgentStateBadge } from '@/components/demo-ui/agent-state-badge';
@@ -11,34 +11,63 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 
 export function isTypedChatReady({
-  isConnected,
+  canListen,
+  isFinished,
   send,
 }: {
-  isConnected: boolean;
+  canListen: boolean;
+  isFinished: boolean;
   send: unknown;
 }) {
-  return isConnected && typeof send === 'function';
+  return canListen && !isFinished && typeof send === 'function';
 }
 
-function getTypedChatHint(isReady: boolean) {
-  return isReady
-    ? 'Ready. Messages flow through the existing typed chat topic.'
-    : 'Typed chat unlocks as soon as the session connects.';
+function getTypedChatHint({
+  canListen,
+  isFinished,
+}: {
+  canListen: boolean;
+  isFinished: boolean;
+}) {
+  if (canListen) {
+    return 'Ready. Messages flow through the existing typed chat topic.';
+  }
+
+  return isFinished
+    ? 'Reconnect the session to send another typed message.'
+    : 'Typed chat unlocks as soon as the agent can listen.';
 }
 
-function getTypedChatPlaceholder(isReady: boolean) {
-  return isReady
-    ? 'Ask about products, shipping, returns, or warranty details…'
-    : 'Connect the session to send a typed message…';
+function getTypedChatPlaceholder({
+  canListen,
+  isFinished,
+}: {
+  canListen: boolean;
+  isFinished: boolean;
+}) {
+  if (canListen) {
+    return 'Ask about products, shipping, returns, or warranty details…';
+  }
+
+  return isFinished
+    ? 'Reconnect the session to send a typed message…'
+    : 'Wait for the agent to be ready before sending a typed message…';
 }
 
 export function TranscriptPanel() {
   const session = useMaybeSessionContext();
+  const agent = useAgent(session);
   const { isSending, messages, send } = useSessionMessages(session);
   const [draft, setDraft] = useState('');
   const [sendError, setSendError] = useState<string | null>(null);
-  const isConnected = session?.isConnected ?? false;
-  const isTypedInputReady = isTypedChatReady({ isConnected, send });
+  const typedChatStatus = {
+    canListen: agent.canListen,
+    isFinished: agent.isFinished,
+  };
+  const isTypedInputReady = isTypedChatReady({
+    ...typedChatStatus,
+    send,
+  });
   const transcriptSummary =
     messages.length === 0 ? 'No turns yet' : `${messages.length} turn${messages.length === 1 ? '' : 's'} in view`;
 
@@ -104,7 +133,7 @@ export function TranscriptPanel() {
                 disabled={!isTypedInputReady || isSending}
                 id="typed-chat-input"
                 name="typedChatPrompt"
-                placeholder={getTypedChatPlaceholder(isTypedInputReady)}
+                placeholder={getTypedChatPlaceholder(typedChatStatus)}
                 spellCheck={false}
                 type="text"
                 value={draft}
@@ -121,7 +150,7 @@ export function TranscriptPanel() {
             </div>
           </div>
           <p className="text-sm leading-6 text-slate-400" id="typed-chat-hint">
-            {getTypedChatHint(isTypedInputReady)}
+            {getTypedChatHint(typedChatStatus)}
           </p>
           {sendError ? (
             <p className="text-sm leading-6 text-red-300" id="typed-chat-error" role="alert" aria-live="polite">

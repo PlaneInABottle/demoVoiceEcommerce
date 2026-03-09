@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { type LocalAudioTrack, type RemoteAudioTrack } from 'livekit-client';
+import { LocalAudioTrack, RemoteAudioTrack } from 'livekit-client';
 import {
   type AnimationPlaybackControlsWithThen,
   type ValueAnimationTransition,
@@ -9,10 +9,10 @@ import {
 } from 'motion/react';
 import {
   type AgentState,
-  type TrackReference,
   type TrackReferenceOrPlaceholder,
   useTrackVolume,
 } from '@livekit/components-react';
+import { isTrackReference } from '@livekit/components-core';
 
 const DEFAULT_SPEED = 10;
 const DEFAULT_AMPLITUDE = 2;
@@ -57,7 +57,14 @@ export function useAgentAudioVisualizerAura(
   const { value: frequency, animate: animateFrequency } = useAnimatedValue(DEFAULT_FREQUENCY);
   const { value: brightness, animate: animateBrightness } = useAnimatedValue(DEFAULT_BRIGHTNESS);
 
-  const volume = useTrackVolume(audioTrack as TrackReference, {
+  const analyzableTrack =
+    !audioTrack || audioTrack instanceof LocalAudioTrack || audioTrack instanceof RemoteAudioTrack
+      ? audioTrack
+      : isTrackReference(audioTrack)
+        ? audioTrack
+        : undefined;
+
+  const volume = useTrackVolume(analyzableTrack, {
     fftSize: 512,
     smoothingTimeConstant: 0.55,
   });

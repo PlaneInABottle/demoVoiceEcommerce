@@ -51,7 +51,8 @@ test('scrollElementToBottom updates only the container scrollTop', () => {
 test('isTypedChatReady unlocks typed chat as soon as the session can send', () => {
   assert.equal(
     isTypedChatReady({
-      isConnected: true,
+      canListen: true,
+      isFinished: false,
       send: async () => ({ id: 'message-1' }),
     }),
     true,
@@ -59,6 +60,10 @@ test('isTypedChatReady unlocks typed chat as soon as the session can send', () =
 });
 
 test('isTypedChatReady stays locked when disconnected or send is unavailable', () => {
-  assert.equal(isTypedChatReady({ isConnected: false, send: async () => ({ id: 'message-1' }) }), false);
-  assert.equal(isTypedChatReady({ isConnected: true, send: null }), false);
+  assert.equal(
+    isTypedChatReady({ canListen: false, isFinished: false, send: async () => ({ id: 'message-1' }) }),
+    false,
+  );
+  assert.equal(isTypedChatReady({ canListen: true, isFinished: true, send: async () => ({ id: 'message-1' }) }), false);
+  assert.equal(isTypedChatReady({ canListen: true, isFinished: false, send: null }), false);
 });

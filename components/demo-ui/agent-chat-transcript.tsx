@@ -92,8 +92,8 @@ function AgentChatTranscriptInner() {
             <h3 className="text-xl font-semibold tracking-[-0.03em] text-white text-balance">
               The shared transcript will settle here.
             </h3>
-             <p className="max-w-md text-sm leading-6 text-slate-400">
-                Connect the session, speak, or use typed fallback as soon as the session is live.
+              <p className="max-w-md text-sm leading-6 text-slate-400">
+                Start the session, speak, or use typed fallback as soon as the agent can listen.
               </p>
             </div>
           </div>
