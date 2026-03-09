@@ -100,10 +100,15 @@ html {
 
 .skip-link:focus-visible {
   transform: translateY(0);
+  outline: 2px solid color-mix(in oklab, var(--ring) 85%, white 15%);
+  outline-offset: 3px;
 }
 
-#main-content:focus {
-  outline: none;
+#main-content:focus,
+#main-content:focus-visible,
+#main-content:target {
+  outline: 2px solid color-mix(in oklab, var(--ring) 85%, white 15%);
+  outline-offset: 4px;
 }
 
 @layer base {
