@@ -1,4 +1,4 @@
-import { DemoShell } from '@/components/demo-shell';
+import { DemoSessionShell } from '@/components/demo-session-shell';
 import { createHomepageRoomName, getCanonicalAgentName } from '@/app/home-page-config';
 
 export const dynamic = 'force-dynamic';
@@ -8,5 +8,5 @@ export default function HomePage() {
   const agentName = getCanonicalAgentName();
   const roomName = createHomepageRoomName();
 
-  return <DemoShell appName={appName} agentName={agentName} roomName={roomName} />;
+  return <DemoSessionShell appName={appName} agentName={agentName} roomName={roomName} />;
 }
