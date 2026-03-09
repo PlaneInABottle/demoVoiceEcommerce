@@ -10,12 +10,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 
-const PROMPT_CHIPS = [
-  'I need noise-cancelling headphones under $200.',
-  'Compare the QuietCore 200 and the Commute Mini.',
-  'How fast is shipping and what is the return window for the QuietCore 200?',
-];
-
 export function isTypedChatReady({
   isConnected,
   send,
@@ -93,21 +87,6 @@ export function TranscriptPanel() {
 
       <CardContent className="flex min-h-0 flex-1 flex-col gap-6 p-4 sm:p-6">
         <AgentChatTranscript />
-
-        <div className="flex flex-wrap gap-2">
-          {PROMPT_CHIPS.map((prompt) => (
-            <Button
-              key={prompt}
-              className="h-auto min-h-10 rounded-full border border-white/8 bg-white/4 px-4 py-2 text-left text-sm font-medium text-slate-200 hover:bg-white/7"
-              disabled={!isTypedInputReady || isSending}
-              type="button"
-              variant="ghost"
-              onClick={() => void submitText(prompt)}
-            >
-              <span className="break-words">{prompt}</span>
-            </Button>
-          ))}
-        </div>
 
         <form className="grid gap-3" onSubmit={(event) => void handleSubmit(event)}>
           <label

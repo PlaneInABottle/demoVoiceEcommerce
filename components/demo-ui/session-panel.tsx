@@ -131,13 +131,17 @@ export function SessionPanel({ agentName: _agentName, session: _session }: Sessi
       </div>
 
       <div className="grid gap-2 sm:grid-cols-3">
-        <Button className="h-11 w-full min-w-0 px-3 text-center whitespace-normal sm:px-4" disabled={_session.isConnected || isConnecting} onClick={handleConnect}>
+        <Button
+          className="h-auto min-h-11 w-full min-w-0 flex-wrap px-3 py-3 text-center whitespace-normal [overflow-wrap:anywhere] sm:px-4"
+          disabled={_session.isConnected || isConnecting}
+          onClick={handleConnect}
+        >
           {connectLabel}
         </Button>
 
         <Button
           aria-pressed={isMicrophoneEnabled}
-          className="h-11 w-full min-w-0 px-3 text-center whitespace-normal sm:px-4"
+          className="h-auto min-h-11 w-full min-w-0 flex-wrap px-3 py-3 text-center whitespace-normal [overflow-wrap:anywhere] sm:px-4"
           disabled={!_session.isConnected}
           type="button"
           variant="secondary"
@@ -148,7 +152,7 @@ export function SessionPanel({ agentName: _agentName, session: _session }: Sessi
         </Button>
 
         <Button
-          className="h-11 w-full min-w-0 px-3 text-center whitespace-normal sm:px-4"
+          className="h-auto min-h-11 w-full min-w-0 flex-wrap px-3 py-3 text-center whitespace-normal [overflow-wrap:anywhere] sm:px-4"
           disabled={!_session.isConnected}
           type="button"
           variant="destructive"
