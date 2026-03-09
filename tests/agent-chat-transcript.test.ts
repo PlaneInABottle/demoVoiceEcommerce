@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { isScrolledNearBottom, scrollElementToBottom } from '@/components/agents-ui/agent-chat-transcript';
+import { isScrolledNearBottom, scrollElementToBottom } from '@/lib/transcript-scroll';
 
 test('isScrolledNearBottom returns true when the user is at the bottom', () => {
   assert.equal(

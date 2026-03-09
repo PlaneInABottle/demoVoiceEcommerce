@@ -4,19 +4,10 @@ import { useAgent, useLocalParticipant, useMaybeSessionContext, useSessionMessag
 import { useEffect, useRef } from 'react';
 
 import { Badge } from '@/components/ui/badge';
+import { isScrolledNearBottom, scrollElementToBottom } from '@/lib/transcript-scroll';
 import { cn } from '@/lib/utils';
 
 type TranscriptTone = 'agent' | 'user' | 'chat';
-
-const SCROLL_BOTTOM_THRESHOLD_PX = 16;
-
-function isScrolledNearBottom(element: Pick<HTMLDivElement, 'scrollHeight' | 'clientHeight' | 'scrollTop'>) {
-  return Math.abs(element.scrollHeight - element.clientHeight - element.scrollTop) <= SCROLL_BOTTOM_THRESHOLD_PX;
-}
-
-function scrollElementToBottom(element: Pick<HTMLDivElement, 'scrollHeight' | 'scrollTop'>) {
-  element.scrollTop = element.scrollHeight;
-}
 
 function getDisplayableBody(message: { message?: string }) {
   return message.message?.trim() ?? '';
