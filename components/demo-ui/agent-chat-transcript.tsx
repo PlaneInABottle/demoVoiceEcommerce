@@ -1,7 +1,7 @@
 'use client';
 
 import { useAgent, useLocalParticipant, useMaybeSessionContext, useSessionMessages } from '@livekit/components-react';
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useMemo, useRef } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { isScrolledNearBottom, scrollElementToBottom } from '@/lib/transcript-scroll';
@@ -38,14 +38,17 @@ const TIMESTAMP_FORMATTER = new Intl.DateTimeFormat([], {
   minute: '2-digit',
 });
 
-export function RefactorAgentChatTranscript() {
+function AgentChatTranscriptInner() {
   const session = useMaybeSessionContext();
   const agent = useAgent(session);
   const { messages } = useSessionMessages(session);
   const { localParticipant } = useLocalParticipant({ room: session?.room });
   const transcriptListRef = useRef<HTMLDivElement | null>(null);
   const shouldAutoScrollRef = useRef(true);
-  const displayableMessages = messages.filter((message) => getDisplayableBody(message).length > 0);
+  const displayableMessages = useMemo(
+    () => messages.filter((message) => getDisplayableBody(message).length > 0),
+    [messages],
+  );
   const lastMessage = displayableMessages.at(-1);
   const lastMessageText = lastMessage ? getDisplayableBody(lastMessage) : '';
   const lastMessageSignature = `${lastMessage?.id ?? 'none'}:${lastMessage?.timestamp ?? 0}:${lastMessageText}`;
@@ -89,11 +92,11 @@ export function RefactorAgentChatTranscript() {
             <h3 className="text-xl font-semibold tracking-[-0.03em] text-white text-balance">
               The shared transcript will settle here.
             </h3>
-            <p className="max-w-md text-sm leading-6 text-slate-400">
-              Connect the session, speak, or use typed fallback once the first agent transcript arrives.
-            </p>
+             <p className="max-w-md text-sm leading-6 text-slate-400">
+                Connect the session, speak, or use typed fallback as soon as the session is live.
+              </p>
+            </div>
           </div>
-        </div>
       ) : (
         displayableMessages.map((message) => {
           const body = getDisplayableBody(message);
@@ -147,3 +150,5 @@ export function RefactorAgentChatTranscript() {
     </div>
   );
 }
+
+export const AgentChatTranscript = memo(AgentChatTranscriptInner);

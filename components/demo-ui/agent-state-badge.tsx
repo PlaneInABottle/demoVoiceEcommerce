@@ -5,11 +5,11 @@ import { type UseSessionReturn, useAgent } from '@livekit/components-react';
 import { AGENT_STATE_LABELS } from '@/lib/agent-state-labels';
 import { cn } from '@/lib/utils';
 
-type RefactorAgentStateBadgeProps = {
+type AgentStateBadgeProps = {
   session: UseSessionReturn;
 };
 
-export function RefactorAgentStateBadge({ session: _session }: RefactorAgentStateBadgeProps) {
+export function AgentStateBadge({ session: _session }: AgentStateBadgeProps) {
   const agent = useAgent(_session);
   const label = AGENT_STATE_LABELS[agent.state] ?? agent.state;
 

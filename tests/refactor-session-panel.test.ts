@@ -1,16 +1,23 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { getRefactorConnectLabel } from '@/components/refactor-ui/refactor-session-panel';
+import { getAudioRecoveryCopy, getConnectLabel } from '@/components/demo-ui/session-panel';
 
-test('getRefactorConnectLabel returns connected copy for active sessions', () => {
-  assert.equal(getRefactorConnectLabel({ isConnected: true, microphoneEnabledOnConnect: true }), 'Connected');
+test('getConnectLabel returns connected copy for active sessions', () => {
+  assert.equal(getConnectLabel({ isConnected: true, microphoneEnabledOnConnect: true }), 'Connected');
 });
 
-test('getRefactorConnectLabel shortens microphone connect copy', () => {
-  assert.equal(getRefactorConnectLabel({ isConnected: false, microphoneEnabledOnConnect: true }), 'Connect mic');
+test('getConnectLabel shortens microphone connect copy', () => {
+  assert.equal(getConnectLabel({ isConnected: false, microphoneEnabledOnConnect: true }), 'Connect mic');
 });
 
-test('getRefactorConnectLabel preserves typed-only copy', () => {
-  assert.equal(getRefactorConnectLabel({ isConnected: false, microphoneEnabledOnConnect: false }), 'Connect typed-only');
+test('getConnectLabel preserves typed-only copy', () => {
+  assert.equal(getConnectLabel({ isConnected: false, microphoneEnabledOnConnect: false }), 'Connect typed-only');
+});
+
+test('getAudioRecoveryCopy points to the speaker audio card below', () => {
+  assert.equal(
+    getAudioRecoveryCopy('Playback blocked'),
+    'Playback blocked. If playback stays blocked, use the speaker audio card below.',
+  );
 });

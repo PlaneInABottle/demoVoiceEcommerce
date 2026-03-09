@@ -5,7 +5,7 @@ import { TokenSource } from 'livekit-client';
 import { useMemo } from 'react';
 
 import { AgentSessionProvider } from '@/components/agents-ui/agent-session-provider';
-import { RefactorDemoShell } from '@/components/refactor-ui/refactor-demo-shell';
+import { DemoShell } from '@/components/demo-shell';
 
 type DemoSessionShellProps = {
   appName: string;
@@ -23,7 +23,7 @@ export function DemoSessionShell({ appName, agentName, roomName }: DemoSessionSh
 
   return (
     <AgentSessionProvider session={session}>
-      <RefactorDemoShell appName={appName} agentName={agentName} roomName={roomName} session={session} />
+      <DemoShell appName={appName} agentName={agentName} roomName={roomName} session={session} />
     </AgentSessionProvider>
   );
 }

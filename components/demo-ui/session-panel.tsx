@@ -8,12 +8,16 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 
-type RefactorSessionPanelProps = {
+type SessionPanelProps = {
   agentName: string;
   session: UseSessionReturn;
 };
 
-export function getRefactorConnectLabel({
+export function getAudioRecoveryCopy(message: string) {
+  return `${message}. If playback stays blocked, use the speaker audio card below.`;
+}
+
+export function getConnectLabel({
   isConnected,
   microphoneEnabledOnConnect,
 }: {
@@ -27,7 +31,7 @@ export function getRefactorConnectLabel({
   return microphoneEnabledOnConnect ? 'Connect mic' : 'Connect typed-only';
 }
 
-export function RefactorSessionPanel({ agentName: _agentName, session: _session }: RefactorSessionPanelProps) {
+export function SessionPanel({ agentName: _agentName, session: _session }: SessionPanelProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [microphoneEnabledOnConnect, setMicrophoneEnabledOnConnect] = useState(true);
   const { startAudio } = useAudioPlayback(_session.room);
@@ -45,7 +49,7 @@ export function RefactorSessionPanel({ agentName: _agentName, session: _session 
           ? 'Reconnecting'
           : 'Disconnected';
   const isConnecting = _session.connectionState === ConnectionState.Connecting;
-  const connectLabel = getRefactorConnectLabel({
+  const connectLabel = getConnectLabel({
     isConnected: _session.isConnected,
     microphoneEnabledOnConnect,
   });
@@ -86,8 +90,8 @@ export function RefactorSessionPanel({ agentName: _agentName, session: _session 
       } catch (error) {
         setErrorMessage(
           error instanceof Error
-            ? `${error.message}. If the browser still blocks playback, use the speaker audio action above.`
-            : 'Connected, but speaker audio still needs a click. Use the speaker audio action above.',
+            ? getAudioRecoveryCopy(error.message)
+            : 'Connected, but speaker audio still needs a click. Use the speaker audio card below.',
         );
       }
     }
@@ -133,7 +137,7 @@ export function RefactorSessionPanel({ agentName: _agentName, session: _session 
 
         <Button
           aria-pressed={isMicrophoneEnabled}
-          className="h-11 w-full"
+          className="h-11 w-full min-w-0 px-3 text-center whitespace-normal sm:px-4"
           disabled={!_session.isConnected}
           type="button"
           variant="secondary"
@@ -144,7 +148,7 @@ export function RefactorSessionPanel({ agentName: _agentName, session: _session 
         </Button>
 
         <Button
-          className="h-11 w-full"
+          className="h-11 w-full min-w-0 px-3 text-center whitespace-normal sm:px-4"
           disabled={!_session.isConnected}
           type="button"
           variant="destructive"
@@ -191,8 +195,16 @@ export function RefactorSessionPanel({ agentName: _agentName, session: _session 
         ) : null}
       </div>
 
-      {lastMicrophoneError ? <p className="text-sm leading-6 text-red-300">{lastMicrophoneError.message}</p> : null}
-      {errorMessage ? <p className="text-sm leading-6 text-red-300">{errorMessage}</p> : null}
+      {lastMicrophoneError ? (
+        <p aria-live="polite" className="text-sm leading-6 text-red-300" role="alert">
+          {lastMicrophoneError.message}
+        </p>
+      ) : null}
+      {errorMessage ? (
+        <p aria-live="polite" className="text-sm leading-6 text-red-300" role="alert">
+          {errorMessage}
+        </p>
+      ) : null}
     </section>
   );
 }
