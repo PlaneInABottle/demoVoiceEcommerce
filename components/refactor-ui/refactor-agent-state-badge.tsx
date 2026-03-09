@@ -2,7 +2,7 @@
 
 import { type UseSessionReturn, useAgent } from '@livekit/components-react';
 
-import { AGENT_STATE_LABELS } from '@/components/agent-state-badge';
+import { AGENT_STATE_LABELS } from '@/lib/agent-state-labels';
 import { cn } from '@/lib/utils';
 
 type RefactorAgentStateBadgeProps = {
