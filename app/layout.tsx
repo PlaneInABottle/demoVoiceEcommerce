@@ -1,12 +1,16 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import type { Viewport } from 'next';
 import type { ReactNode } from 'react';
-
-import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
   title: 'LiveKit Ecommerce Voice Demo',
   description: 'Local MVP for a LiveKit-powered ecommerce voice and chat assistant.',
+};
+
+export const viewport: Viewport = {
+  colorScheme: 'dark',
+  themeColor: 'oklch(0.14 0.03 258)',
 };
 
 type RootLayoutProps = {
@@ -15,16 +19,14 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark" enableSystem={false} disableTransitionOnChange>
-          <a className="skip-link" href="#main-content">
-            Skip to main content
-          </a>
-          <div id="main-content" tabIndex={-1}>
-            {children}
-          </div>
-        </ThemeProvider>
+        <a className="skip-link" href="#main-content">
+          Skip to main content
+        </a>
+        <div id="main-content" tabIndex={-1}>
+          {children}
+        </div>
       </body>
     </html>
   );

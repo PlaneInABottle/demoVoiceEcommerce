@@ -2,9 +2,6 @@
 
 import { useAgent, type UseSessionReturn } from '@livekit/components-react';
 import { Bot, Sparkles, Volume2 } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
-
 import { RefactorAgentStateBadge } from '@/components/refactor-ui/refactor-agent-state-badge';
 import { RefactorSessionPanel } from '@/components/refactor-ui/refactor-session-panel';
 import { cn } from '@/lib/utils';
@@ -15,14 +12,6 @@ type RefactorAgentPaneProps = {
 
 export function RefactorAgentPane({ agentName: _agentName, session: _session }: RefactorAgentPaneProps) {
   const agent = useAgent(_session);
-  const [mounted, setMounted] = useState(false);
-  const { resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const themeMode = mounted && resolvedTheme === 'light' ? 'light' : 'dark';
   const stageSummary =
     agent.state === 'failed'
       ? agent.failureReasons?.[0] ?? 'The session needs attention before the next handoff.'
@@ -71,7 +60,7 @@ export function RefactorAgentPane({ agentName: _agentName, session: _session }: 
               </div>
               <div className="space-y-1">
                 <p className="text-sm font-medium text-white">Premium presence surface</p>
-                <p className="text-sm text-slate-400">{themeMode === 'dark' ? 'Dark-tuned' : 'Light-tuned'} reactive visual fallback</p>
+                <p className="text-sm text-slate-400">Dark-tuned reactive visual fallback</p>
               </div>
             </div>
             <div

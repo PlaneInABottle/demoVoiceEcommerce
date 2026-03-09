@@ -10,7 +10,7 @@ export function RefactorShellHeader({ appName, roomName }: RefactorShellHeaderPr
     <header className="flex flex-col gap-5 rounded-[32px] border border-white/8 bg-[linear-gradient(180deg,rgba(14,19,33,0.94),rgba(7,10,19,0.98))] px-6 py-6 shadow-[0_30px_120px_-52px_rgba(0,0,0,0.95)] sm:px-8 sm:py-8">
       <div className="flex flex-wrap items-center gap-3">
         <Badge variant="secondary">Voice commerce demo</Badge>
-        <Badge variant="outline">Dark refactor preview</Badge>
+        <Badge variant="outline">Dark voice workspace</Badge>
       </div>
 
       <div className="max-w-3xl space-y-3">

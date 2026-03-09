@@ -53,28 +53,6 @@
   color-scheme: dark;
 }
 
-.dark {
-  --background: oklch(0.14 0.03 258);
-  --foreground: oklch(0.97 0.01 255);
-  --card: oklch(0.2 0.03 258);
-  --card-foreground: oklch(0.97 0.01 255);
-  --popover: oklch(0.2 0.03 258);
-  --popover-foreground: oklch(0.97 0.01 255);
-  --primary: oklch(0.7 0.14 238);
-  --primary-foreground: oklch(0.98 0.01 245);
-  --secondary: oklch(0.26 0.02 255);
-  --secondary-foreground: oklch(0.94 0.01 245);
-  --muted: oklch(0.24 0.02 255);
-  --muted-foreground: oklch(0.77 0.02 250);
-  --accent: oklch(0.3 0.04 232);
-  --accent-foreground: oklch(0.97 0.01 255);
-  --destructive: oklch(0.64 0.2 24);
-  --destructive-foreground: oklch(0.98 0.01 245);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.72 0.12 238);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -142,75 +120,4 @@ html {
 
 #main-content {
   min-height: 100vh;
-}
-
-.panel__header h2 {
-  margin: 0;
-}
-
-.helper-copy,
-.product-card p,
-.product-card ul {
-  color: rgba(226, 232, 240, 0.85);
-}
-
-.panel {
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  background: rgba(15, 23, 42, 0.72);
-  backdrop-filter: blur(16px);
-  border-radius: 20px;
-  box-shadow: 0 24px 60px rgba(2, 6, 23, 0.35);
-}
-
-.sidebar-panel {
-  min-height: 200px;
-}
-
-.panel {
-  padding: 24px;
-}
-
-.panel__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.product-card-list {
-  display: grid;
-  gap: 12px;
-}
-
-.product-card {
-  border: 1px solid rgba(148, 163, 184, 0.14);
-  background: rgba(15, 23, 42, 0.55);
-  border-radius: 16px;
-  padding: 14px 16px;
-}
-
-.product-card__topline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.product-card-list {
-  max-height: 720px;
-  overflow: auto;
-}
-
-.product-card ul {
-  padding-left: 18px;
-  margin-top: 12px;
-  color: rgba(226, 232, 240, 0.85);
-}
-
-@media (max-width: 900px) {
-  .product-card__topline {
-    flex-direction: column;
-    align-items: stretch;
-  }
 }
