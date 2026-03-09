@@ -23,6 +23,10 @@ type TokenRequestBody = {
   };
 };
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
 function jsonError(message: string, status: number) {
   return NextResponse.json({ error: message }, { status });
 }
@@ -73,20 +77,27 @@ function isLocalRequest(request: NextRequest) {
 }
 
 async function parseTokenRequest(request: NextRequest) {
-  const body = (await request.json()) as TokenRequestBody;
-  return body;
+  const body = await request.json();
+
+  if (!isRecord(body)) {
+    throw new Error('Request body must be a JSON object');
+  }
+
+  return body as TokenRequestBody;
 }
 
-export function buildNormalizedRoomConfig(
+export function buildTokenRoomConfig(
   roomConfig: TokenRequestBody['room_config'],
   canonicalAgentName: string,
 ) {
-  if (!roomConfig) {
-    const normalizedConfig = new RoomConfiguration();
-    const dispatch = new RoomAgentDispatch();
-    dispatch.agentName = canonicalAgentName;
-    normalizedConfig.agents.push(dispatch);
-    return normalizedConfig;
+  const dispatch = new RoomAgentDispatch({ agentName: canonicalAgentName });
+
+  if (roomConfig === undefined) {
+    return new RoomConfiguration({ agents: [dispatch] });
+  }
+
+  if (!isRecord(roomConfig)) {
+    throw new Error('room_config must be an object when provided');
   }
 
   for (const key of Object.keys(roomConfig)) {
@@ -95,17 +106,21 @@ export function buildNormalizedRoomConfig(
     }
   }
 
+  if (roomConfig.agents !== undefined && !Array.isArray(roomConfig.agents)) {
+    throw new Error('room_config.agents must be an array when provided');
+  }
+
   if (roomConfig.agents && roomConfig.agents.length > 1) {
     throw new Error('MVP supports at most one agent dispatch entry');
   }
 
-  const normalizedConfig = new RoomConfiguration();
-  const dispatch = new RoomAgentDispatch();
-  dispatch.agentName = canonicalAgentName;
-
   const providedAgent = roomConfig.agents?.[0];
 
-  if (providedAgent) {
+  if (roomConfig.agents?.length === 1) {
+    if (!isRecord(providedAgent)) {
+      throw new Error('room_config.agents[0] must be an object when provided');
+    }
+
     for (const key of Object.keys(providedAgent)) {
       if (!ALLOWED_AGENT_KEYS.has(key)) {
         throw new Error(`Unsupported room_config.agents[0] key: ${key}`);
@@ -125,8 +140,7 @@ export function buildNormalizedRoomConfig(
     }
   }
 
-  normalizedConfig.agents.push(dispatch);
-  return normalizedConfig;
+  return new RoomConfiguration({ agents: [dispatch] });
 }
 
 async function createParticipantToken(body: TokenRequestBody) {
@@ -151,7 +165,7 @@ async function createParticipantToken(body: TokenRequestBody) {
     canPublishData: true,
     canSubscribe: true,
   });
-  token.roomConfig = buildNormalizedRoomConfig(body.room_config, canonicalAgentName);
+  token.roomConfig = buildTokenRoomConfig(body.room_config, canonicalAgentName);
 
   return {
     server_url: livekitUrl,
@@ -159,12 +173,16 @@ async function createParticipantToken(body: TokenRequestBody) {
   };
 }
 
-function validateTokenRequest(body: TokenRequestBody) {
-  if (body.participant_metadata) {
+export function validateTokenRequest(body: TokenRequestBody) {
+  if (body.participant_identity !== undefined) {
+    throw new Error('participant_identity cannot be provided in the MVP token endpoint');
+  }
+
+  if (body.participant_metadata !== undefined) {
     throw new Error('participant_metadata is not supported in the MVP token endpoint');
   }
 
-  if (body.participant_attributes) {
+  if (body.participant_attributes !== undefined) {
     throw new Error('participant_attributes is not supported in the MVP token endpoint');
   }
 }

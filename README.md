@@ -86,15 +86,17 @@ pm2 delete demoVoice-agent
 - Accepted:
   - `room_name` (optional; defaults to `demoVoice-room`)
   - `participant_name` (optional display-name hint)
-- Ignored/normalized:
-  - `participant_identity` is always generated server-side
-  - `room_config.agents[0].agent_name` is normalized to `LIVEKIT_AGENT_NAME`
-- Passed through when provided:
-  - `room_config.agents[0].metadata`
+- Supported `room_config` subset:
+  - `room_config.agents`
+  - at most one `room_config.agents[0]`
+  - `room_config.agents[0].agent_name` is accepted but the effective dispatch name is always normalized to `LIVEKIT_AGENT_NAME`
+  - `room_config.agents[0].metadata` is passed through when provided
 - Rejected with 4xx:
+  - `participant_identity` (the MVP endpoint always generates the effective identity server-side)
   - `participant_metadata`
   - `participant_attributes`
   - unsupported `room_config` keys
+  - unsupported `room_config.agents[0]` keys
 
 ## Startup
 

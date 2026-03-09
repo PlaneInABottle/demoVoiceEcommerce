@@ -19,13 +19,25 @@ type DemoShellProps = {
   session: UseSessionReturn;
 };
 
-function getConnectionCopy(isConnected: boolean, state: string) {
-  if (isConnected) {
+function getConnectionCopy({
+  canListen,
+  isFinished,
+  isPending,
+}: {
+  canListen: boolean;
+  isFinished: boolean;
+  isPending: boolean;
+}) {
+  if (canListen) {
     return 'Live now';
   }
 
-  if (state === 'connecting' || state === 'initializing' || state === 'pre-connect-buffering') {
+  if (isPending) {
     return 'Connecting';
+  }
+
+  if (isFinished) {
+    return 'Ready to reconnect';
   }
 
   return 'Ready to connect';
@@ -33,7 +45,11 @@ function getConnectionCopy(isConnected: boolean, state: string) {
 
 export function DemoShell({ appName, agentName, roomName, session }: DemoShellProps) {
   const agent = useAgent(session);
-  const connectionCopy = getConnectionCopy(session.isConnected, agent.state);
+  const connectionCopy = getConnectionCopy({
+    canListen: agent.canListen,
+    isFinished: agent.isFinished,
+    isPending: agent.isPending,
+  });
 
   return (
     <main
@@ -60,7 +76,7 @@ export function DemoShell({ appName, agentName, roomName, session }: DemoShellPr
                   <AgentStateBadge session={session} />
                 </div>
               </div>
-              <LiveKitRoomAudio room={session.room} isConnected={session.isConnected} />
+              <LiveKitRoomAudio room={session.room} isConnected={agent.isConnected} />
             </CardHeader>
 
             <CardContent className="flex min-h-0 flex-1 p-0">

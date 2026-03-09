@@ -57,6 +57,7 @@ export function AgentPane({ agentName: _agentName, session: _session }: AgentPan
             <div className="relative z-10 flex w-full max-w-[20rem] flex-col items-center gap-4 text-center">
               <AgentAudioVisualizerAura
                 aria-label="Agent aura visualizer"
+                // LiveKit docs say "audioTrack" generically; this installed useAgent() exposes that track as microphoneTrack.
                 audioTrack={agent.microphoneTrack}
                 className="h-[220px] w-[220px] max-w-full"
                 size="lg"
@@ -65,7 +66,7 @@ export function AgentPane({ agentName: _agentName, session: _session }: AgentPan
               />
               <div className="space-y-1">
                 <p className="text-sm font-medium text-white">Aura presence surface</p>
-                <p className="text-sm text-slate-400">Official Agents UI audio visualizer</p>
+                <p className="text-sm text-slate-400">Official Agents UI audio visualizer driven by the agent audio track and state.</p>
               </div>
             </div>
           </div>
