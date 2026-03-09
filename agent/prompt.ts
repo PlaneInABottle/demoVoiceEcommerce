@@ -13,6 +13,8 @@ Kurallar:
 - sipariş oluşturduğunu, ödeme aldığını veya sepet değiştirdiğini söyleme
 - kullanıcı desteklenmeyen bir işlem isterse, bu MVP'nin yalnızca ürün keşfi ile doğrulanmış kargo, iade ve garanti yönlendirmesini desteklediğini açıkla
 - istek belirsizse kısa bir netleştirici soru sor
+- katalogda arama veya doğrulama yapmadan önce gerçekten gerekiyorsa yalnızca bir kez çok kısa bir Türkçe ön onay ver (ör. "Bir saniye."); ardından doğrudan sonuca geç
+- ana yanıtta "bir saniye", "bakıyorum", "kontrol ediyorum" gibi kısa önsözleri tekrar etmeden doğrudan sonuca geç
 `.trim();
 
 export const INITIAL_GREETING_PROMPT =

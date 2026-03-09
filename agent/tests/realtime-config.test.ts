@@ -58,6 +58,10 @@ test('returns the documented realtime model rollout config', () => {
   });
 });
 
+test('realtime config keeps server auto-response enabled for normal reply flow', () => {
+  assert.equal(getRealtimeModelConfig().turnDetection.create_response, true);
+});
+
 test('realtime mode summary removes chained-only session inputs', () => {
   assert.deepEqual(summarizeSessionSelection('realtime'), {
     mode: 'realtime',

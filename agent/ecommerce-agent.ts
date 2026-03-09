@@ -10,7 +10,10 @@ import * as silero from '@livekit/agents-plugin-silero';
 import { BackgroundVoiceCancellation } from '@livekit/noise-cancellation-node';
 
 import { loadProductCatalog } from './catalog.js';
-import { ECOMMERCE_AGENT_INSTRUCTIONS, INITIAL_GREETING_PROMPT } from './prompt.js';
+import {
+  ECOMMERCE_AGENT_INSTRUCTIONS,
+  INITIAL_GREETING_PROMPT,
+} from './prompt.js';
 import { getRealtimeModelConfig, getVoicePipelineMode } from './realtime-config.js';
 import { createGetProductDetailsTool } from './tools/get-product-details.js';
 import { createSearchProductsTool } from './tools/search-products.js';
